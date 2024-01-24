@@ -1,66 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar Berners-Lee</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <header>
-        <section class="date">
-            <div class="today">
-                <h1 class="month">January</h1>
-                <h2 class="day">Wednesday 21</h2>
-            </div>
-            <div class="year-and-btn">
-                <h3>2024</h3>
-                <button>Add event</button>
-            </div>
-        </section>
-        <section class="more-months">
-            <button>Prev Month</button>
-            <button>Next Month</button>
-        </section>
+      <section class="date">
+        <div class="today">
+          <h1 class="month">January</h1>
+          <h2 class="day">Wednesday 21</h2>
+        </div>
+        <div class="year-and-btn">
+          <h3>2024</h3>
+          <button>Add event</button>
+        </div>
+      </section>
+      <section class="more-months">
+        <button class="previous-btn">Prev Month</button>
+        <button class="next-btn">Next Month</button>
+      </section>
     </header>
     <main>
-        <!-- No dinamyc day name -->
-        <div class="container-week">
-            <div class="day-name day">
-                <p>Monday</p>
-            </div>
-            <div class="day-name day">
-                <p>Tuesday</p>
-            </div>
-            <div class="day-name day">
-                <p>Wednesday</p>
-            </div>
-            <div class="day-name day">
-                <p>Thursday</p>
-            </div>
-            <div class="day-name day">
-                <p>Friday</p>
-            </div>
-            <div class="day-name day">
-                <p>Saturday</p>
-            </div>
-            <div class="day-name day">
-                <p>Sunday</p>
-            </div>
+      <!-- No dinamyc day name -->
+      <div class="container-week">
+        <div class="day-name day">
+          <p>Monday</p>
         </div>
-
-        <!-- dynamic days -->
-        <div class="container-days">
-            <div class="dynamic-day day">
-                <p class="day-number">#day</p>
-                <div class="event">Dentist</div>
-            </div>
+        <div class="day-name day">
+          <p>Tuesday</p>
+        </div>
+        <div class="day-name day">
+          <p>Wednesday</p>
+        </div>
+        <div class="day-name day">
+          <p>Thursday</p>
+        </div>
+        <div class="day-name day">
+          <p>Friday</p>
+        </div>
+        <div class="day-name day">
+          <p>Saturday</p>
+        </div>
+        <div class="day-name day">
+          <p>Sunday</p>
+        </div>
       </div>
 
+      <!-- dynamic days -->
+      <div class="container-days">
+        <div class="dynamic-day day">
+          <p class="day-number">#day</p>
+          <div class="event">Dentist</div>
+        </div>
+      </div>
     </main>
     <script src="dist/scripts.js"></script>
-</body>
+  </body>
 </html>
