@@ -82,11 +82,7 @@ main .container-days .dynamic-day {
   padding: 0.2rem;
   border-radius: 10px;
   text-align: right;
-<<<<<<< Updated upstream
-  background-color: azure;
-=======
   background-color: red;
->>>>>>> Stashed changes
 }
 
 main .container-days .dynamic-day .event {
