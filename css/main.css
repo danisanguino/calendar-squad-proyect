@@ -15,7 +15,7 @@ header {
   background-color: white;
   padding: 1rem;
   height: 13rem;
-  border-bottom: solid 0.06rem var(--secondary-colour);
+  border-bottom: solid 0.06rem var(--secondary-color);
 }
 
 .header__date {
@@ -27,17 +27,17 @@ header {
 
 .header__date--today-month {
   font-size: 6rem;
-  color: var(--secondary-colour);
+  color: var(--secondary-color);
 }
 
 .header__date--today-day {
   font-size: 2rem;
-  color: var(--primary-colour);
+  color: var(--primary-color);
 }
 
 .header__date--year-and-btn--year {
   font-size: 8rem;
-  color: var(--primary-colour);
+  color: var(--primary-color);
 }
 
 .header__date--year-and-btn {
@@ -53,7 +53,7 @@ header {
 /* ---MAIN--- */
 
 main {
-  background-color: var(--background-colour);
+  background-color: var(--background-color);
   height: calc(100vh - 15.1rem);
   padding: 0 1rem 0 1rem;
 }
@@ -88,7 +88,7 @@ main p {
 }
 
 .main__container-days--dynamic-day {
-  border: 0.06rem solid var(--border-colour);
+  border: 0.06rem solid var(--border-color);
   padding: 0.2rem;
   border-radius: 5px;
   text-align: right;
