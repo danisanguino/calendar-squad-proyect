@@ -5,8 +5,9 @@
   font-weight: 600;
 }
 
-.frenguel {
-  color: black;
+
+.testStyle-notemenees {
+    border-radius: 34px;
 }
 
 /* ---HEADER--- */
@@ -87,6 +88,7 @@ main .container-days .dynamic-day {
   border-radius: 10px;
   text-align: right;
   background-color: azure;
+  min-height: 10rem;
 }
 
 main .container-days .dynamic-day .event {
