@@ -1,6 +1,10 @@
+import { Months } from "./enums.js";
 import { domElements } from "./dom.js";
+const getMonthName = (month) => {
+    return Months[month];
+};
 let date = new Date();
-let currentDay = date.getDay();
+let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 function printCalendar() {
@@ -19,6 +23,6 @@ function printCalendar() {
         dayBox.innerText = i.toString();
         daysElement.appendChild(dayBox);
     }
-    currentMonthElement.innerText = "";
+    currentMonthElement.innerText = `${Months[currentMonth]}`;
 }
 printCalendar();
