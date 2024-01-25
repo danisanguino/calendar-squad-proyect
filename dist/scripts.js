@@ -10,12 +10,12 @@ function printCalendar() {
     daysElement.innerHTML = " ";
     for (let i = 0; i < firstDayOfTheMonth; i++) {
         const dayBox = document.createElement("div");
-        dayBox.classList.add("dynamic-day");
+        dayBox.classList.add("main__container-days--dynamic-day");
         daysElement.appendChild(dayBox);
     }
     for (let i = 1; i <= totalDaysInMonth; i++) {
         const dayBox = document.createElement("div");
-        dayBox.classList.add("dynamic-day");
+        dayBox.classList.add("main__container-days--dynamic-day");
         dayBox.innerText = i.toString();
         daysElement.appendChild(dayBox);
     }
