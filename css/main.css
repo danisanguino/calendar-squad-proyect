@@ -8,9 +8,10 @@
 /* ---HEADER--- */
 
 header {
-  background-color: aquamarine;
+  background-color: white;
   padding: 1rem;
   height: 13rem;
+  border-bottom: solid 0.06rem var(--secondary-colour);
 }
 
 .header__date {
@@ -22,14 +23,17 @@ header {
 
 .header__date--today-month {
   font-size: 6rem;
+  color: var(--secondary-colour);
 }
 
 .header__date--today-day {
   font-size: 2rem;
+  color: var(--primary-colour);
 }
 
 .header__date--year-and-btn--year {
   font-size: 8rem;
+  color: var(--primary-colour);
 }
 
 .header__date--year-and-btn {
@@ -37,7 +41,6 @@ header {
 }
 
 .header__more-months {
-  background-color: aqua;
   display: flex;
   justify-content: space-between;
   margin-top: 0.7rem;
@@ -46,8 +49,9 @@ header {
 /* ---MAIN--- */
 
 main {
-  background-color: antiquewhite;
+  background-color: var(--background-colour);
   height: calc(100vh - 15rem);
+  padding: 0 1rem 0 1rem;
 }
 
 main p {
@@ -61,12 +65,11 @@ main p {
   justify-content: space-between;
 }
 .main__container-week--day-name {
-  border: 1px solid black;
+  text-align: center;
   padding: 0.2rem;
-  border-radius: 10px;
-  height: 3rem;
-  background-color: cadetblue;
-  color: white;
+  height: 1rem;
+  color: black;
+  padding: 0.5rem;
 }
 
 /* Dynamic */
@@ -74,15 +77,21 @@ main p {
 .main__container-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 0.3rem;
   justify-content: space-between;
+  height: 100vh;
 }
 
 .main__container-days--dynamic-day {
-  border: 1px solid black;
+  border: 0.06rem solid var(--border-colour);
   padding: 0.2rem;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: right;
-  background-color: azure;
+  background-color: white;
+  font-weight: 200;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .main__container-days--dynamic-day--event {
