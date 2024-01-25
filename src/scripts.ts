@@ -2,13 +2,6 @@ import { Months } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
-<<<<<<< Updated upstream
-=======
-// const getMonthName = (month: Months): string => {
-//   return Months[month];
-// };
-
->>>>>>> Stashed changes
 let date: Date = new Date();
 
 let currentDay: number = date.getDate();
@@ -52,7 +45,6 @@ function printCalendar(): void {
     dayBox.innerText = i.toString();
     daysElement.appendChild(dayBox);
   }
-<<<<<<< Updated upstream
   currentMonthElement.innerText = `${Months[currentMonth]}`;
 
   // Buttons functionality
@@ -77,9 +69,6 @@ function printCalendar(): void {
     prevMonthBtn();
     printCalendar();
   });
-=======
-  currentMonthElement.innerText = `${Months[currentMonth]}`; // Use getMonthName function
->>>>>>> Stashed changes
 }
 
 printCalendar();
