@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+
+}
+
+/* ---HEADER--- */
+
+header {
+    background-color: aquamarine;
+    padding: 1rem;
+    height: 13rem;
+}
+
+header .date {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+}
+
+header .date h1{
+    font-size: 6rem;
+}
+
+header .date h2{
+    font-size: 2rem;
+}
+
+
+header .date h3{
+    font-size: 8rem;
+}
+
+header .date .year-and-btn {
+    text-align: right;
+}
+
+header .more-months {
+    background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+}
+
+/* ---MAIN--- */
+
+main {
+    background-color:antiquewhite;
+    height: calc(100vh - 15rem);
+}
+
+main p {
+    font-weight: 200;
+}
+
+/* Non-dynamic */
+main .container-week{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);;
+    justify-content: space-between;
+
+}
+main .container-week .day-name {
+    border: 1px solid black;
+    padding: 0.2rem;
+    border-radius: 10px;
+    height: 3rem;
+    background-color: cadetblue;
+    color: white;
+}
+
+ /* Dynamic */
+
+ main .container-days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);;
+    justify-content: space-between;
+
+}
+
+ main .container-days .dynamic-day {
+    border: 1px solid black;
+    padding: 0.2rem;
+    border-radius: 10px;
+    text-align: right;
+    background-color: azure;
+}
+
+main .container-days .dynamic-day .event{
+    border: 1px solid black;
+    padding: 0.2rem;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
