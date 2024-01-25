@@ -1,7 +1,7 @@
 export const domElements = {
-    daysElement: document.querySelector(".container-days"),
-    currentMonthElement: document.querySelector(".month"),
-    currentDayElement: document.querySelector(".day"),
-    prevBtn: document.querySelector(".previous-btn"),
-    nextBtn: document.querySelector(".next-btn"),
+    daysElement: document.getElementById("container-days"),
+    currentMonthElement: document.getElementById("header-month"),
+    currentDayElement: document.getElementById("header-day"),
+    prevBtn: document.getElementById("prev-btn"),
+    nextBtn: document.getElementById("next-btn"),
 };

@@ -1,4 +1,4 @@
-import { Months } from "./enums";
+// import { Months } from "./enums";
 
 import { domElements } from "./dom.js";
 
@@ -29,13 +29,13 @@ function printCalendar(): void {
   // Add empty days element before first day
   for (let i = 0; i < firstDayOfTheMonth; i++) {
     const dayBox = document.createElement("div");
-    dayBox.classList.add("dynamic-day");
+    dayBox.classList.add("main__container-days--dynamic-day");
     daysElement.appendChild(dayBox);
   }
   // Printing Days of actual month
   for (let i = 1; i <= totalDaysInMonth; i++) {
     const dayBox = document.createElement("div");
-    dayBox.classList.add("dynamic-day");
+    dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
     daysElement.appendChild(dayBox);
   }
