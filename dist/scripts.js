@@ -4,7 +4,7 @@ let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, } = domElements;
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -21,11 +21,15 @@ function printCalendar() {
         daysElement.appendChild(dayBox);
     }
     currentMonthElement.innerText = `${Months[currentMonth]}`;
+    currentYearElement.innerHTML = `${currentYear}`;
 }
 const prevMonthBtn = () => {
-    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    if (currentMonth === 11) {
+    if (currentMonth === 0) {
+        currentMonth = 11;
         currentYear -= 1;
+    }
+    else {
+        currentMonth -= 1;
     }
 };
 const nextMonthBtn = () => {

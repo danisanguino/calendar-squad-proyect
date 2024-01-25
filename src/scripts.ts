@@ -14,6 +14,7 @@ const {
   daysElement,
   prevBtn,
   nextBtn,
+  currentYearElement,
 } = domElements;
 
 // Function to print the Calendar
@@ -46,15 +47,20 @@ function printCalendar(): void {
     daysElement.appendChild(dayBox);
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
+  currentYearElement.innerHTML = `${currentYear}`;
 }
 
-const prevMonthBtn = (): void => {
-  currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-  if (currentMonth === 11) {
+// Buttons functionality
+const prevMonthBtn = () => {
+  if (currentMonth === 0) {
+    currentMonth = 11;
     currentYear -= 1;
+  } else {
+    currentMonth -= 1;
   }
 };
-const nextMonthBtn = (): void => {
+
+const nextMonthBtn = () => {
   if (currentMonth === 11) {
     currentMonth = 0;
     currentYear += 1;
@@ -68,8 +74,10 @@ prevBtn.addEventListener("click", () => {
   prevMonthBtn();
   printCalendar();
 });
+
 nextBtn.addEventListener("click", () => {
   nextMonthBtn();
   printCalendar();
 });
+
 printCalendar();
