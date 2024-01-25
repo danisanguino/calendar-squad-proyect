@@ -23,6 +23,6 @@ function printCalendar() {
         dayBox.innerText = i.toString();
         daysElement.appendChild(dayBox);
     }
-    currentMonthElement.innerText = getMonthName(currentMonth);
+    currentMonthElement.innerText = `${Months[currentMonth]}`;
 }
 printCalendar();

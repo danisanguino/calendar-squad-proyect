@@ -43,7 +43,7 @@ function printCalendar(): void {
     dayBox.innerText = i.toString();
     daysElement.appendChild(dayBox);
   }
-  currentMonthElement.innerText = getMonthName(currentMonth); // Use getMonthName function
+  currentMonthElement.innerText = `${Months[currentMonth]}`;
 }
 
 printCalendar();
