@@ -8,16 +8,16 @@ let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
 
+const {
+  currentMonthElement,
+  currentDayElement,
+  daysElement,
+  prevBtn,
+  nextBtn,
+} = domElements;
+
 // Function to print the Calendar
 function printCalendar(): void {
-  const {
-    currentMonthElement,
-    currentDayElement,
-    daysElement,
-    prevBtn,
-    nextBtn,
-  } = domElements;
-
   const firstDayOfTheMonth: number = new Date(
     currentYear,
     currentMonth,
@@ -46,29 +46,30 @@ function printCalendar(): void {
     daysElement.appendChild(dayBox);
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
-
-  // Buttons functionality
-  const nextMonthBtn = () => {
-    currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-    if (currentMonth === 0) {
-      currentYear += 1;
-    }
-  };
-  const prevMonthBtn = () => {
-    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    if (currentMonth === 11) {
-      currentYear -= 1;
-    }
-  };
-  nextBtn.addEventListener("click", () => {
-    nextMonthBtn();
-    printCalendar();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    prevMonthBtn();
-    printCalendar();
-  });
 }
 
+const prevMonthBtn = (): void => {
+  currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+  if (currentMonth === 11) {
+    currentYear -= 1;
+  }
+};
+const nextMonthBtn = (): void => {
+  if (currentMonth === 11) {
+    currentMonth = 0;
+    currentYear += 1;
+  } else {
+    currentMonth += 1;
+  }
+  console.log(currentMonth);
+};
+
+prevBtn.addEventListener("click", () => {
+  prevMonthBtn();
+  printCalendar();
+});
+nextBtn.addEventListener("click", () => {
+  nextMonthBtn();
+  printCalendar();
+});
 printCalendar();

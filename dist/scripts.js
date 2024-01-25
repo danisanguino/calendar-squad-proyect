@@ -4,8 +4,8 @@ let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, } = domElements;
 function printCalendar() {
-    const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, } = domElements;
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     daysElement.innerHTML = " ";
@@ -21,25 +21,29 @@ function printCalendar() {
         daysElement.appendChild(dayBox);
     }
     currentMonthElement.innerText = `${Months[currentMonth]}`;
-    const nextMonthBtn = () => {
-        currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-        if (currentMonth === 0) {
-            currentYear += 1;
-        }
-    };
-    const prevMonthBtn = () => {
-        currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-        if (currentMonth === 11) {
-            currentYear -= 1;
-        }
-    };
-    nextBtn.addEventListener("click", () => {
-        nextMonthBtn();
-        printCalendar();
-    });
-    prevBtn.addEventListener("click", () => {
-        prevMonthBtn();
-        printCalendar();
-    });
 }
+const prevMonthBtn = () => {
+    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    if (currentMonth === 11) {
+        currentYear -= 1;
+    }
+};
+const nextMonthBtn = () => {
+    if (currentMonth === 11) {
+        currentMonth = 0;
+        currentYear += 1;
+    }
+    else {
+        currentMonth += 1;
+    }
+    console.log(currentMonth);
+};
+prevBtn.addEventListener("click", () => {
+    prevMonthBtn();
+    printCalendar();
+});
+nextBtn.addEventListener("click", () => {
+    nextMonthBtn();
+    printCalendar();
+});
 printCalendar();
