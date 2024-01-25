@@ -13,30 +13,30 @@ header {
   height: 13rem;
 }
 
-header .date {
+.header__date {
   display: flex;
   flex-direction: row;
   align-items: end;
   justify-content: space-between;
 }
 
-header .date h1 {
+.header__date--today-month {
   font-size: 6rem;
 }
 
-header .date h2 {
+.header__date--today-day {
   font-size: 2rem;
 }
 
-header .date h3 {
+.header__date--year-and-btn--year {
   font-size: 8rem;
 }
 
-header .date .year-and-btn {
+.header__date--year-and-btn {
   text-align: right;
 }
 
-header .more-months {
+.header__more-months {
   background-color: aqua;
   display: flex;
   justify-content: space-between;
@@ -55,12 +55,12 @@ main p {
 }
 
 /* Non-dynamic */
-main .container-week {
+.main__container-week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-content: space-between;
 }
-main .container-week .day-name {
+.main__container-week--day-name {
   border: 1px solid black;
   padding: 0.2rem;
   border-radius: 10px;
@@ -71,13 +71,13 @@ main .container-week .day-name {
 
 /* Dynamic */
 
-main .container-days {
+.main__container-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-content: space-between;
 }
 
-main .container-days .dynamic-day {
+.main__container-days--dynamic-day {
   border: 1px solid black;
   padding: 0.2rem;
   border-radius: 10px;
@@ -85,7 +85,7 @@ main .container-days .dynamic-day {
   background-color: azure;
 }
 
-main .container-days .dynamic-day .event {
+.main__container-days--dynamic-day--event {
   border: 1px solid black;
   padding: 0.2rem;
   border-radius: 5px;
