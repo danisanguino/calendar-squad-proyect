@@ -2,10 +2,6 @@ import { Months } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
-const getMonthName = (month: Months): string => {
-  return Months[month];
-};
-
 let date: Date = new Date();
 
 let currentDay: number = date.getDate();
@@ -14,7 +10,13 @@ let currentYear: number = date.getFullYear();
 
 // Function to print the Calendar
 function printCalendar(): void {
-  const { currentMonthElement, currentDayElement, daysElement } = domElements;
+  const {
+    currentMonthElement,
+    currentDayElement,
+    daysElement,
+    prevBtn,
+    nextBtn,
+  } = domElements;
 
   const firstDayOfTheMonth: number = new Date(
     currentYear,
@@ -44,6 +46,29 @@ function printCalendar(): void {
     daysElement.appendChild(dayBox);
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
+
+  // Buttons functionality
+  const nextMonthBtn = () => {
+    currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+    if (currentMonth === 0) {
+      currentYear += 1;
+    }
+  };
+  const prevMonthBtn = () => {
+    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    if (currentMonth === 11) {
+      currentYear -= 1;
+    }
+  };
+  nextBtn.addEventListener("click", () => {
+    nextMonthBtn();
+    printCalendar();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prevMonthBtn();
+    printCalendar();
+  });
 }
 
 printCalendar();
