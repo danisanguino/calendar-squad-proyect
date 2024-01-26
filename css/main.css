@@ -42,10 +42,29 @@ header {
   text-align: right;
 }
 
+.header__date--year-and-btn--btn {
+  background-color: white;
+  border: 0;
+  margin-top: -1rem;
+}
+
+.header__date--year-and-btn--btn:hover {
+ cursor: pointer;
+}
+
 .header__more-months {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.month-btn {
+  background-color: var(--secondary-colour);
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  padding: 0 2rem 0 2rem ;
+  border: 0;
 }
 
 /* ---MAIN--- */
