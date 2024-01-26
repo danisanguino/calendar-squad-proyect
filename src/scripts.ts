@@ -17,6 +17,9 @@ const {
   prevBtn,
   nextBtn,
   currentYearElement,
+  eventBtnElement,
+  eventModalElement,
+  modalOverlayElement,
 } = domElements;
 
 // Function to print the Calendar
@@ -47,6 +50,10 @@ function printCalendar(): void {
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
     daysElement.appendChild(dayBox);
+
+    if (i === currentDay) {
+      dayBox.classList.add("active");
+    }
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
@@ -91,6 +98,16 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
   nextMonthBtn();
   printCalendar();
+});
+
+//Showing Modal Function
+const showModal = () => {
+  eventModalElement.classList.remove("hide");
+  eventModalElement.classList.remove("");
+};
+
+eventBtnElement.addEventListener("click", () => {
+  showModal();
 });
 
 printCalendar();

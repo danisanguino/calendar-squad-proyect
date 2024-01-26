@@ -22,7 +22,9 @@
         </div>
         <div class="header__date--year-and-btn">
           <h3 id="header-year" class="header__date--year-and-btn--year"></h3>
-          <button class="header__date--year-and-btn--btn">Add event</button>
+          <button class="header__date--year-and-btn--btn" id="event-btn">
+            Add event
+          </button>
         </div>
       </section>
       <section class="header__more-months">
@@ -95,7 +97,7 @@
 
       <button type="submit">Add event</button>
     </form>
-    <div class="overlay hide"></div>
+    <div id="modal-overlay" class="overlay hide"></div>
 
     <script type="module" src="dist/scripts.js"></script>
   </body>
