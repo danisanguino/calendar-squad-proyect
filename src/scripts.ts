@@ -1,5 +1,7 @@
 // import { Months } from "./enums";
 
+//this is a text that must be stay here later
+
 import { domElements } from "./dom.js";
 
 let date: Date = new Date();
