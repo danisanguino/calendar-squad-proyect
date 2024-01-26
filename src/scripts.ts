@@ -62,6 +62,10 @@ const prevMonthBtn = () => {
   }
 };
 
+const today = function (){
+  
+}
+
 const nextMonthBtn = () => {
   if (currentMonth === 11) {
     currentMonth = 0;
