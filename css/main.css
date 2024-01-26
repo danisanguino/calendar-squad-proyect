@@ -7,10 +7,6 @@
 
 /* this is a text that must be stay here later */
 
-.frenguel {
-  color: black;
-}
-
 /* ---HEADER--- */
 
 header {
@@ -83,7 +79,7 @@ main p {
 .main__container-days {
   height: calc(100vh - 17.5rem);
   display: grid;
-  grid-template-columns: repeat(7, 1fr); 
+  grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 1fr;
   gap: 0.3rem;
   justify-content: space-between;
@@ -96,6 +92,12 @@ main p {
   text-align: right;
   background-color: white;
   font-weight: 200;
+}
+
+.main__container-days--dynamic-day:hover {
+  transition: background-color 0.6s ease;
+  background-color: #31aad299;
+  color: white;
 }
 
 .main__container-days--dynamic-day--event {
