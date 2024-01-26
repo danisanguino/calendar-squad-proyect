@@ -5,6 +5,10 @@
   font-weight: 600;
 }
 
+body {
+  font-size: 62.5%;
+}
+
 /* ---HEADER--- */
 
 header {
