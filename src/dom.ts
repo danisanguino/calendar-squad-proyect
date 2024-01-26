@@ -12,4 +12,10 @@ export const domElements = {
   modalOverlayElement: document.getElementById(
     "modal-overlay"
   ) as HTMLDivElement,
+  modalCloseBtnElement: document.getElementById(
+    "close-btn"
+  ) as HTMLButtonElement,
+  modalCurrentDayElement: document.getElementById(
+    "initial-date"
+  ) as HTMLInputElement,
 };
