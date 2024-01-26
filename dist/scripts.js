@@ -1,10 +1,11 @@
+import { Months } from "./enums.js";
 import { domElements } from "./dom.js";
 let date = new Date();
-let currentDay = date.getDay();
+let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, } = domElements;
 function printCalendar() {
-    const { currentMonthElement, currentDayElement, daysElement } = domElements;
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     daysElement.innerHTML = " ";
@@ -19,6 +20,34 @@ function printCalendar() {
         dayBox.innerText = i.toString();
         daysElement.appendChild(dayBox);
     }
-    currentMonthElement.innerText = "";
+    currentMonthElement.innerText = `${Months[currentMonth]}`;
+    currentYearElement.innerHTML = `${currentYear}`;
 }
+const prevMonthBtn = () => {
+    if (currentMonth === 0) {
+        currentMonth = 11;
+        currentYear -= 1;
+    }
+    else {
+        currentMonth -= 1;
+    }
+};
+const nextMonthBtn = () => {
+    if (currentMonth === 11) {
+        currentMonth = 0;
+        currentYear += 1;
+    }
+    else {
+        currentMonth += 1;
+    }
+    console.log(currentMonth);
+};
+prevBtn.addEventListener("click", () => {
+    prevMonthBtn();
+    printCalendar();
+});
+nextBtn.addEventListener("click", () => {
+    nextMonthBtn();
+    printCalendar();
+});
 printCalendar();

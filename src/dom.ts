@@ -4,4 +4,7 @@ export const domElements = {
   currentDayElement: document.getElementById("header-day") as HTMLElement,
   prevBtn: document.getElementById("prev-btn") as HTMLButtonElement,
   nextBtn: document.getElementById("next-btn") as HTMLButtonElement,
+  currentYearElement: document.getElementById(
+    "header-year"
+  ) as HTMLHeadingElement,
 };

@@ -4,4 +4,5 @@ export const domElements = {
     currentDayElement: document.getElementById("header-day"),
     prevBtn: document.getElementById("prev-btn"),
     nextBtn: document.getElementById("next-btn"),
+    currentYearElement: document.getElementById("header-year"),
 };
