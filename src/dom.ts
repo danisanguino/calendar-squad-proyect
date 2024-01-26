@@ -7,4 +7,9 @@ export const domElements = {
   currentYearElement: document.getElementById(
     "header-year"
   ) as HTMLHeadingElement,
+  eventBtnElement: document.getElementById("event-btn") as HTMLButtonElement,
+  eventModalElement: document.getElementById("event-form") as HTMLModElement,
+  modalOverlayElement: document.getElementById(
+    "modal-overlay"
+  ) as HTMLDivElement,
 };

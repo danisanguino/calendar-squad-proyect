@@ -1,4 +1,4 @@
-import { Months } from "./enums.js";
+import { Months, Days } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
@@ -15,6 +15,9 @@ const {
   prevBtn,
   nextBtn,
   currentYearElement,
+  eventBtnElement,
+  eventModalElement,
+  modalOverlayElement,
 } = domElements;
 
 // Function to print the Calendar
@@ -45,9 +48,20 @@ function printCalendar(): void {
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
     daysElement.appendChild(dayBox);
+
+    if (i === currentDay) {
+      dayBox.classList.add("active");
+    }
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
+
+  const weekDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
+    date
+  );
+  const dayNumber = date.getDate();
+
+  currentDayElement.innerText = `${weekDay} ${dayNumber}`;
 }
 
 // Buttons functionality
@@ -78,6 +92,16 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
   nextMonthBtn();
   printCalendar();
+});
+
+//Showing Modal Function
+const showModal = () => {
+  eventModalElement.classList.remove("hide");
+  eventModalElement.classList.remove("");
+};
+
+eventBtnElement.addEventListener("click", () => {
+  showModal();
 });
 
 printCalendar();

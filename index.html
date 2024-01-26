@@ -18,11 +18,13 @@
       <section class="header__date">
         <div class="header__date--today">
           <h1 id="header-month" class="header__date--today-month"></h1>
-          <h2 id="header-day" class="header__date--today-day">Wednesday 21</h2>
+          <h2 id="header-day" class="header__date--today-day"></h2>
         </div>
         <div class="header__date--year-and-btn">
           <h3 id="header-year" class="header__date--year-and-btn--year"></h3>
-          <button class="header__date--year-and-btn--btn">Add event</button>
+          <button class="header__date--year-and-btn--btn" id="event-btn">
+            Add event
+          </button>
         </div>
       </section>
       <section class="header__more-months">
@@ -63,29 +65,39 @@
       <!-- Dynamic days -->
       <div id="container-days" class="main__container-days">
         <div id="dynamic-day" class="main__container-days--dynamic-day">
-          <p class="main__container-days--dynamic-day--day-number">#day</p>
-          <div class="main__container-days--dynamic-day--event">Dentist</div>
+          <!-- EVENT REFERENCE -->
+          <!-- <p class="main__container-days--dynamic-day--day-number"></p>
+          <div class="main__container-days--dynamic-day--event"></div> -->
         </div>
       </div>
     </main>
 
-<!-- Modal form -->
+    <!-- Modal form -->
     <form class="modal-form hide" id="event-form">
-        <input type="text" placeholder="event" name="event"><br><br>
+      <input
+        type="text"
+        placeholder="event"
+        name="event"
+        required
+      /><br /><br />
 
-        <label for="initial-date">Initial date</label><br>
-        <input type="date" name="start-event" id="initial-date"><br><br>
+      <label for="initial-date">Initial date</label><br />
+      <input
+        type="date"
+        name="start-event"
+        id="initial-date"
+        required
+      /><br /><br />
 
-        <label for="end-date">Fill to End date</label><br>
-        <input type="checkbox" name="end-event-box" id="end-date"><br>
+      <label for="end-date">Fill to End date</label><br />
+      <input type="checkbox" name="end-event-box" id="end-date" /><br />
 
-        <label for="end-date">End date</label><br>
-        <input type="date" name="end-event" id="end-date"><br><br>
+      <label for="end-date">End date</label><br />
+      <input type="date" name="end-event" id="end-date" /><br /><br />
 
-        <button type="submit">Add event</button>
-
+      <button type="submit">Add event</button>
     </form>
-    <div class="overlay hide"></div>
+    <div id="modal-overlay" class="overlay hide"></div>
 
     <script type="module" src="dist/scripts.js"></script>
   </body>

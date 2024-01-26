@@ -5,4 +5,7 @@ export const domElements = {
     prevBtn: document.getElementById("prev-btn"),
     nextBtn: document.getElementById("next-btn"),
     currentYearElement: document.getElementById("header-year"),
+    eventBtnElement: document.getElementById("event-btn"),
+    eventModalElement: document.getElementById("event-form"),
+    modalOverlayElement: document.getElementById("modal-overlay"),
 };
