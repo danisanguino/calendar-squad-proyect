@@ -26,17 +26,17 @@ header {
 }
 
 .header__date--today-month {
-  font-size: 6rem;
+  font-size: 3.75rem;
   color: var(--secondary-color);
 }
 
 .header__date--today-day {
-  font-size: 2rem;
+  font-size: 1.25rem;
   color: var(--primary-color);
 }
 
 .header__date--year-and-btn--year {
-  font-size: 8rem;
+  font-size: 5rem;
   color: var(--primary-color);
 }
 
