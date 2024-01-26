@@ -73,15 +73,16 @@
     </main>
 
     <!-- Modal form -->
-    <section class="modal-section hide" id="event-form">
+    <!-- <section class="modal-section" > -->
+
+    <form class="modal-form hide" id="event-form">
       <button id="close-btn" class="section__btn-close">X</button>
-      <form class="modal-form" >
-        <input
-          type="text"
-          placeholder="event"
-          name="event"
-          required
-        /><br /><br />
+      <input
+        type="text"
+        placeholder="event"
+        name="event"
+        required
+      /><br /><br />
 
         <label for="initial-date">Initial date</label><br />
         <input
@@ -97,10 +98,9 @@
         <label for="end-date">End date</label><br />
         <input type="date" name="end-event" id="end-date" /><br /><br />
 
-        <button type="submit">Add event</button>
-      </form>
-    </section>
-    <div id="modal-overlay hide" class="overlay hide"></div>
+      <button type="submit">Add event</button>
+    </form>
+    <div id="modal-overlay" class="overlay hide"></div>
 
     <script type="module" src="dist/scripts.js"></script>
   </body>
