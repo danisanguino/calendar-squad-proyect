@@ -49,6 +49,19 @@ function printCalendar(): void {
     const dayBox = document.createElement("div");
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
+
+    //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
+    const addTaskButton = document.createElement("button");
+    addTaskButton.innerHTML = "+";
+    addTaskButton.classList.add("add-btn", "hide");
+
+    dayBox.addEventListener("mouseover", () => {
+      addTaskButton.classList.remove("hide");
+    });
+    dayBox.addEventListener("mouseout", () => {
+      addTaskButton.classList.add("hide");
+    });
+    dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
     if (i === currentDay) {
@@ -132,7 +145,8 @@ const showModal = () => {
 const showModalDayBox = () => {
   eventModalElement.classList.remove("hide");
   modalOverlayElement.classList.remove("hide");
-  const formattedDate = date.toISOString().split(" ")[0];
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().split("T")[0];
   modalCurrentDayElement.value = formattedDate;
 };
 
