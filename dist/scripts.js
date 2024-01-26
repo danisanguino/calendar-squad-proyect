@@ -22,6 +22,9 @@ function printCalendar() {
     }
     currentMonthElement.innerText = `${Months[currentMonth]}`;
     currentYearElement.innerHTML = `${currentYear}`;
+    const weekDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+    const dayNumber = date.getDate();
+    currentDayElement.innerText = `${weekDay} ${dayNumber}`;
 }
 const prevMonthBtn = () => {
     if (currentMonth === 0) {

@@ -1,4 +1,4 @@
-import { Months } from "./enums.js";
+import { Months, Days } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
@@ -48,6 +48,13 @@ function printCalendar(): void {
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
+
+  const weekDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
+    date
+  );
+  const dayNumber = date.getDate();
+
+  currentDayElement.innerText = `${weekDay} ${dayNumber}`;
 }
 
 // Buttons functionality
