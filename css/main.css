@@ -115,3 +115,9 @@ main p {
   color: white;
   text-align: center;
 }
+
+.add-btn {
+  color: red;
+  display: flex;
+  border: 1px solid blackt;
+}

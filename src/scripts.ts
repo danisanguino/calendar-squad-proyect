@@ -18,6 +18,8 @@ const {
   eventBtnElement,
   eventModalElement,
   modalOverlayElement,
+  modalCloseBtnElement,
+  modalCurrentDayElement,
 } = domElements;
 
 // Function to print the Calendar
@@ -52,6 +54,9 @@ function printCalendar(): void {
     if (i === currentDay) {
       dayBox.classList.add("active");
     }
+    dayBox.addEventListener("click", () => {
+      showModalDayBox();
+    });
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
@@ -94,12 +99,44 @@ nextBtn.addEventListener("click", () => {
   printCalendar();
 });
 
+const hideModal = () => {
+  eventModalElement.classList.add("hide");
+  modalOverlayElement.classList.add("hide");
+};
+
+// Escape button listener to close modal
+document.addEventListener("keydown", (escKey) => {
+  if (
+    escKey.key === "Escape" &&
+    !eventModalElement.classList.contains("hide")
+  ) {
+    hideModal();
+  }
+});
+
+// Overlay click to close modal
+modalOverlayElement.addEventListener("click", () => {
+  hideModal();
+});
+
+modalCloseBtnElement.addEventListener("click", () => {
+  hideModal();
+});
+
 //Showing Modal Function
 const showModal = () => {
   eventModalElement.classList.remove("hide");
-  eventModalElement.classList.remove("");
+  modalOverlayElement.classList.remove("hide");
 };
 
+const showModalDayBox = () => {
+  eventModalElement.classList.remove("hide");
+  modalOverlayElement.classList.remove("hide");
+  const formattedDate = date.toISOString().split(" ")[0];
+  modalCurrentDayElement.value = formattedDate;
+};
+
+// Listener to show modal
 eventBtnElement.addEventListener("click", () => {
   showModal();
 });
