@@ -98,6 +98,15 @@ main p {
   color: white;
 }
 
+.active {
+  border: 0.06rem solid var(--primary-colour);
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+  color: var(--primary-colour);
+  /* background-color: #f5f3f4; */
+  background-color: #e3f2fd;
+  font-weight: 600;
+}
+
 .main__container-days--dynamic-day--event {
   border: 1px solid black;
   padding: 0.2rem;
