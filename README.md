@@ -11,6 +11,5 @@ Squad project Berners lee / January 2024
 
 25th January 2024:
 
-    · Testing how
-    ·
-    ·
+    · Building HTML structure.
+    · Styling CSS design.
