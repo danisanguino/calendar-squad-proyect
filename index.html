@@ -68,6 +68,25 @@
         </div>
       </div>
     </main>
+
+<!-- Modal form -->
+    <form class="modal-form hide" id="event-form">
+        <input type="text" placeholder="event" name="event"><br><br>
+
+        <label for="initial-date">Initial date</label><br>
+        <input type="date" name="start-event" id="initial-date"><br><br>
+
+        <label for="end-date">Fill to End date</label><br>
+        <input type="checkbox" name="end-event-box" id="end-date"><br>
+
+        <label for="end-date">End date</label><br>
+        <input type="date" name="end-event" id="end-date"><br><br>
+
+        <button type="submit">Add event</button>
+
+    </form>
+    <div class="overlay hide"></div>
+
     <script type="module" src="dist/scripts.js"></script>
   </body>
 </html>
