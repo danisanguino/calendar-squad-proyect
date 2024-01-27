@@ -23,17 +23,16 @@
         <div class="header__date--year-and-btn">
           <h3 id="header-year" class="header__date--year-and-btn--year"></h3>
           <button class="header__date--year-and-btn--btn" id="event-btn">
-            <img src="assets/add-event.svg" height="40rem">
+            Add event
           </button>
         </div>
       </section>
       <section class="header__more-months">
-        <button id="prev-btn" class="header__more-months--previous-btn month-btn">
-          &lt
+        <button id="prev-btn" class="header__more-months--previous-btn">
+          Prev Month
         </button>
-        <p>Texto con el nombre aqui</p>
-        <button id="next-btn" class="header__more-months--next-btn month-btn">
-          >
+        <button id="next-btn" class="header__more-months--next-btn">
+          Next Month
         </button>
       </section>
     </header>
@@ -74,10 +73,7 @@
     </main>
 
     <!-- Modal form -->
-    <!-- <section class="modal-section" > -->
-
     <form class="modal-form hide" id="event-form">
-      <button id="close-btn" class="section__btn-close">X</button>
       <input
         type="text"
         placeholder="event"
@@ -85,19 +81,19 @@
         required
       /><br /><br />
 
-        <label for="initial-date">Initial date</label><br />
-        <input
-          type="date"
-          name="start-event"
-          id="initial-date"
-          required
-        /><br /><br />
+      <label for="initial-date">Initial date</label><br />
+      <input
+        type="date"
+        name="start-event"
+        id="initial-date"
+        required
+      /><br /><br />
 
-        <label for="end-date">Fill to End date</label><br />
-        <input type="checkbox" name="end-event-box" id="end-date" /><br />
+      <label for="end-date">Fill to End date</label><br />
+      <input type="checkbox" name="end-event-box" id="end-date" /><br />
 
-        <label for="end-date">End date</label><br />
-        <input type="date" name="end-event" id="end-date" /><br /><br />
+      <label for="end-date">End date</label><br />
+      <input type="date" name="end-event" id="end-date" /><br /><br />
 
       <button type="submit">Add event</button>
     </form>

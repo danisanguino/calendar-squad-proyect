@@ -8,6 +8,4 @@ export const domElements = {
     eventBtnElement: document.getElementById("event-btn"),
     eventModalElement: document.getElementById("event-form"),
     modalOverlayElement: document.getElementById("modal-overlay"),
-    modalCloseBtnElement: document.getElementById("close-btn"),
-    modalCurrentDayElement: document.getElementById("initial-date"),
 };

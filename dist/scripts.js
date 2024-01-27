@@ -4,7 +4,7 @@ let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, modalOverlayElement, } = domElements;
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -22,9 +22,6 @@ function printCalendar() {
         if (i === currentDay) {
             dayBox.classList.add("active");
         }
-        dayBox.addEventListener("click", () => {
-            showModalDayBox();
-        });
     }
     currentMonthElement.innerText = `${Months[currentMonth]}`;
     currentYearElement.innerHTML = `${currentYear}`;
@@ -59,31 +56,9 @@ nextBtn.addEventListener("click", () => {
     nextMonthBtn();
     printCalendar();
 });
-const hideModal = () => {
-    eventModalElement.classList.add("hide");
-    modalOverlayElement.classList.add("hide");
-};
-document.addEventListener("keydown", (escKey) => {
-    if (escKey.key === "Escape" &&
-        !eventModalElement.classList.contains("hide")) {
-        hideModal();
-    }
-});
-modalOverlayElement.addEventListener("click", () => {
-    hideModal();
-});
-modalCloseBtnElement.addEventListener("click", () => {
-    hideModal();
-});
 const showModal = () => {
     eventModalElement.classList.remove("hide");
-    modalOverlayElement.classList.remove("hide");
-};
-const showModalDayBox = () => {
-    eventModalElement.classList.remove("hide");
-    modalOverlayElement.classList.remove("hide");
-    const formattedDate = date.toISOString().split(" ")[0];
-    modalCurrentDayElement.value = formattedDate;
+    eventModalElement.classList.remove("");
 };
 eventBtnElement.addEventListener("click", () => {
     showModal();
