@@ -5,9 +5,7 @@
   font-weight: 600;
 }
 
-body {
-  font-size: 62.5%;
-}
+/* this is a text that must be stay here later */
 
 /* ---HEADER--- */
 
@@ -26,17 +24,17 @@ header {
 }
 
 .header__date--today-month {
-  font-size: 3.75rem;
+  font-size: 6rem;
   color: var(--secondary-color);
 }
 
 .header__date--today-day {
-  font-size: 1.25rem;
+  font-size: 2rem;
   color: var(--primary-color);
 }
 
 .header__date--year-and-btn--year {
-  font-size: 5rem;
+  font-size: 8rem;
   color: var(--primary-color);
 }
 
@@ -44,10 +42,29 @@ header {
   text-align: right;
 }
 
+.header__date--year-and-btn--btn {
+  background-color: white;
+  border: 0;
+  margin-top: -1rem;
+}
+
+.header__date--year-and-btn--btn:hover {
+ cursor: pointer;
+}
+
 .header__more-months {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.month-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  padding: 0 2rem 0 2rem ;
+  border: 0;
 }
 
 /* ---MAIN--- */
@@ -103,9 +120,9 @@ main p {
 }
 
 .active {
-  border: 0.06rem solid var(--primary-colour);
+  border: 0.06rem solid var(--primary-color);
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
-  color: var(--primary-colour);
+  color: var(--primary-color);
   /* background-color: #f5f3f4; */
   background-color: #e3f2fd;
   font-weight: 600;
@@ -118,4 +135,10 @@ main p {
   background-color: black;
   color: white;
   text-align: center;
+}
+
+.add-btn {
+  color: red;
+  display: flex;
+  border: 1px solid black;
 }
