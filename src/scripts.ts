@@ -18,6 +18,8 @@ const {
   eventBtnElement,
   eventModalElement,
   modalOverlayElement,
+  modalCloseBtnElement,
+  modalCurrentDayElement,
 } = domElements;
 
 // Function to print the Calendar
@@ -47,11 +49,27 @@ function printCalendar(): void {
     const dayBox = document.createElement("div");
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
+
+    //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
+    const addTaskButton = document.createElement("button");
+    addTaskButton.innerHTML = "+";
+    addTaskButton.classList.add("add-btn", "hide");
+
+    dayBox.addEventListener("mouseover", () => {
+      addTaskButton.classList.remove("hide");
+    });
+    dayBox.addEventListener("mouseout", () => {
+      addTaskButton.classList.add("hide");
+    });
+    dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
     if (i === currentDay) {
       dayBox.classList.add("active");
     }
+    dayBox.addEventListener("click", () => {
+      showModalDayBox();
+    });
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
@@ -94,12 +112,45 @@ nextBtn.addEventListener("click", () => {
   printCalendar();
 });
 
+const hideModal = () => {
+  eventModalElement.classList.add("hide");
+  modalOverlayElement.classList.add("hide");
+};
+
+// Escape button listener to close modal
+document.addEventListener("keydown", (escKey) => {
+  if (
+    escKey.key === "Escape" &&
+    !eventModalElement.classList.contains("hide")
+  ) {
+    hideModal();
+  }
+});
+
+// Overlay click to close modal
+modalOverlayElement.addEventListener("click", () => {
+  hideModal();
+});
+
+modalCloseBtnElement.addEventListener("click", () => {
+  hideModal();
+});
+
 //Showing Modal Function
 const showModal = () => {
   eventModalElement.classList.remove("hide");
-  eventModalElement.classList.remove("");
+  modalOverlayElement.classList.remove("hide");
 };
 
+const showModalDayBox = () => {
+  eventModalElement.classList.remove("hide");
+  modalOverlayElement.classList.remove("hide");
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().split("T")[0];
+  modalCurrentDayElement.value = formattedDate;
+};
+
+// Listener to show modal
 eventBtnElement.addEventListener("click", () => {
   showModal();
 });

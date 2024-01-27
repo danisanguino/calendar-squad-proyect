@@ -13,6 +13,11 @@ Squad project Berners Lee / January 2024
 
 25th January 2024:
 
-    · Testing how
+    · Building HTML structure.
+    · Styling CSS design.
+
+26th January 2024:
+
+    · Implementing function to show day boxes.
     ·
     ·
