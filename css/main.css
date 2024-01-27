@@ -9,6 +9,8 @@ body {
   font-size: 62.5%;
 }
 
+/* this is a text that must be stay here later */
+
 /* ---HEADER--- */
 
 header {
@@ -44,10 +46,29 @@ header {
   text-align: right;
 }
 
+.header__date--year-and-btn--btn {
+  background-color: white;
+  border: 0;
+  margin-top: -1rem;
+}
+
+.header__date--year-and-btn--btn:hover {
+ cursor: pointer;
+}
+
 .header__more-months {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.month-btn {
+  background-color: var(--secondary-colour);
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  padding: 0 2rem 0 2rem ;
+  border: 0;
 }
 
 /* ---MAIN--- */
@@ -118,4 +139,10 @@ main p {
   background-color: black;
   color: white;
   text-align: center;
+}
+
+.add-btn {
+  color: red;
+  display: flex;
+  border: 1px solid black;
 }
