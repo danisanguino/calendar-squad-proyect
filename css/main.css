@@ -146,6 +146,7 @@ main p {
 }
 
 .add-btn {
+  cursor: pointer;
   color: white;
   background-color: var(--primary-color);
   border: 0;
