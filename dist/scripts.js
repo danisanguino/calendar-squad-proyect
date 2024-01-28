@@ -100,3 +100,16 @@ eventBtnElement.addEventListener("click", () => {
     showModal();
 });
 printCalendar();
+window.addEventListener('load', () => {
+    const darkMode = document.getElementById('dark-mode');
+    if (darkMode) {
+        darkMode.addEventListener('click', darkModeSwitcher);
+    }
+    else {
+        console.error('Dark mode toggle button not found');
+    }
+});
+function darkModeSwitcher() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+}

@@ -1,0 +1,10 @@
+/* Dark Mode Variables */
+.dark-mode {
+    --primary-color: #18363E;
+    --secondary-color: #31aad2;
+    --tertiary-color: #0079a1;
+    --background-color: #46484F;
+    --text-color: #FFFFFF;
+    --border-color: #626567;
+  }
+  

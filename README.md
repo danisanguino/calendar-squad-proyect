@@ -22,3 +22,6 @@ Squad project Berners Lee / January 2024
 
 27th January 2024:
     · CSS styling
+
+28th January 2024:
+    · Dark Mode feature added
