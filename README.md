@@ -27,6 +27,5 @@ Squad project Berners Lee / January 2024
     · Modal CSS styling.
 
 28th January 2024:
-
-    · Dark Mode feature added.
-    · Adding months animations.
+· Dark Mode feature added
+· Dark Mode styling
