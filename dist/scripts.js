@@ -63,13 +63,27 @@ const nextMonthBtn = () => {
     }
     console.log(currentMonth);
 };
+const leftAnimation = function () {
+    daysElement.classList.add('animate__slideOutRight');
+    daysElement.addEventListener('animationend', function () {
+        daysElement.classList.remove('animate__slideOutRight');
+    });
+};
+const rightAnimation = function () {
+    daysElement.classList.add('animate__slideOutLeft');
+    daysElement.addEventListener('animationend', function () {
+        daysElement.classList.remove('animate__slideOutLeft');
+    });
+};
 prevBtn.addEventListener("click", () => {
     prevMonthBtn();
     printCalendar();
+    leftAnimation();
 });
 nextBtn.addEventListener("click", () => {
     nextMonthBtn();
     printCalendar();
+    rightAnimation();
 });
 const hideModal = () => {
     eventModalElement.classList.add("hide");
