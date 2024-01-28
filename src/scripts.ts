@@ -236,7 +236,25 @@ function darkModeSwitcher () {
   });
 
   });
-
   
+}
+
+// Dark Mode Button
+
+const img = document.querySelector('#icon') as HTMLImageElement;
+let newSrc = 'assets/button-on.png';
+
+function onImageClick(event: MouseEvent) {
+  const target = event.target as HTMLImageElement;
+  target.src = newSrc;
+  if (newSrc == 'assets/button-on.png') {
+    newSrc = 'assets/button-off.png';
+  } else {
+    newSrc = 'assets/button-on.png';
+  }
+}
+
+if (img) {
+  img.addEventListener('click', onImageClick);
 }
 

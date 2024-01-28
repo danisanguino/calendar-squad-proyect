@@ -153,3 +153,18 @@ function darkModeSwitcher() {
         });
     });
 }
+const img = document.querySelector('#icon');
+let newSrc = 'assets/button-on.png';
+function onImageClick(event) {
+    const target = event.target;
+    target.src = newSrc;
+    if (newSrc == 'assets/button-on.png') {
+        newSrc = 'assets/button-off.png';
+    }
+    else {
+        newSrc = 'assets/button-on.png';
+    }
+}
+if (img) {
+    img.addEventListener('click', onImageClick);
+}
