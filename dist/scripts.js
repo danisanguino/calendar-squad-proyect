@@ -18,10 +18,9 @@ function printCalendar() {
         const dayBox = document.createElement("div");
         dayBox.classList.add("main__container-days--dynamic-day");
         dayBox.innerText = i.toString();
-        const currentDate = new Date();
-        if (i === currentDate.getDate() &&
-            currentMonth === currentDate.getMonth() &&
-            currentYear === currentDate.getFullYear()) {
+        if (i === date.getDate() &&
+            currentMonth === date.getMonth() &&
+            currentYear === date.getFullYear()) {
             dayBox.classList.add("active");
         }
         const addTaskButton = document.createElement("button");

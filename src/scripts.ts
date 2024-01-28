@@ -51,11 +51,10 @@ function printCalendar(): void {
     dayBox.innerText = i.toString();
 
     // Emphasing current day
-    const currentDate = new Date();
     if (
-      i === currentDate.getDate() &&
-      currentMonth === currentDate.getMonth() &&
-      currentYear === currentDate.getFullYear()
+      i === date.getDate() &&
+      currentMonth === date.getMonth() &&
+      currentYear === date.getFullYear()
     ) {
       dayBox.classList.add("active");
     }
