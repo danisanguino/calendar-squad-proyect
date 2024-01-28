@@ -191,7 +191,7 @@ printCalendar();
 // Dark Mode switcher
 
 window.addEventListener('load', ()=> {
-  const darkMode = document.getElementById('dark-mode');
+  const darkMode = document.getElementById('switch');
 
   // Check if the element exists before adding the event listener
   if (darkMode) {

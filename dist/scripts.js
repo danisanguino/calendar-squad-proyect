@@ -117,7 +117,7 @@ eventBtnElement.addEventListener("click", () => {
 });
 printCalendar();
 window.addEventListener('load', () => {
-    const darkMode = document.getElementById('dark-mode');
+    const darkMode = document.getElementById('switch');
     if (darkMode) {
         darkMode.addEventListener('click', darkModeSwitcher);
     }
