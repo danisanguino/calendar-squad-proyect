@@ -50,6 +50,15 @@ function printCalendar(): void {
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
 
+    // Emphasing current day
+    if (
+      i === date.getDate() &&
+      currentMonth === date.getMonth() &&
+      currentYear === date.getFullYear()
+    ) {
+      dayBox.classList.add("active");
+    }
+
     //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
@@ -64,9 +73,9 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    if (i === currentDay) {
-      dayBox.classList.add("active");
-    }
+    // if (i === currentDay) {
+    //   dayBox.classList.add("active");
+    // }
     dayBox.addEventListener("click", () => {
       showModalDayBox();
     });
