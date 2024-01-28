@@ -161,7 +161,7 @@ main p {
 
 /* Dark Mode Button */
 
-.dark-mode-switcher {
+switch {
   margin: 0;
   padding: 0;
   cursor: pointer;
