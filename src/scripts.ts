@@ -201,6 +201,8 @@ window.addEventListener("load", () => {
   }
 });
 
+// DARK MODE
+
 function darkModeSwitcher() {
   const body = document.body;
   body.classList.toggle("dark-mode");
