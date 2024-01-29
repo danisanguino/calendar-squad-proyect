@@ -1,6 +1,10 @@
-import { Months, Days } from "./enums.js";
+import { Months, Days,  EventType, Event, } from "./enums.js";
 
 import { domElements } from "./dom.js";
+
+import * as localstorage from "./localstorage.js";
+
+
 
 let date: Date = new Date();
 
@@ -166,6 +170,7 @@ modalOverlayElement.addEventListener("click", () => {
 modalCloseBtnElement.addEventListener("click", () => {
   hideModal();
 });
+
 
 //Showing Modal Function
 const showModal = () => {
