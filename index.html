@@ -98,8 +98,15 @@
           required
         /><br /><br />
 
-        
         <input type="checkbox" name="end-event-box" id="end-date" /><br />
+
+        <label for="end-date">End date</label><br />
+        <input
+          type="date"
+          name="end-event"
+          id="end-date"
+          /><br /><br />
+
         <div id="modal-child" class="">
           <label for="end-date">Fill to End date</label><br />
           
@@ -143,6 +150,7 @@
         </div>
 
       <button type="submit">Add event</button>
+      <button type="reset">Cancel</button>
     </form>
     <!-- </section> -->
     <div id="modal-overlay" class="overlay hide"></div>

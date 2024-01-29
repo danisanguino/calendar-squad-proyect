@@ -171,6 +171,7 @@ modalCloseBtnElement.addEventListener("click", () => {
   hideModal();
 });
 
+
 //Showing Modal Function
 const showModal = () => {
   eventModalElement.classList.remove("hide");
