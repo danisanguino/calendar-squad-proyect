@@ -121,7 +121,7 @@ main p {
   padding: 0.2rem;
   border-radius: 5px;
   text-align: right;
-  background-color: white;
+  background-color: var(--daybox-bg-color);
   font-weight: 200;
 }
 
