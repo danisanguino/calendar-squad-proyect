@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <!-- dynamic days -->
+      <!-- Dynamic days -->
       <div id="container-days" class="main__container-days">
         <div id="dynamic-day" class="main__container-days--dynamic-day">
           <!-- EVENT REFERENCE -->
@@ -84,9 +84,10 @@
       <button id="close-btn" class="section__btn-close">X</button>
       <input
         type="text"
-        placeholder="event"
+        placeholder="Add a title"
         name="event"
         required
+        maxlength="60"
       /><br /><br />
 
         <label for="initial-date">Initial date</label><br />
@@ -97,11 +98,49 @@
           required
         /><br /><br />
 
-        <label for="end-date">Fill to End date</label><br />
+        
         <input type="checkbox" name="end-event-box" id="end-date" /><br />
+        <div id="modal-child" class="">
+          <label for="end-date">Fill to End date</label><br />
+          
+          
+          <!-- <input type="date" name="end-event" id="end-date" /><br /><br />
+          <label for="end-date">End date</label><br /> -->
+          
+          <input type="checkbox" name="reminder" id="reminder" /><br />
+          <label for="reminder">Set a reminder</label><br />
 
-        <label for="end-date">End date</label><br />
-        <input type="date" name="end-event" id="end-date" /><br /><br />
+            <div id="reminder-options" class="modal-form__reminder-options">
+
+              <select name="reminder" id="reminder-checkbox">
+              <option value="5">5 minutes before</option>
+              <option value="10">10 minutes before</option>
+              <option value="15">15 minutes before</option>
+              <option value="30">30 minutes before</option>
+              <option value="60">1 hour before</option>  
+              </select>
+            </div>
+        </div>
+
+        <div class="modal-form__textbox">
+          <textarea
+          name="modal-form-textarea"
+          rows="8"
+          cols="30"
+          maxlength="500"
+          >Write something here</textarea>
+        </div>
+
+        <div id="type-events-options" class="modal-form__reminder-options">
+
+          <select name="event-options" id="type-events-options-values">
+          <option value="meeting">Meeting</option>
+          <option value="personal">Personal</option>
+          <option value="study">Study</option>
+          <option value="assembler">Assembler</option>
+          <option value="other">Leisure</option>  
+          </select>
+        </div>
 
       <button type="submit">Add event</button>
     </form>
