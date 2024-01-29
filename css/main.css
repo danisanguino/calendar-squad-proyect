@@ -11,9 +11,9 @@
 
 header {
   background-color: white;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   height: 13rem;
-  /* border-bottom: solid 0.06rem var(--secondary-color); */
+  border-bottom: solid 0.06rem var(--secondary-color);
 }
 
 .header__date {
@@ -26,12 +26,35 @@ header {
 .header__date--today-month {
   font-size: 5rem;
   color: var(--secondary-color);
-  margin-top: -10rem;
+  margin-top: -8.3rem; 
 }
 
 .header__date--today-day {
   font-size: 1.6rem;
   color: var(--primary-color);
+  margin-top: -1.0rem;
+}
+
+/* Dark Mode Button */
+
+/* .dark-mode-switcher {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+} */
+
+.switch { /* dark mode button */
+  margin: 0;
+  padding: 0;
+  background: none;
+  /* height: 2rem; */
+  border: 0;
+  /* margin-right: 0.5rem; */
+}
+
+img { /* switch image button */
+  width: 3rem;
+  cursor: pointer;
 }
 
 .header__date--year-and-btn--year {
@@ -159,24 +182,3 @@ main p {
   border-radius: 5px;
 }
 
-/* Dark Mode Button */
-
-/* .dark-mode-switcher {
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-} */
-
-.switch { /* dark mode button */
-  margin: 0;
-  padding: 0;
-  background: none;
-  /* height: 2rem; */
-  border: 0;
-  /* margin-right: 0.5rem; */
-}
-
-img { /* switch image button */
-  width: 3rem;
-  cursor: pointer;
-}

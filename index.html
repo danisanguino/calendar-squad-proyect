@@ -77,30 +77,32 @@
       </div>
     </main>
 
-    <!-- Modal form -->
+    <!-- MODAL FORM -->
     <!-- <section class="modal-section" > -->
 
     <form class="modal-form hide" id="event-form">
       <button id="close-btn" class="section__btn-close">X</button>
+      <h4>ADD EVENT</h4>
+      <label for="tittle-date">Tittle</label><br>
       <input
         type="text"
         placeholder="Add a title"
         name="event"
         required
         maxlength="60"
-      /><br /><br />
+      /><br />
 
-        <label for="initial-date">Initial date</label><br />
+        <label for="initial-date">Initial date</label><br>
         <input
           type="date"
           name="start-event"
           id="initial-date"
           required
-        /><br /><br />
+        /><br />
+        
+        <input type="checkbox" name="end-event-box" id="end-date" /><label for="end-date"> End date</label>
 
-        <input type="checkbox" name="end-event-box" id="end-date" /><br />
-
-        <label for="end-date">End date</label><br />
+        <br />
         <input
           type="date"
           name="end-event"
@@ -108,13 +110,13 @@
           /><br /><br />
 
         <div id="modal-child" class="">
-          <label for="end-date">Fill to End date</label><br />
+          
           
           
           <!-- <input type="date" name="end-event" id="end-date" /><br /><br />
           <label for="end-date">End date</label><br /> -->
           
-          <input type="checkbox" name="reminder" id="reminder" /><br />
+          <input type="checkbox" name="reminder" id="reminder" /> <label for="end-date">Remember</label><br /><br />
           <label for="reminder">Set a reminder</label><br />
 
             <div id="reminder-options" class="modal-form__reminder-options">
