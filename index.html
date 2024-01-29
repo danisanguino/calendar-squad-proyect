@@ -80,7 +80,7 @@
     <!-- MODAL FORM -->
     <!-- <section class="modal-section" > -->
 
-    <form class="modal-form hide" id="event-form">
+    <form class="modal-form" id="event-form">
       <button id="close-btn" class="section__btn-close">X</button>
       <h4>ADD EVENT</h4>
       <label for="tittle-date">Tittle</label><br>
@@ -98,38 +98,32 @@
           name="start-event"
           id="initial-date"
           required
-        /><br />
-        
-        <input type="checkbox" name="end-event-box" id="end-date" /><label for="end-date"> End date</label>
+        /><br /><br />
 
-        <br />
+        <div class="modal-form__end-date">
+          <input type="checkbox" name="end-event-box" id="end-date" class="modal-form__end-date" /><label for="end-date"> End date</label><br />
+        </div>
         <input
           type="date"
           name="end-event"
-          id="end-date"
+          id="end-date-calendar"
+          class="modal-form__end-date hide"
           /><br /><br />
 
-        <div id="modal-child" class="">
-          
-          
-          
-          <!-- <input type="date" name="end-event" id="end-date" /><br /><br />
-          <label for="end-date">End date</label><br /> -->
-          
-          <input type="checkbox" name="reminder" id="reminder" /> <label for="end-date">Remember</label><br /><br />
-          <label for="reminder">Set a reminder</label><br />
+          <div class="modal-form__reminder-set">
+            
+            <input type="checkbox" name="reminder" id="reminder" /> <label for="reminder"> Remember me</label><br />
+          </div>
+          <div id="reminder-options" class="modal-form__reminder-options hide">
 
-            <div id="reminder-options" class="modal-form__reminder-options">
-
-              <select name="reminder" id="reminder-checkbox">
-              <option value="5">5 minutes before</option>
-              <option value="10">10 minutes before</option>
-              <option value="15">15 minutes before</option>
-              <option value="30">30 minutes before</option>
-              <option value="60">1 hour before</option>  
-              </select>
-            </div>
-        </div>
+            <select name="reminder" id="reminder-checkbox">
+            <option value="5">5 minutes before</option>
+            <option value="10">10 minutes before</option>
+            <option value="15">15 minutes before</option>
+            <option value="30">30 minutes before</option>
+            <option value="60">1 hour before</option>  
+            </select>
+          </div>
 
         <div class="modal-form__textbox">
           <textarea

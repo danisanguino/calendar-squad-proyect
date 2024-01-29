@@ -49,6 +49,7 @@ header {
   background: none;
   /* height: 2rem; */
   border: 0;
+  z-index: 30;
   /* margin-right: 0.5rem; */
 }
 
@@ -96,15 +97,16 @@ img { /* switch image button */
 
 .month-btn:hover {
   cursor: pointer;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 /* ---MAIN--- */
 
 main {
   background-color: var(--background-color);
-  height: calc(100vh - 15.1rem);
+  height: calc(100vh - 14.1rem);
   padding: 0 1rem 0 1rem;
 }
 
@@ -148,9 +150,10 @@ main p {
 }
 
 .main__container-days--dynamic-day:hover {
-  transition: background-color 0.6s ease;
-  background-color: #31aad299;
-  color: white;
+  transition: all 0.3s ease;
+  /* background-color: var(--background-color);
+  color: white; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .active {

@@ -1,10 +1,10 @@
-import { Months } from "./enums.js";
+import { Months, } from "./enums.js";
 import { domElements } from "./dom.js";
 let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -63,6 +63,16 @@ const nextMonthBtn = () => {
     }
     console.log(currentMonth);
 };
+prevBtn.addEventListener("click", () => {
+    prevMonthBtn();
+    printCalendar();
+    leftAnimation();
+});
+nextBtn.addEventListener("click", () => {
+    nextMonthBtn();
+    printCalendar();
+    rightAnimation();
+});
 const leftAnimation = function () {
     daysElement.classList.add('animate__slideOutRight');
     daysElement.addEventListener('animationend', function () {
@@ -75,16 +85,6 @@ const rightAnimation = function () {
         daysElement.classList.remove('animate__slideOutLeft');
     });
 };
-prevBtn.addEventListener("click", () => {
-    prevMonthBtn();
-    printCalendar();
-    leftAnimation();
-});
-nextBtn.addEventListener("click", () => {
-    nextMonthBtn();
-    printCalendar();
-    rightAnimation();
-});
 const hideModal = () => {
     eventModalElement.classList.add("hide");
     modalOverlayElement.classList.add("hide");
@@ -168,3 +168,15 @@ function onImageClick(event) {
 if (img) {
     img.addEventListener('click', onImageClick);
 }
+const ShowEndDate = () => {
+    eventModalEndDate.classList.remove("hide");
+};
+const showReminder = () => {
+    eventModalReminderOptions.classList.remove("hide");
+};
+eventModalEndDateCheck.addEventListener("click", () => {
+    ShowEndDate();
+});
+eventModalReminderCheck.addEventListener("click", () => {
+    showReminder();
+});
