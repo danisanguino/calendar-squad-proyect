@@ -21,6 +21,10 @@ const {
   currentYearElement,
   eventBtnElement,
   eventModalElement,
+  eventModalEndDate,
+  eventModalEndDateCheck,
+  eventModalReminderCheck,
+  eventModalReminderOptions,
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
@@ -115,6 +119,18 @@ const nextMonthBtn = () => {
   console.log(currentMonth);
 };
 
+prevBtn.addEventListener("click", () => {
+  prevMonthBtn();
+  printCalendar();
+  leftAnimation();    
+});
+
+nextBtn.addEventListener("click", () => {
+  nextMonthBtn();
+  printCalendar();
+  rightAnimation();
+});
+
  // Add animation into main__container
  
  const leftAnimation = function() {
@@ -135,17 +151,7 @@ const rightAnimation = function() {
   });
 };
 
-prevBtn.addEventListener("click", () => {
-  prevMonthBtn();
-  printCalendar();
-  leftAnimation();    
-});
-
-nextBtn.addEventListener("click", () => {
-  nextMonthBtn();
-  printCalendar();
-  rightAnimation();
-});
+// Hide Modal
 
 const hideModal = () => {
   eventModalElement.classList.add("hide");
@@ -263,3 +269,22 @@ if (img) {
   img.addEventListener('click', onImageClick);
 }
 
+// Show and hide modal's children
+
+// !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
+
+  const ShowEndDate = () => {
+    eventModalEndDate.classList.remove("hide");
+  };
+  const showReminder = () => {
+    eventModalReminderOptions.classList.remove("hide");
+  };
+
+  // Listener to show modal
+
+  eventModalEndDateCheck.addEventListener("click", () => {
+    ShowEndDate();
+  });
+  eventModalReminderCheck.addEventListener("click", () => {
+    showReminder();
+  });

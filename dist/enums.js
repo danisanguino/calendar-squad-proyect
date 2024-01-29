@@ -23,3 +23,11 @@ export var Days;
     Days[Days["Friday"] = 5] = "Friday";
     Days[Days["Saturday"] = 6] = "Saturday";
 })(Days || (Days = {}));
+export var EventType;
+(function (EventType) {
+    EventType[EventType["Meeting"] = 0] = "Meeting";
+    EventType[EventType["Personal"] = 1] = "Personal";
+    EventType[EventType["Study"] = 2] = "Study";
+    EventType[EventType["Assembler"] = 3] = "Assembler";
+    EventType[EventType["Leisure"] = 4] = "Leisure";
+})(EventType || (EventType = {}));
