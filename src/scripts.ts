@@ -204,37 +204,6 @@ window.addEventListener("load", () => {
 function darkModeSwitcher() {
   const body = document.body;
   body.classList.toggle("dark-mode");
-
-  // const headers = document.getElementsByClassName('header');
-  // for (let i=0; i < headers.length; i++) {
-  //   headers[i].classList.toggle('dark-mode');
-  // }
-
-  // const h1Elements = document.querySelectorAll('.header__date--today-month');
-  // h1Elements.forEach(element => {
-  //   element.classList.toggle('h1-dark-mode')
-  // })
-
-  // const h2Elements = document.querySelectorAll('.header__date--today-day');
-  // h2Elements.forEach(element => {
-  //   element.classList.toggle('h2-dark-mode');
-  // });
-
-  // const h3Elements = document.querySelectorAll('.header__date--year-and-btn--year');
-  // h3Elements.forEach(h3 => {
-  //   h3.classList.toggle('h3-dark-mode');
-
-  // const calendarBtn = document.querySelectorAll('.header__date--year-and-btn--btn');
-  // calendarBtn.forEach (element => {
-  //   element.classList.toggle('calendar-btn-dark-mode')
-  // });
-
-  // const monthBtn = document.querySelectorAll('.month-btn');
-  // monthBtn.forEach (element => {
-  //   element.classList.toggle('month-btn-dark-mode')
-  // });
-
-  // });
 }
 
 // Dark Mode Button
