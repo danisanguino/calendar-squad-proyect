@@ -22,3 +22,17 @@ export enum Days {
   Friday,
   Saturday,
 }
+
+export enum EventType {
+  Meeting,
+  Personal,
+  Study,
+  Assembler,
+  Leisure, 
+}
+
+export interface Event {
+  initialDate: Date;
+  title: string;
+  eventType: EventType;
+}

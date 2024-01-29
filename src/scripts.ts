@@ -1,4 +1,4 @@
-import { Months, Days } from "./enums.js";
+import { Months, Days,  EventType, Event, } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
