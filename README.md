@@ -29,4 +29,5 @@ Squad project Berners Lee / January 2024
 28th January 2024:
 
     · Dark Mode feature added.
+    · Dark Mode styling.
     · Adding months animations.
