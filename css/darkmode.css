@@ -1,0 +1,43 @@
+/* Dark Mode Variables */
+.dark-mode {
+    --primary-color: #18363E;
+    --secondary-color: #31aad2;
+    --tertiary-color: #0079a1;
+    --background-color: #46484F;
+    --text-color: #FFFFFF;
+    --border-color: #626567;
+  }
+
+  .dark-mode p {
+    color: var(--text-color);
+  }
+  
+  header.dark-mode {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    height: 13rem;
+    border-bottom: solid 0.06rem var(--secondary-color);
+  }
+
+  .header.dark-mode .h1-dark-mode {
+    color: var(--secondary-color);
+  }
+
+  .header.dark-mode .h2-dark-mode {
+    color: var(--tertiary-color);
+  }
+
+  .header.dark-mode .h3-dark-mode {
+    color: var(--tertiary-color);
+  }
+
+  .header.dark-mode .calendar-btn-dark-mode {
+    background-color: var(--primary-color);
+  }
+
+  .header.dark-mode .month-btn-dark-mode {
+    background-color: var(--secondary-color);
+  }
+
+
+  

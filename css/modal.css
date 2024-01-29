@@ -12,11 +12,12 @@
 }
 #close-btn {
   position: absolute;
-  padding: 0.5rem;
+  padding-inline: 0.45rem;
+  padding-block: 0.2rem;
   font-weight: 800;
   top: 1rem;
   right: 1rem;
-  background-color: var(--primary-colour);
+  background-color: var(--primary-color);
   border-radius: 5px;
   color: white;
   border: 0;
@@ -24,7 +25,7 @@
 
 #close-btn:hover {
   cursor: pointer;
-  background-color: var(--secondary-colour);
+  background-color: var(--secondary-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 

@@ -50,6 +50,15 @@ function printCalendar(): void {
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
 
+    // Emphasing current day
+    if (
+      i === date.getDate() &&
+      currentMonth === date.getMonth() &&
+      currentYear === date.getFullYear()
+    ) {
+      dayBox.classList.add("active");
+    }
+
     //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
@@ -64,9 +73,9 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    if (i === currentDay) {
-      dayBox.classList.add("active");
-    }
+    // if (i === currentDay) {
+    //   dayBox.classList.add("active");
+    // }
     dayBox.addEventListener("click", () => {
       showModalDayBox();
     });
@@ -102,14 +111,36 @@ const nextMonthBtn = () => {
   console.log(currentMonth);
 };
 
+// Add animation into main__container
+
+const leftAnimation = function () {
+  daysElement.classList.add("animate__slideOutRight");
+
+  // Remove class after animation is completed
+  daysElement.addEventListener("animationend", function () {
+    daysElement.classList.remove("animate__slideOutRight");
+  });
+};
+
+const rightAnimation = function () {
+  daysElement.classList.add("animate__slideOutLeft");
+
+  // Remove class after animation is completed
+  daysElement.addEventListener("animationend", function () {
+    daysElement.classList.remove("animate__slideOutLeft");
+  });
+};
+
 prevBtn.addEventListener("click", () => {
   prevMonthBtn();
   printCalendar();
+  leftAnimation();
 });
 
 nextBtn.addEventListener("click", () => {
   nextMonthBtn();
   printCalendar();
+  rightAnimation();
 });
 
 const hideModal = () => {
@@ -156,3 +187,74 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 printCalendar();
+
+// Dark Mode switcher
+
+window.addEventListener("load", () => {
+  const darkMode = document.getElementById("switch");
+
+  // Check if the element exists before adding the event listener
+  if (darkMode) {
+    darkMode.addEventListener("click", darkModeSwitcher);
+  } else {
+    console.error("Dark mode toggle button not found");
+  }
+});
+
+function darkModeSwitcher() {
+  const body = document.body;
+  body.classList.toggle("dark-mode");
+
+  const headers = document.getElementsByClassName("header");
+  for (let i = 0; i < headers.length; i++) {
+    headers[i].classList.toggle("dark-mode");
+  }
+
+  const h1Elements = document.querySelectorAll(".header__date--today-month");
+  h1Elements.forEach((element) => {
+    element.classList.toggle("h1-dark-mode");
+  });
+
+  const h2Elements = document.querySelectorAll(".header__date--today-day");
+  h2Elements.forEach((element) => {
+    element.classList.toggle("h2-dark-mode");
+  });
+
+  const h3Elements = document.querySelectorAll(
+    ".header__date--year-and-btn--year"
+  );
+  h3Elements.forEach((h3) => {
+    h3.classList.toggle("h3-dark-mode");
+
+    const calendarBtn = document.querySelectorAll(
+      ".header__date--year-and-btn--btn"
+    );
+    calendarBtn.forEach((element) => {
+      element.classList.toggle("calendar-btn-dark-mode");
+    });
+
+    const monthBtn = document.querySelectorAll(".month-btn");
+    monthBtn.forEach((element) => {
+      element.classList.toggle("month-btn-dark-mode");
+    });
+  });
+}
+
+// Dark Mode Button
+
+const img = document.querySelector("#icon") as HTMLImageElement;
+let newSrc = "assets/button-on.png";
+
+function onImageClick(event: MouseEvent) {
+  const target = event.target as HTMLImageElement;
+  target.src = newSrc;
+  if (newSrc == "assets/button-on.png") {
+    newSrc = "assets/button-off.png";
+  } else {
+    newSrc = "assets/button-on.png";
+  }
+}
+
+if (img) {
+  img.addEventListener("click", onImageClick);
+}
