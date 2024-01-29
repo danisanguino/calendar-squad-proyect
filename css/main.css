@@ -161,11 +161,11 @@ main p {
 
 /* Dark Mode Button */
 
-switch {
+/* .dark-mode-switcher {
   margin: 0;
   padding: 0;
   cursor: pointer;
-}
+} */
 
 .switch { /* dark mode button */
   margin: 0;
