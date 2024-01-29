@@ -2,6 +2,10 @@ import { Months, Days } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
+import * as localstorage from "./localstorage.js";
+
+
+
 let date: Date = new Date();
 
 let currentDay: number = date.getDate();
