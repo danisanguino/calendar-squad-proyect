@@ -1,4 +1,4 @@
-import { Months, Days, EventType, Event } from "./enums.js";
+import { Months, Days, EventType, Event, Reminder } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
@@ -20,6 +20,8 @@ const {
   eventBtnElement,
   eventModalElement,
   eventModalEndDate,
+  eventModalInitialDate,
+  eventNameElement,
   eventModalEndDateCheck,
   eventModalReminderCheck,
   eventModalReminderOptions,
@@ -294,3 +296,10 @@ eventModalEndDateCheck.addEventListener("click", () => {
 eventModalReminderCheck.addEventListener("click", () => {
   showReminder();
 });
+
+document.getElementById("event-form")?.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+
+
+
+
