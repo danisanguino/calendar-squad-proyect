@@ -73,11 +73,8 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    // if (i === currentDay) {
-    //   dayBox.classList.add("active");
-    // }
     dayBox.addEventListener("click", () => {
-      showModalDayBox();
+      showModalDayBox(i);
     });
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
@@ -173,11 +170,12 @@ const showModal = () => {
   modalOverlayElement.classList.remove("hide");
 };
 
-const showModalDayBox = () => {
+const showModalDayBox = (clickedDay: number) => {
   eventModalElement.classList.remove("hide");
   modalOverlayElement.classList.remove("hide");
-  const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().split("T")[0];
+
+  const clickedDate = new Date(currentYear, currentMonth, clickedDay + 1);
+  const formattedDate = clickedDate.toISOString().split("T")[0];
   modalCurrentDayElement.value = formattedDate;
 };
 
