@@ -130,6 +130,10 @@ main p {
   padding: 0.5rem;
 }
 
+input, select {
+  cursor: pointer;
+}
+
 /* Dynamic */
 
 .main__container-days {
