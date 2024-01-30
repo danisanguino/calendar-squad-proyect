@@ -64,7 +64,8 @@ img {
 .header__date--year-and-btn--year {
   font-size: 7.4rem;
   color: var(--primary-color);
-  margin-top: -1rem;
+  margin-top: 0;
+  margin-bottom: -1rem;
 }
 
 .header__date--year-and-btn {
