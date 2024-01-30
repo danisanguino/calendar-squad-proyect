@@ -5,7 +5,7 @@ let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -197,15 +197,31 @@ function onImageClick(event) {
     }
 }
 addEventBtnImg.addEventListener("click", onImageClick);
-const ShowEndDate = () => {
-    eventModalEndDate.classList.remove("hide");
+const showEndDateTime = () => {
+    eventModalEndDateTime.classList.remove("hide");
+};
+const hideEndDateTime = () => {
+    eventModalEndDateTime.classList.add("hide");
 };
 const showReminder = () => {
     eventModalReminderOptions.classList.remove("hide");
 };
+const hideReminder = () => {
+    eventModalReminderOptions.classList.add("hide");
+};
 eventModalEndDateCheck.addEventListener("click", () => {
-    ShowEndDate();
+    if (eventModalEndDateCheck.checked) {
+        showEndDateTime();
+    }
+    else {
+        hideEndDateTime();
+    }
 });
 eventModalReminderCheck.addEventListener("click", () => {
-    showReminder();
+    if (eventModalReminderCheck.checked) {
+        showReminder();
+    }
+    else {
+        hideReminder();
+    }
 });

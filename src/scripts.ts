@@ -20,6 +20,7 @@ const {
   eventBtnElement,
   eventModalElement,
   eventModalEndDate,
+  eventModalEndDateTime,
   eventModalInitialDate,
   eventNameElement,
   eventModalEndDateCheck,
@@ -67,21 +68,19 @@ function printCalendar(): void {
       dayBox.classList.add("active");
     }
 
-    // // TESTING LOCALSTORAGE FETCH
-
+    // //testing localStorage Fetch
     // const previousEvents = localStorage.getItem("events");
     // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
-    // //iterar atraves de los eventos para encontrar los eventos del día actual
+    // //iterar atravé de los eventos para encontrar eventos del dia actual
     // const eventsForDay = allEvents.filter(
-    //   (evnt) =>
-    //     evnt.initialDate.getDate() === i &&
-    //     evnt.initialDate.getMonth() === currentMonth &&
-    //     evnt.initialDate.getFullYear() === currentYear
-    // );
+    //   (evnt) => {
+    //   evnt.initialDate.getDate() === i &&
+    //   evnt.initialDate.getMonth() === currentMonth &&
+    //   evnt.initialDate.getFullYear() === currentYear
+    //   });
 
-    // // display events if they exist
-
+    // //Display event if day exists
     // if (eventsForDay.length > 0) {
     //   const eventsContainer = document.createElement("div");
     //   eventsContainer.classList.add("events-container");
@@ -92,7 +91,8 @@ function printCalendar(): void {
     //     eventsContainer.appendChild(eventElement);
     //   });
 
-    //   dayBox.innerHTML= eventsContainer.outerHTML;
+    //   dayBox.innerHTML = eventsContainer.outerHTML;
+
     // }
 
     //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
@@ -341,18 +341,36 @@ addEventBtnImg.addEventListener("click", onImageClick);
 
 // !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
 
-const ShowEndDate = () => {
-  eventModalEndDate.classList.remove("hide");
+const showEndDateTime = () => {
+  eventModalEndDateTime.classList.remove("hide");
 };
+
+const hideEndDateTime = () => {
+  eventModalEndDateTime.classList.add("hide");
+};
+
 const showReminder = () => {
   eventModalReminderOptions.classList.remove("hide");
+};
+
+const hideReminder = () => {
+  eventModalReminderOptions.classList.add("hide");
 };
 
 // Listener to show modal
 
 eventModalEndDateCheck.addEventListener("click", () => {
-  ShowEndDate();
+  if (eventModalEndDateCheck.checked) {
+    showEndDateTime();
+  } else {
+    hideEndDateTime();
+  }
 });
+
 eventModalReminderCheck.addEventListener("click", () => {
-  showReminder();
+  if (eventModalReminderCheck.checked) {
+    showReminder();
+  } else {
+    hideReminder();
+  }
 });

@@ -42,3 +42,4 @@ Squad project Berners Lee / January 2024
 
     · Implementing localStorage.
     · Styling Add Event inside DayBox.
+    · Implementing Modal Checkboxes.
