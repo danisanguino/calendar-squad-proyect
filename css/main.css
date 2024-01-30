@@ -26,13 +26,13 @@ header {
 .header__date--today-month {
   font-size: 5rem;
   color: var(--secondary-color);
-  margin-top: -8.3rem; 
+  margin-top: -9rem; 
 }
 
 .header__date--today-day {
   font-size: 1.6rem;
   color: var(--primary-color);
-  margin-top: -1.0rem;
+  margin-top: -0.5rem;
 }
 
 /* Dark Mode Button */
@@ -43,25 +43,26 @@ header {
   cursor: pointer;
 } */
 
+
+
+.header__date--year-and-btn--year {
+  font-size: 7.4rem;
+  color: var(--primary-color);
+  margin-bottom: -1rem;
+}
+
 .switch { /* dark mode button */
   margin: 0;
   padding: 0;
   background: none;
   /* height: 2rem; */
   border: 0;
-  z-index: 30;
   /* margin-right: 0.5rem; */
 }
 
 img { /* switch image button */
   width: 3rem;
   cursor: pointer;
-}
-
-.header__date--year-and-btn--year {
-  font-size: 7rem;
-  color: var(--primary-color);
-  margin-top: -2rem;
 }
 
 .header__date--year-and-btn {
@@ -71,8 +72,6 @@ img { /* switch image button */
 .header__date--year-and-btn--btn {
   background-color: white;
   border: 0;
-  margin-top: -1rem;
-  border-radius: 5px;
 }
 
 .header__date--year-and-btn--btn:hover {
