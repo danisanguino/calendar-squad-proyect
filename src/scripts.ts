@@ -67,6 +67,33 @@ function printCalendar(): void {
       dayBox.classList.add("active");
     }
 
+    // //testing localStorage Fetch
+    // const previousEvents = localStorage.getItem("events");
+    // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+
+    // //iterar atravé de los eventos para encontrar eventos del dia actual
+    // const eventsForDay = allEvents.filter(
+    //   (evnt) => {
+    //   evnt.initialDate.getDate() === i &&
+    //   evnt.initialDate.getMonth() === currentMonth &&
+    //   evnt.initialDate.getFullYear() === currentYear
+    //   });
+
+    // //Display event if day exists
+    // if (eventsForDay.length > 0) {
+    //   const eventsContainer = document.createElement("div");
+    //   eventsContainer.classList.add("events-container");
+
+    //   eventsForDay.forEach((evnt) => {
+    //     const eventElement = document.createElement("p");
+    //     eventElement.textContent = evnt.title;
+    //     eventsContainer.appendChild(eventElement);
+    //   });
+
+    //   dayBox.innerHTML = eventsContainer.outerHTML;
+
+    // }
+
     //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
@@ -286,60 +313,28 @@ window.addEventListener("load", () => {
 function darkModeSwitcher() {
   const body = document.body;
   body.classList.toggle("dark-mode");
-
-  const headers = document.getElementsByClassName("header");
-  for (let i = 0; i < headers.length; i++) {
-    headers[i].classList.toggle("dark-mode");
-  }
-
-  const h1Elements = document.querySelectorAll(".header__date--today-month");
-  h1Elements.forEach((element) => {
-    element.classList.toggle("h1-dark-mode");
-  });
-
-  const h2Elements = document.querySelectorAll(".header__date--today-day");
-  h2Elements.forEach((element) => {
-    element.classList.toggle("h2-dark-mode");
-  });
-
-  const h3Elements = document.querySelectorAll(
-    ".header__date--year-and-btn--year"
-  );
-  h3Elements.forEach((h3) => {
-    h3.classList.toggle("h3-dark-mode");
-
-    const calendarBtn = document.querySelectorAll(
-      ".header__date--year-and-btn--btn"
-    );
-    calendarBtn.forEach((element) => {
-      element.classList.toggle("calendar-btn-dark-mode");
-    });
-
-    const monthBtn = document.querySelectorAll(".month-btn");
-    monthBtn.forEach((element) => {
-      element.classList.toggle("month-btn-dark-mode");
-    });
-  });
 }
 
 // Dark Mode Button
 
-const img = document.querySelector("#icon") as HTMLImageElement;
+const addEventBtnImg = document.getElementById(
+  "button-off"
+) as HTMLImageElement;
 let newSrc = "assets/button-on.png";
 
 function onImageClick(event: MouseEvent) {
   const target = event.target as HTMLImageElement;
-  target.src = newSrc;
-  if (newSrc == "assets/button-on.png") {
-    newSrc = "assets/button-off.png";
-  } else {
-    newSrc = "assets/button-on.png";
+  if (target) {
+    target.src = newSrc;
+    if (newSrc == "assets/button-on.png") {
+      newSrc = "assets/button-off.png";
+    } else {
+      newSrc = "assets/button-on.png";
+    }
   }
 }
 
-if (img) {
-  img.addEventListener("click", onImageClick);
-}
+addEventBtnImg.addEventListener("click", onImageClick);
 
 // Show and hide modal's children
 

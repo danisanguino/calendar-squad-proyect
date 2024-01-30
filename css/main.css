@@ -3,6 +3,7 @@
   padding: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
+  color: var(--text-color);
 }
 
 /* this is a text that must be stay here later */
@@ -10,7 +11,7 @@
 /* ---HEADER--- */
 
 header {
-  background-color: white;
+  background-color: var(--second-background-color);
   padding: 0 1rem 1rem 1rem;
   height: 13rem;
   border-bottom: solid 0.06rem var(--secondary-color);
@@ -26,7 +27,7 @@ header {
 .header__date--today-month {
   font-size: 5rem;
   color: var(--secondary-color);
-  margin-top: -9rem; 
+  margin-top: -9rem;
 }
 
 .header__date--today-day {
@@ -43,27 +44,11 @@ header {
   cursor: pointer;
 } */
 
-
-
-.header__date--year-and-btn--year {
-  font-size: 7.4rem;
-  color: var(--primary-color);
-  margin-bottom: -1rem;
-}
-
-
-
-.header__date--year-and-btn--year {
-  font-size: 7.4rem;
-  color: var(--primary-color);
-  margin-bottom: -1rem;
-}
-
 .switch {
   /* dark mode button */
-  margin: 0;
-  padding: 0;
-  background: none;
+  /* margin: 0;
+  padding: 0; */
+  /* background: none; */
   /* height: 2rem; */
   border: 0;
   /* margin-right: 0.5rem; */
@@ -75,13 +60,21 @@ img {
   cursor: pointer;
 }
 
+.header__date--year-and-btn--year {
+  font-size: 7.4rem;
+  color: var(--primary-color);
+  margin-top: 0rem;
+  margin-bottom: -1rem;
+}
+
 .header__date--year-and-btn {
   text-align: right;
 }
 
 .header__date--year-and-btn--btn {
-  background-color: white;
+  background-color: var(--second-background-color);
   border: 0;
+  margin-top: -1rem;
 }
 
 .header__date--year-and-btn--btn:hover {
@@ -154,14 +147,31 @@ main p {
   padding: 0.2rem;
   border-radius: 5px;
   text-align: right;
-  background-color: white;
+  background-color: var(--second-background-color);
   font-weight: 200;
+  position: relative;
+}
+
+.add-btn {
+  cursor: pointer;
+  color: white;
+  background-color: var(--primary-color);
+  border: 0;
+  font-size: 1.5rem;
+  padding: 0 0.5rem 0 0.5rem;
+  font-weight: 800;
+  /* padding-inline: 0.2rem; */
+  margin-left: 0.2rem;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.4rem;
 }
 
 .main__container-days--dynamic-day:hover {
   transition: all 0.3s ease;
-  /* background-color: var(--background-color);
-  color: white; */
+  background-color: var(--background-color);
+  /*color: white; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -170,7 +180,7 @@ main p {
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
   color: var(--primary-color);
   /* background-color: #f5f3f4; */
-  background-color: #e3f2fd;
+  background-color: var(--active-color);
   font-weight: 600;
 }
 
@@ -183,16 +193,7 @@ main p {
   text-align: center;
 }
 
-.add-btn {
-  cursor: pointer;
-  color: white;
-  background-color: var(--primary-color);
-  border: 0;
-  font-weight: 800;
-  padding-inline: 0.2rem;
-  margin-left: 0.2rem;
-  border-radius: 5px;
-}
+
 
 /* Dark Mode Button */
 
@@ -212,8 +213,11 @@ main p {
   /* margin-right: 0.5rem; */
 }
 
-img {
-  /* switch image button */
-  width: 3rem;
+.header__date--year-and-btn--btn {
+  background: none;
+}
+
+.header__date--year-and-btn--btn--img {
+  width: 2.5rem;
   cursor: pointer;
 }
