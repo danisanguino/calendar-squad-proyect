@@ -1,1 +1,1 @@
-export const userName = document.getElementById('name');
+export const userName = document.getElementById("name");

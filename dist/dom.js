@@ -8,6 +8,8 @@ export const domElements = {
     eventModalReminderOptions: document.getElementById("reminder-options"),
     eventModalEndDateCheck: document.getElementById("end-date"),
     eventModalEndDate: document.getElementById("end-date-calendar"),
+    eventModalInitialDate: document.getElementById("initial-date"),
+    eventNameElement: document.getElementById("event-name"),
     currentYearElement: document.getElementById("header-year"),
     eventBtnElement: document.getElementById("event-btn"),
     eventModalElement: document.getElementById("event-form"),

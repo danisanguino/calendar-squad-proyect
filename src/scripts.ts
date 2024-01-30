@@ -204,6 +204,70 @@ eventBtnElement.addEventListener("click", () => {
   showModal();
 });
 
+export const saveEvent = (evnt: Event) => {
+  if (evnt.title && evnt.initialDate && evnt.time) {
+    const previousEvents = localStorage.getItem("events");
+    const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+
+    allEvents.push(evnt);
+    localStorage.setItem("events", JSON.stringify(allEvents));
+    printCalendar();
+  }
+};
+
+document.getElementById("event-form")?.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+
+  // Gather form data
+  const title = eventNameElement.value;
+  const initialDate = new Date(eventModalInitialDate.value);
+  const endDate = eventModalEndDateCheck.checked
+    ? new Date(eventModalEndDate.value)
+    : null;
+  const eventTypeString = (
+    document.getElementById("type-events-options-values") as HTMLSelectElement
+  ).value;
+  const eventType: EventType = <EventType>eventTypeString;
+  const reminderValue = (
+    document.getElementById("reminder-checkbox") as HTMLSelectElement
+  ).value;
+  const reminder: Reminder | null = eventModalReminderCheck.checked
+    ? (reminderValue as Reminder)
+    : null;
+  const description = (
+    document.querySelector(
+      'textarea[name="modal-form-textarea"]'
+    ) as HTMLTextAreaElement
+  ).value;
+
+  const startTimeInput = (
+    document.getElementById("start-time-input") as HTMLInputElement
+  ).value;
+  const endTimeInputValue = (
+    document.getElementById("end-time-input") as HTMLInputElement
+  ).value;
+
+  const time: number = parseInt(startTimeInput, 10);
+  const endTime: number | null = endTimeInputValue
+    ? parseInt(endTimeInputValue, 10)
+    : null;
+
+  //Create event Object
+  const event: Event = {
+    initialDate,
+    title,
+    eventType,
+    time,
+    endDate,
+    endTime,
+    reminder,
+    description,
+  };
+
+  saveEvent(event);
+  hideModal();
+});
+
 printCalendar();
 
 // Dark Mode switcher
@@ -296,10 +360,3 @@ eventModalEndDateCheck.addEventListener("click", () => {
 eventModalReminderCheck.addEventListener("click", () => {
   showReminder();
 });
-
-document.getElementById("event-form")?.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-
-
-
-

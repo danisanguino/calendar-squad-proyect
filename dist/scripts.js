@@ -1,10 +1,11 @@
-import { Months, } from "./enums.js";
+var _a;
+import { Months } from "./enums.js";
 import { domElements } from "./dom.js";
 let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -85,6 +86,16 @@ const rightAnimation = function () {
         daysElement.classList.remove("animate__slideOutLeft");
     });
 };
+prevBtn.addEventListener("click", () => {
+    prevMonthBtn();
+    printCalendar();
+    leftAnimation();
+});
+nextBtn.addEventListener("click", () => {
+    nextMonthBtn();
+    printCalendar();
+    rightAnimation();
+});
 const hideModal = () => {
     eventModalElement.classList.add("hide");
     modalOverlayElement.classList.add("hide");
@@ -114,6 +125,48 @@ const showModalDayBox = (clickedDay) => {
 };
 eventBtnElement.addEventListener("click", () => {
     showModal();
+});
+export const saveEvent = (evnt) => {
+    if (evnt.title && evnt.initialDate && evnt.time) {
+        const previousEvents = localStorage.getItem("events");
+        const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+        allEvents.push(evnt);
+        localStorage.setItem("events", JSON.stringify(allEvents));
+        printCalendar();
+    }
+};
+(_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    const title = eventNameElement.value;
+    const initialDate = new Date(eventModalInitialDate.value);
+    const endDate = eventModalEndDateCheck.checked
+        ? new Date(eventModalEndDate.value)
+        : null;
+    const eventTypeString = document.getElementById("type-events-options-values").value;
+    const eventType = eventTypeString;
+    const reminderValue = document.getElementById("reminder-checkbox").value;
+    const reminder = eventModalReminderCheck.checked
+        ? reminderValue
+        : null;
+    const description = document.querySelector('textarea[name="modal-form-textarea"]').value;
+    const startTimeInput = document.getElementById("start-time-input").value;
+    const endTimeInputValue = document.getElementById("end-time-input").value;
+    const time = parseInt(startTimeInput, 10);
+    const endTime = endTimeInputValue
+        ? parseInt(endTimeInputValue, 10)
+        : null;
+    const event = {
+        initialDate,
+        title,
+        eventType,
+        time,
+        endDate,
+        endTime,
+        reminder,
+        description,
+    };
+    saveEvent(event);
+    hideModal();
 });
 printCalendar();
 window.addEventListener("load", () => {
