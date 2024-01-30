@@ -51,7 +51,16 @@ header {
   margin-bottom: -1rem;
 }
 
-.switch { /* dark mode button */
+
+
+.header__date--year-and-btn--year {
+  font-size: 7.4rem;
+  color: var(--primary-color);
+  margin-bottom: -1rem;
+}
+
+.switch {
+  /* dark mode button */
   margin: 0;
   padding: 0;
   background: none;
@@ -60,7 +69,8 @@ header {
   /* margin-right: 0.5rem; */
 }
 
-img { /* switch image button */
+img {
+  /* switch image button */
   width: 3rem;
   cursor: pointer;
 }
@@ -75,7 +85,7 @@ img { /* switch image button */
 }
 
 .header__date--year-and-btn--btn:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 
 .header__more-months {
@@ -90,7 +100,7 @@ img { /* switch image button */
   color: white;
   font-size: 1.5rem;
   border-radius: 4px;
-  padding: 0 2rem 0 2rem ;
+  padding: 0 2rem 0 2rem;
   border: 0;
 }
 
@@ -184,3 +194,26 @@ main p {
   border-radius: 5px;
 }
 
+/* Dark Mode Button */
+
+/* .dark-mode-switcher {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+} */
+
+.switch {
+  /* dark mode button */
+  margin: 0;
+  padding: 0;
+  background: none;
+  /* height: 2rem; */
+  border: 0;
+  /* margin-right: 0.5rem; */
+}
+
+img {
+  /* switch image button */
+  width: 3rem;
+  cursor: pointer;
+}

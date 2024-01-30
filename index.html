@@ -24,15 +24,18 @@
           <h3 id="header-year" class="header__date--year-and-btn--year"></h3>
           <!-- <button class="dark-mode-switcher" id="dark-mode">DM</button> -->
           <button id="switch" class="switch">
-            <img id="button-off" src="assets/button-off.png">
+            <img id="button-off" src="assets/button-off.png" />
           </button>
           <button class="header__date--year-and-btn--btn" id="event-btn">
-              <img src="assets/add-event.svg" height="40rem">
+            <img src="assets/add-event.svg" height="40rem" />
           </button>
         </div>
       </section>
       <section class="header__more-months">
-        <button id="prev-btn" class="header__more-months--previous-btn month-btn">
+        <button
+          id="prev-btn"
+          class="header__more-months--previous-btn month-btn"
+        >
           &lt
         </button>
         <p class="header__more-months">TypeScript Calendar</p>
@@ -83,67 +86,83 @@
     <form class="modal-form hide" id="event-form">
       <button id="close-btn" class="section__btn-close">X</button>
       <h4>ADD EVENT</h4>
-      <label for="tittle-date">Tittle</label><br>
+      <label for="title-date">Title</label><br />
       <input
         type="text"
         placeholder="Add a title"
         name="event"
         required
         maxlength="60"
+        id="event-name"
       /><br />
 
-        <label for="initial-date">Initial date</label><br>
+      <label for="initial-date">Initial date</label><br />
+      <input
+        type="date"
+        name="start-event"
+        id="initial-date"
+        required
+      /><br /><br />
+
+      <label for="time-input">Start Time</label><br />
+      <input
+        type="time"
+        name="start-time-input"
+        id="start-time-input"
+        required
+      /><br /><br />
+
+      <div class="modal-form__end-date">
         <input
-          type="date"
-          name="start-event"
-          id="initial-date"
-          required
-        /><br /><br />
+          type="checkbox"
+          name="end-event-box"
+          id="end-date"
+          class="modal-form__end-date"
+        /><label for="end-date"> End date</label><br />
+      </div>
+      <input
+        type="date"
+        name="end-event"
+        id="end-date-calendar"
+        class="modal-form__end-date hide"
+      /><br /><br />
 
-        <div class="modal-form__end-date">
-          <input type="checkbox" name="end-event-box" id="end-date" class="modal-form__end-date" /><label for="end-date"> End date</label><br />
-        </div>
-        <input
-          type="date"
-          name="end-event"
-          id="end-date-calendar"
-          class="modal-form__end-date hide"
-          /><br /><br />
+      <label for="end-time-input">End Time</label><br />
+      <input
+        type="time"
+        name="end-time-input"
+        id="end-time-input"
+      /><br /><br />
 
-          <div class="modal-form__reminder-set">
-            
-            <input type="checkbox" name="reminder" id="reminder" /> <label for="reminder"> Remember me</label><br />
-          </div>
-          <div id="reminder-options" class="modal-form__reminder-options hide">
+      <div class="modal-form__reminder-set">
+        <input type="checkbox" name="reminder" id="reminder" />
+        <label for="reminder"> Remember me</label><br />
+      </div>
+      <div id="reminder-options" class="modal-form__reminder-options hide">
+        <select name="reminder" id="reminder-checkbox">
+          <option value="5">5 minutes before</option>
+          <option value="10">10 minutes before</option>
+          <option value="15">15 minutes before</option>
+          <option value="30">30 minutes before</option>
+          <option value="60">1 hour before</option>
+        </select>
+      </div>
 
-            <select name="reminder" id="reminder-checkbox">
-            <option value="5">5 minutes before</option>
-            <option value="10">10 minutes before</option>
-            <option value="15">15 minutes before</option>
-            <option value="30">30 minutes before</option>
-            <option value="60">1 hour before</option>  
-            </select>
-          </div>
+      <div class="modal-form__textbox">
+        <textarea name="modal-form-textarea" rows="8" cols="30" maxlength="500">
+Write something here</textarea
+        >
+      </div>
 
-        <div class="modal-form__textbox">
-          <textarea
-          name="modal-form-textarea"
-          rows="8"
-          cols="30"
-          maxlength="500"
-          >Write something here</textarea>
-        </div>
-
-        <div id="type-events-options" class="modal-form__reminder-options">
-
-          <select name="event-options" id="type-events-options-values">
+      <div id="type-events-options" class="modal-form__reminder-options">
+        <select name="event-options" id="type-events-options-values">
           <option value="meeting">Meeting</option>
           <option value="personal">Personal</option>
           <option value="study">Study</option>
           <option value="assembler">Assembler</option>
-          <option value="other">Leisure</option>  
-          </select>
-        </div>
+          <option value="other">Leisure</option>
+        </select>
+      </div>
 
       <button type="submit">Add event</button>
       <button type="reset">Cancel</button>

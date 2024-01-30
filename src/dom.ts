@@ -4,10 +4,22 @@ export const domElements = {
   currentDayElement: document.getElementById("header-day") as HTMLElement,
   prevBtn: document.getElementById("prev-btn") as HTMLButtonElement,
   nextBtn: document.getElementById("next-btn") as HTMLButtonElement,
-  eventModalReminderCheck: document.getElementById("reminder") as HTMLInputElement,
-  eventModalReminderOptions: document.getElementById("reminder-options") as HTMLDivElement,
-  eventModalEndDateCheck: document.getElementById("end-date") as HTMLInputElement,
-  eventModalEndDate: document.getElementById("end-date-calendar") as HTMLInputElement,
+  eventModalReminderCheck: document.getElementById(
+    "reminder"
+  ) as HTMLInputElement,
+  eventModalReminderOptions: document.getElementById(
+    "reminder-options"
+  ) as HTMLDivElement,
+  eventModalEndDateCheck: document.getElementById(
+    "end-date"
+  ) as HTMLInputElement,
+  eventModalEndDate: document.getElementById(
+    "end-date-calendar"
+  ) as HTMLInputElement,
+  eventModalInitialDate: document.getElementById(
+    "initial-date"
+  ) as HTMLInputElement,
+  eventNameElement: document.getElementById("event-name") as HTMLInputElement,
   currentYearElement: document.getElementById(
     "header-year"
   ) as HTMLHeadingElement,
@@ -23,5 +35,3 @@ export const domElements = {
     "initial-date"
   ) as HTMLInputElement,
 };
-
-
