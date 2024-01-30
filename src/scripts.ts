@@ -1,10 +1,8 @@
-import { Months, Days } from "./enums.js";
+import { Months, Days, EventType, Event, Reminder } from "./enums.js";
 
 import { domElements } from "./dom.js";
 
 import * as localstorage from "./localstorage.js";
-
-
 
 let date: Date = new Date();
 
@@ -21,6 +19,12 @@ const {
   currentYearElement,
   eventBtnElement,
   eventModalElement,
+  eventModalEndDate,
+  eventModalInitialDate,
+  eventNameElement,
+  eventModalEndDateCheck,
+  eventModalReminderCheck,
+  eventModalReminderOptions,
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
@@ -77,11 +81,8 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    // if (i === currentDay) {
-    //   dayBox.classList.add("active");
-    // }
     dayBox.addEventListener("click", () => {
-      showModalDayBox();
+      showModalDayBox(i);
     });
   }
   currentMonthElement.innerText = `${Months[currentMonth]}`;
@@ -114,6 +115,18 @@ const nextMonthBtn = () => {
   }
   console.log(currentMonth);
 };
+
+prevBtn.addEventListener("click", () => {
+  prevMonthBtn();
+  printCalendar();
+  leftAnimation();
+});
+
+nextBtn.addEventListener("click", () => {
+  nextMonthBtn();
+  printCalendar();
+  rightAnimation();
+});
 
 // Add animation into main__container
 
@@ -177,11 +190,12 @@ const showModal = () => {
   modalOverlayElement.classList.remove("hide");
 };
 
-const showModalDayBox = () => {
+const showModalDayBox = (clickedDay: number) => {
   eventModalElement.classList.remove("hide");
   modalOverlayElement.classList.remove("hide");
-  const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().split("T")[0];
+
+  const clickedDate = new Date(currentYear, currentMonth, clickedDay + 1);
+  const formattedDate = clickedDate.toISOString().split("T")[0];
   modalCurrentDayElement.value = formattedDate;
 };
 
@@ -205,8 +219,6 @@ window.addEventListener("load", () => {
   }
 });
 
-// DARK MODE
-
 function darkModeSwitcher() {
   const body = document.body;
   body.classList.toggle("dark-mode");
@@ -214,19 +226,45 @@ function darkModeSwitcher() {
 
 // Dark Mode Button
 
-const img = document.querySelector("#icon") as HTMLImageElement;
+const addEventBtnImg = document.getElementById(
+  "button-off"
+) as HTMLImageElement;
 let newSrc = "assets/button-on.png";
 
 function onImageClick(event: MouseEvent) {
   const target = event.target as HTMLImageElement;
-  target.src = newSrc;
-  if (newSrc == "assets/button-on.png") {
-    newSrc = "assets/button-off.png";
-  } else {
-    newSrc = "assets/button-on.png";
+  if (target) {
+    target.src = newSrc;
+    if (newSrc == "assets/button-on.png") {
+      newSrc = "assets/button-off.png";
+    } else {
+      newSrc = "assets/button-on.png";
+    }
   }
 }
 
-if (img) {
-  img.addEventListener("click", onImageClick);
-}
+addEventBtnImg.addEventListener("click", onImageClick);
+
+// Show and hide modal's children
+
+// !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
+
+const ShowEndDate = () => {
+  eventModalEndDate.classList.remove("hide");
+};
+const showReminder = () => {
+  eventModalReminderOptions.classList.remove("hide");
+};
+
+// Listener to show modal
+
+eventModalEndDateCheck.addEventListener("click", () => {
+  ShowEndDate();
+});
+eventModalReminderCheck.addEventListener("click", () => {
+  showReminder();
+});
+
+document.getElementById("event-form")?.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+});

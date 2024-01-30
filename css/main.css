@@ -11,10 +11,10 @@
 /* ---HEADER--- */
 
 header {
-  background-color: var(--header-bg-color);
-  padding: 1rem;
+  background-color: var(--second-background-color);
+  padding: 0 1rem 1rem 1rem;
   height: 13rem;
-  /* border-bottom: solid 0.06rem var(--secondary-color); */
+  border-bottom: solid 0.06rem var(--secondary-color);
 }
 
 .header__date {
@@ -27,12 +27,38 @@ header {
 .header__date--today-month {
   font-size: 5rem;
   color: var(--secondary-color);
-  margin-top: -10rem;
+  margin-top: -8.3rem;
 }
 
 .header__date--today-day {
   font-size: 1.6rem;
   color: var(--primary-color);
+  margin-top: -1rem;
+}
+
+/* Dark Mode Button */
+
+/* .dark-mode-switcher {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+} */
+
+.switch {
+  /* dark mode button */
+  margin: 0;
+  padding: 0;
+  background: none;
+  /* height: 2rem; */
+  border: 0;
+  z-index: 30;
+  /* margin-right: 0.5rem; */
+}
+
+img {
+  /* switch image button */
+  width: 3rem;
+  cursor: pointer;
 }
 
 .header__date--year-and-btn--year {
@@ -74,15 +100,16 @@ header {
 
 .month-btn:hover {
   cursor: pointer;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 /* ---MAIN--- */
 
 main {
   background-color: var(--background-color);
-  height: calc(100vh - 15.1rem);
+  height: calc(100vh - 14.1rem);
   padding: 0 1rem 0 1rem;
 }
 
@@ -121,14 +148,15 @@ main p {
   padding: 0.2rem;
   border-radius: 5px;
   text-align: right;
-  background-color: var(--daybox-bg-color);
+  background-color: var(--second-background-color);
   font-weight: 200;
 }
 
 .main__container-days--dynamic-day:hover {
-  transition: background-color 0.6s ease;
-  background-color: #31aad299;
-  color: white;
+  transition: all 0.3s ease;
+  background-color: var(--secondary-color);
+  /*color: white; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .active {

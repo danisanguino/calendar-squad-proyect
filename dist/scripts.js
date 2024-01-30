@@ -1,10 +1,11 @@
+var _a;
 import { Months } from "./enums.js";
 import { domElements } from "./dom.js";
 let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -35,7 +36,7 @@ function printCalendar() {
         dayBox.appendChild(addTaskButton);
         daysElement.appendChild(dayBox);
         dayBox.addEventListener("click", () => {
-            showModalDayBox();
+            showModalDayBox(i);
         });
     }
     currentMonthElement.innerText = `${Months[currentMonth]}`;
@@ -63,6 +64,16 @@ const nextMonthBtn = () => {
     }
     console.log(currentMonth);
 };
+prevBtn.addEventListener("click", () => {
+    prevMonthBtn();
+    printCalendar();
+    leftAnimation();
+});
+nextBtn.addEventListener("click", () => {
+    nextMonthBtn();
+    printCalendar();
+    rightAnimation();
+});
 const leftAnimation = function () {
     daysElement.classList.add("animate__slideOutRight");
     daysElement.addEventListener("animationend", function () {
@@ -105,11 +116,11 @@ const showModal = () => {
     eventModalElement.classList.remove("hide");
     modalOverlayElement.classList.remove("hide");
 };
-const showModalDayBox = () => {
+const showModalDayBox = (clickedDay) => {
     eventModalElement.classList.remove("hide");
     modalOverlayElement.classList.remove("hide");
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split("T")[0];
+    const clickedDate = new Date(currentYear, currentMonth, clickedDay + 1);
+    const formattedDate = clickedDate.toISOString().split("T")[0];
     modalCurrentDayElement.value = formattedDate;
 };
 eventBtnElement.addEventListener("click", () => {
@@ -129,18 +140,33 @@ function darkModeSwitcher() {
     const body = document.body;
     body.classList.toggle("dark-mode");
 }
-const img = document.querySelector("#icon");
+const addEventBtnImg = document.getElementById("button-off");
 let newSrc = "assets/button-on.png";
 function onImageClick(event) {
     const target = event.target;
-    target.src = newSrc;
-    if (newSrc == "assets/button-on.png") {
-        newSrc = "assets/button-off.png";
-    }
-    else {
-        newSrc = "assets/button-on.png";
+    if (target) {
+        target.src = newSrc;
+        if (newSrc == "assets/button-on.png") {
+            newSrc = "assets/button-off.png";
+        }
+        else {
+            newSrc = "assets/button-on.png";
+        }
     }
 }
-if (img) {
-    img.addEventListener("click", onImageClick);
-}
+addEventBtnImg.addEventListener("click", onImageClick);
+const ShowEndDate = () => {
+    eventModalEndDate.classList.remove("hide");
+};
+const showReminder = () => {
+    eventModalReminderOptions.classList.remove("hide");
+};
+eventModalEndDateCheck.addEventListener("click", () => {
+    ShowEndDate();
+});
+eventModalReminderCheck.addEventListener("click", () => {
+    showReminder();
+});
+(_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+});
