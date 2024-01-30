@@ -67,6 +67,34 @@ function printCalendar(): void {
       dayBox.classList.add("active");
     }
 
+    // // TESTING LOCALSTORAGE FETCH
+
+    // const previousEvents = localStorage.getItem("events");
+    // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+
+    // //iterar atraves de los eventos para encontrar los eventos del día actual
+    // const eventsForDay = allEvents.filter(
+    //   (evnt) =>
+    //     evnt.initialDate.getDate() === i &&
+    //     evnt.initialDate.getMonth() === currentMonth &&
+    //     evnt.initialDate.getFullYear() === currentYear
+    // );
+
+    // // display events if they exist
+
+    // if (eventsForDay.length > 0) {
+    //   const eventsContainer = document.createElement("div");
+    //   eventsContainer.classList.add("events-container");
+
+    //   eventsForDay.forEach((evnt) => {
+    //     const eventElement = document.createElement("p");
+    //     eventElement.textContent = evnt.title;
+    //     eventsContainer.appendChild(eventElement);
+    //   });
+
+    //   dayBox.innerHTML= eventsContainer.outerHTML;
+    // }
+
     //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
