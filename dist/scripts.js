@@ -12,18 +12,17 @@ function printCalendar() {
     daysElement.innerHTML = " ";
     for (let i = 0; i < firstDayOfTheMonth; i++) {
         const dayBox = document.createElement("div");
-        dayBox.classList.add("main__container-days--dynamic-day");
+        dayBox.classList.add("main__container-days--dynamic-day", "opacity");
         daysElement.appendChild(dayBox);
     }
     for (let i = 1; i <= totalDaysInMonth; i++) {
         const dayBox = document.createElement("div");
         dayBox.classList.add("main__container-days--dynamic-day");
         dayBox.innerText = i.toString();
-        if (i === date.getDate() &&
-            currentMonth === date.getMonth() &&
-            currentYear === date.getFullYear()) {
-            dayBox.classList.add("active");
+        if (daysElement.innerHTML === " ") {
+            dayBox.classList.add("opacity");
         }
+        ;
         const addTaskButton = document.createElement("button");
         addTaskButton.innerHTML = "+";
         addTaskButton.classList.add("add-btn", "hide");

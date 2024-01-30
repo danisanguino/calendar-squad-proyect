@@ -50,7 +50,7 @@ function printCalendar(): void {
   // Add empty days element before first day
   for (let i = 0; i < firstDayOfTheMonth; i++) {
     const dayBox = document.createElement("div");
-    dayBox.classList.add("main__container-days--dynamic-day");
+    dayBox.classList.add("main__container-days--dynamic-day", "opacity");
     daysElement.appendChild(dayBox);
   }
   // Printing Days of actual month
@@ -60,13 +60,21 @@ function printCalendar(): void {
     dayBox.innerText = i.toString();
 
     // Emphasing current day
-    if (
-      i === date.getDate() &&
-      currentMonth === date.getMonth() &&
-      currentYear === date.getFullYear()
-    ) {
-      dayBox.classList.add("active");
-    }
+    // if (
+    //   i === date.getDate() &&
+    //   currentMonth === date.getMonth() &&
+    //   currentYear === date.getFullYear()
+    // ) {
+    //   dayBox.classList.add("active");
+    // }
+
+    // Add transparency to empty boxdays
+      //Si contenido === " " entonces añade class "opacity"
+    
+      if (daysElement.innerHTML === " ") {
+      dayBox.classList.add("opacity");
+    };
+
 
     // //testing localStorage Fetch
     // const previousEvents = localStorage.getItem("events");
@@ -388,3 +396,5 @@ eventModalReminderCheck.addEventListener("click", () => {
     hideReminder();
   }
 });
+
+
