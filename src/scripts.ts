@@ -44,7 +44,7 @@ function printCalendar(): void {
     0
   ).getDate();
 
-  // clean Calendar content
+  // Clean Calendar content
   daysElement.innerHTML = " ";
 
   // Add empty days element before first day
@@ -95,7 +95,7 @@ function printCalendar(): void {
 
     // }
 
-    //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
+    // Create dynamic button
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
     addTaskButton.classList.add("add-btn", "hide");
@@ -354,8 +354,6 @@ function onImageClick(event: MouseEvent) {
 addEventBtnImg.addEventListener("click", onImageClick);
 
 // Show and hide modal's children
-
-// !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
 
 const showEndDateTime = () => {
   eventModalEndDate.classList.remove("hide");
