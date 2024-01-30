@@ -342,11 +342,11 @@ addEventBtnImg.addEventListener("click", onImageClick);
 // !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
 
 const showEndDateTime = () => {
-  eventModalEndDateTime.classList.remove("hide");
+  eventModalEndDate.classList.remove("hide");
 };
 
 const hideEndDateTime = () => {
-  eventModalEndDateTime.classList.add("hide");
+  eventModalEndDate.classList.add("hide");
 };
 
 const showReminder = () => {

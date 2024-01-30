@@ -198,10 +198,10 @@ function onImageClick(event) {
 }
 addEventBtnImg.addEventListener("click", onImageClick);
 const showEndDateTime = () => {
-    eventModalEndDateTime.classList.remove("hide");
+    eventModalEndDate.classList.remove("hide");
 };
 const hideEndDateTime = () => {
-    eventModalEndDateTime.classList.add("hide");
+    eventModalEndDate.classList.add("hide");
 };
 const showReminder = () => {
     eventModalReminderOptions.classList.remove("hide");
