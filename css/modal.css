@@ -4,8 +4,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 16rem;
-  background-color: white;
-  padding: 6rem;
+  background-color: var(--background-color);
+  padding: 2rem 6rem 2rem 6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
