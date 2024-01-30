@@ -3,6 +3,7 @@
   padding: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
+  color: var(--text-color);
 }
 
 /* this is a text that must be stay here later */
@@ -10,8 +11,8 @@
 /* ---HEADER--- */
 
 header {
-  background-color: white;
-  padding: 1rem;
+  background-color: var(--second-background-color);
+  padding: 0 1rem 1rem 1rem;
   height: 13rem;
   /* border-bottom: solid 0.06rem var(--secondary-color); */
 }
@@ -26,18 +27,44 @@ header {
 .header__date--today-month {
   font-size: 5rem;
   color: var(--secondary-color);
-  margin-top: -10rem;
+  margin-top: -9rem;
 }
 
 .header__date--today-day {
   font-size: 1.6rem;
   color: var(--primary-color);
+  margin-top: -0.5rem;
+}
+
+/* Dark Mode Button */
+
+/* .dark-mode-switcher {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+} */
+
+.switch {
+  /* dark mode button */
+  /* margin: 0;
+  padding: 0; */
+  /* background: none; */
+  /* height: 2rem; */
+  border: 0;
+  /* margin-right: 0.5rem; */
+}
+
+img {
+  /* switch image button */
+  width: 3rem;
+  cursor: pointer;
 }
 
 .header__date--year-and-btn--year {
-  font-size: 7rem;
+  font-size: 7.4rem;
   color: var(--primary-color);
-  margin-top: -2rem;
+  margin-top: 0rem;
+  margin-bottom: -1rem;
 }
 
 .header__date--year-and-btn {
@@ -45,14 +72,13 @@ header {
 }
 
 .header__date--year-and-btn--btn {
-  background-color: white;
+  background-color: var(--second-background-color);
   border: 0;
   margin-top: -1rem;
-  border-radius: 5px;
 }
 
 .header__date--year-and-btn--btn:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 
 .header__more-months {
@@ -67,21 +93,22 @@ header {
   color: white;
   font-size: 1.5rem;
   border-radius: 4px;
-  padding: 0 2rem 0 2rem ;
+  padding: 0 2rem 0 2rem;
   border: 0;
 }
 
 .month-btn:hover {
   cursor: pointer;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 /* ---MAIN--- */
 
 main {
   background-color: var(--background-color);
-  height: calc(100vh - 15.1rem);
+  height: calc(100vh - 14.1rem);
   padding: 0 1rem 0 1rem;
 }
 
@@ -120,14 +147,32 @@ main p {
   padding: 0.2rem;
   border-radius: 5px;
   text-align: right;
-  background-color: white;
+  background-color: var(--second-background-color);
   font-weight: 200;
+  position: relative;
+}
+
+.add-btn {
+  cursor: pointer;
+  color: white;
+  background-color: var(--primary-color);
+  border: 0;
+  font-size: 1.5rem;
+  padding: 0 0.5rem 0 0.5rem;
+  font-weight: 800;
+  /* padding-inline: 0.2rem; */
+  margin-left: 0.2rem;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.4rem;
 }
 
 .main__container-days--dynamic-day:hover {
-  transition: background-color 0.6s ease;
-  background-color: #31aad299;
-  color: white;
+  transition: all 0.3s ease;
+  background-color: var(--background-color);
+  /*color: white; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .active {
@@ -135,7 +180,7 @@ main p {
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
   color: var(--primary-color);
   /* background-color: #f5f3f4; */
-  background-color: #e3f2fd;
+  background-color: var(--active-color);
   font-weight: 600;
 }
 
@@ -148,17 +193,6 @@ main p {
   text-align: center;
 }
 
-.add-btn {
-  cursor: pointer;
-  color: white;
-  background-color: var(--primary-color);
-  border: 0;
-  font-weight: 800;
-  padding-inline: 0.2rem;
-  margin-left: 0.2rem;
-  border-radius: 5px;
-}
-
 /* Dark Mode Button */
 
 /* .dark-mode-switcher {
@@ -167,7 +201,8 @@ main p {
   cursor: pointer;
 } */
 
-.switch { /* dark mode button */
+.switch {
+  /* dark mode button */
   margin: 0;
   padding: 0;
   background: none;
@@ -176,7 +211,11 @@ main p {
   /* margin-right: 0.5rem; */
 }
 
-img { /* switch image button */
-  width: 3rem;
+.header__date--year-and-btn--btn {
+  background: none;
+}
+
+.header__date--year-and-btn--btn--img {
+  width: 2.5rem;
   cursor: pointer;
 }
