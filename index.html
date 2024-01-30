@@ -26,7 +26,7 @@
           <button id="switch" class="switch">
             <img id="button-off" src="assets/button-off.png" />
           </button>
-          <button id="event-btn" class="header__date--year-and-btn--btn">
+          <button class="header__date--year-and-btn--btn" id="event-btn">
             <img
               id="add-event-btn"
               class="header__date--year-and-btn--btn--img"
@@ -109,6 +109,14 @@
         required
       /><br /><br />
 
+      <label for="time-input">Start Time</label><br />
+      <input
+        type="time"
+        name="start-time-input"
+        id="start-time-input"
+        required
+      /><br /><br />
+
       <div class="modal-form__end-date">
         <input
           type="checkbox"
@@ -122,6 +130,13 @@
         name="end-event"
         id="end-date-calendar"
         class="modal-form__end-date hide"
+      /><br /><br />
+
+      <label for="end-time-input">End Time</label><br />
+      <input
+        type="time"
+        name="end-time-input"
+        id="end-time-input"
       /><br /><br />
 
       <div class="modal-form__reminder-set">

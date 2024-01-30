@@ -46,5 +46,6 @@ export interface Event {
   time: number; // Check if it is better number or string
   endDate: Date | null;
   endTime: number | null;
-  reminder: Reminder;
+  reminder: Reminder | null;
+  description: string;
 }
