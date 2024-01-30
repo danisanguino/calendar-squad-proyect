@@ -140,7 +140,7 @@ export const saveEvent = (evnt) => {
     const title = eventNameElement.value;
     const initialDate = new Date(eventModalInitialDate.value);
     const endDate = eventModalEndDateCheck.checked
-        ? new Date(eventModalEndDate.value)
+        ? new Date(eventModalEndDateTime.value)
         : null;
     const eventTypeString = document.getElementById("type-events-options-values").value;
     const eventType = eventTypeString;

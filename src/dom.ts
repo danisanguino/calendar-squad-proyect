@@ -11,14 +11,14 @@ export const domElements = {
     "reminder-options"
   ) as HTMLDivElement,
   eventModalEndDateCheck: document.getElementById(
-    "end-date"
+    "end-date-checkbox"
   ) as HTMLInputElement,
   eventModalEndDate: document.getElementById(
+    "end-date-container"
+  ) as HTMLDivElement,
+  eventModalEndDateTime: document.getElementById(
     "end-date-calendar"
   ) as HTMLInputElement,
-  eventModalEndDateTime: document.getElementById(
-    "modal-form__end-date"
-  ) as HTMLDivElement,
   eventModalInitialDate: document.getElementById(
     "initial-date"
   ) as HTMLInputElement,
