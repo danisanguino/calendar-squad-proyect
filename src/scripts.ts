@@ -246,6 +246,22 @@ export const saveEvent = (evnt: Event) => {
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
+//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+
+// let allEvents: Event[] = [];
+
+// function getEvents() {
+//   const previousEvents = localStorage.getItem("events");
+//   if (previousEvents) {
+//     allEvents = JSON.parse(previousEvents);
+//     console.log(allEvents);
+//   }
+// }
+
+// getEvents();
+
+//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+  
   // Gather form data
   const title = eventNameElement.value;
   const initialDate = new Date(eventModalInitialDate.value);
