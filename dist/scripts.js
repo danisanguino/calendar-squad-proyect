@@ -6,6 +6,26 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+function updateCalendarWithReminders(events) {
+    events.forEach((event) => {
+        if (event.initialDate instanceof Date ||
+            typeof event.initialDate === "string") {
+            const eventDate = new Date(event.initialDate);
+            const eventDay = eventDate.getDate();
+            const dayBox = daysElement.children[eventDay - 1];
+            if (dayBox) {
+                const reminderText = `${event.title} - ${event.time.toString()}:00`;
+                const reminderElement = document.createElement("div");
+                reminderElement.classList.add("reminder");
+                reminderElement.innerText = reminderText;
+                dayBox.appendChild(reminderElement);
+            }
+        }
+        else {
+            console.error(`Invalid initialDate for event: ${event.title}`);
+        }
+    });
+}
 function printCalendar() {
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -34,6 +54,9 @@ function printCalendar() {
             showModalDayBox(i);
         });
     }
+    const previousEvents = localStorage.getItem("events");
+    const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+    updateCalendarWithReminders(allEvents);
     currentMonthElement.innerText = `${Months[currentMonth]}`;
     currentYearElement.innerHTML = `${currentYear}`;
     const weekDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
@@ -112,7 +135,13 @@ eventBtnElement.addEventListener("click", () => {
     showModal();
 });
 export const saveEvent = (evnt) => {
-    if (evnt.title && evnt.initialDate && evnt.time) {
+    if (evnt.title && evnt.time) {
+        if (!evnt.initialDate || typeof evnt.initialDate === "string") {
+            evnt.initialDate = new Date();
+        }
+        if (typeof evnt.initialDate === "string") {
+            evnt.initialDate = new Date(evnt.initialDate);
+        }
         const previousEvents = localStorage.getItem("events");
         const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
         allEvents.push(evnt);

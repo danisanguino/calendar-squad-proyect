@@ -31,6 +31,32 @@ const {
   modalCurrentDayElement,
 } = domElements;
 
+function updateCalendarWithReminders(events: Event[]): void {
+  // Loop through each event and update the corresponding day box in the calendar
+  events.forEach((event: Event) => {
+    if (
+      event.initialDate instanceof Date ||
+      typeof event.initialDate === "string"
+    ) {
+      const eventDate = new Date(event.initialDate);
+      const eventDay = eventDate.getDate();
+      const dayBox = daysElement.children[eventDay - 1];
+
+      if (dayBox) {
+        // Display the title and time as a reminder in the day box
+        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderElement = document.createElement("div");
+        reminderElement.classList.add("reminder");
+        reminderElement.innerText = reminderText;
+
+        dayBox.appendChild(reminderElement);
+      }
+    } else {
+      console.error(`Invalid initialDate for event: ${event.title}`);
+    }
+  });
+}
+
 // Function to print the Calendar
 function printCalendar(): void {
   const firstDayOfTheMonth: number = new Date(
@@ -114,6 +140,11 @@ function printCalendar(): void {
       showModalDayBox(i);
     });
   }
+
+  const previousEvents = localStorage.getItem("events");
+  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+  updateCalendarWithReminders(allEvents);
+
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
 
@@ -222,7 +253,17 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.initialDate && evnt.time) {
+  if (evnt.title && evnt.time) {
+    if (!evnt.initialDate || typeof evnt.initialDate === "string") {
+      // If initialDate is missing or a string, set it to the current date
+      evnt.initialDate = new Date();
+    }
+
+    // If initialDate is a string, convert it to a Date object
+    if (typeof evnt.initialDate === "string") {
+      evnt.initialDate = new Date(evnt.initialDate);
+    }
+
     const previousEvents = localStorage.getItem("events");
     const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
