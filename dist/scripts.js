@@ -157,6 +157,7 @@ export const saveEvent = (evnt) => {
         localStorage.setItem("events", JSON.stringify(allEvents));
         printCalendar();
     }
+    scheduleNotification(evnt);
 };
 (_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
     evt.preventDefault();
@@ -248,3 +249,17 @@ eventModalReminderCheck.addEventListener("click", () => {
         hideReminder();
     }
 });
+function scheduleNotification(evt) {
+    if (evt.reminder && !isNaN(Number(evt.reminder))) {
+        const reminderTimeInMinutes = Number(evt.reminder);
+        const eventStartTime = new Date(evt.initialDate).getTime();
+        const currentTime = new Date().getTime();
+        const reminderTime = eventStartTime - reminderTimeInMinutes * 60000;
+        if (reminderTime > currentTime) {
+            const timeoutDuration = reminderTime - currentTime;
+            setTimeout(() => {
+                alert(`Reminder: ${evt.title} starts in ${reminderTimeInMinutes} minutes.`);
+            }, timeoutDuration);
+        }
+    }
+}

@@ -262,6 +262,7 @@ export const saveEvent = (evnt: Event) => {
     localStorage.setItem("events", JSON.stringify(allEvents));
     printCalendar();
   }
+  scheduleNotification(evnt)
 };
 
 //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
@@ -425,4 +426,20 @@ eventModalReminderCheck.addEventListener("click", () => {
   }
 });
 
+function scheduleNotification(evt: Event) {
+  
+  if (evt.reminder && !isNaN(Number(evt.reminder))) {
+    const reminderTimeInMinutes = Number(evt.reminder);
+    const eventStartTime = new Date(evt.initialDate).getTime();
+    const currentTime = new Date().getTime();
+    const reminderTime = eventStartTime - reminderTimeInMinutes * 60000; // Convert minutes to ms
+
+    if (reminderTime > currentTime) {
+      const timeoutDuration = reminderTime - currentTime;
+      setTimeout(() => {
+        alert(`Reminder: ${evt.title} starts in ${reminderTimeInMinutes} minutes.`);
+      }, timeoutDuration);
+    }
+  }
+}
 
