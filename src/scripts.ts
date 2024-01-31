@@ -177,18 +177,6 @@ const rightAnimation = function () {
   });
 };
 
-prevBtn.addEventListener("click", () => {
-  prevMonthBtn();
-  printCalendar();
-  leftAnimation();
-});
-
-nextBtn.addEventListener("click", () => {
-  nextMonthBtn();
-  printCalendar();
-  rightAnimation();
-});
-
 const hideModal = () => {
   eventModalElement.classList.add("hide");
   modalOverlayElement.classList.add("hide");
