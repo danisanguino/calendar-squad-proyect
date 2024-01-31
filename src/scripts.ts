@@ -59,7 +59,7 @@ function printCalendar(): void {
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
 
-    // Emphasing current day
+    // Emphasing current day ******* ****** *******
     // if (
     //   i === date.getDate() &&
     //   currentMonth === date.getMonth() &&
@@ -67,14 +67,7 @@ function printCalendar(): void {
     // ) {
     //   dayBox.classList.add("active");
     // }
-
-    // Add transparency to empty boxdays
-      //Si contenido === " " entonces añade class "opacity"
-    
-      if (daysElement.innerHTML === " ") {
-      dayBox.classList.add("opacity");
-    };
-
+    // ******** ******** ******** ******** ******** 
 
     // //testing localStorage Fetch
     // const previousEvents = localStorage.getItem("events");

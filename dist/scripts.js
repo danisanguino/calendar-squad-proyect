@@ -19,10 +19,6 @@ function printCalendar() {
         const dayBox = document.createElement("div");
         dayBox.classList.add("main__container-days--dynamic-day");
         dayBox.innerText = i.toString();
-        if (daysElement.innerHTML === " ") {
-            dayBox.classList.add("opacity");
-        }
-        ;
         const addTaskButton = document.createElement("button");
         addTaskButton.innerHTML = "+";
         addTaskButton.classList.add("add-btn", "hide");
