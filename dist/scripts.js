@@ -6,7 +6,7 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let currentDate = new Date();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalPlaceholderElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
         if (event.initialDate instanceof Date ||
@@ -33,16 +33,21 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
                     eventSecondModalTitle.innerText = event.title;
                     eventSecondModalInitialDate.innerText = `Start: ${event.initialDate}`;
                     eventSecondModalTime.innerText = `at: ${event.time} h.`;
-                    eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
-                    eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
-                    eventSecondModalDescription.innerText = `Description: ${event.description}`;
+                    if (event.endDate)
+                        eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
+                    if (event.endTime)
+                        eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+                    if (event.description)
+                        eventSecondModalDescription.innerText = `Description: ${event.description}`;
                     eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
-                    eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
+                    if (event.reminder)
+                        eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
                     eventSecondModalCloseBtn.addEventListener("click", () => {
                         hideEventModal();
                     });
                     eventDeleteButton.addEventListener("click", () => {
                         reminderElement.remove();
+                        hideEventModal();
                     });
                 });
             }

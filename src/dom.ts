@@ -37,6 +37,7 @@ export const domElements = {
   modalCurrentDayElement: document.getElementById(
     "initial-date"
   ) as HTMLInputElement,
+  modalPlaceholderElement: document.getElementById("modal-form-description") as HTMLTextAreaElement,
   modalDescriptionElement: document.getElementById(
     "modal-description"
   ) as HTMLDivElement,

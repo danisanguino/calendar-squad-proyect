@@ -30,6 +30,7 @@ const {
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
+  modalPlaceholderElement,
   modalDescriptionElement,
   eventSecondModalTitle,
   eventSecondModalInitialDate,
@@ -79,16 +80,15 @@ function updateCalendarWithReminders(
         reminderElement.innerHTML += reminderDescription;
         reminderElement.addEventListener("click", () => {
           modalDescriptionElement.classList.remove("hide");
-          // PONER OVERLAY
           modalOverlayElement.classList.remove("hide")
           eventSecondModalTitle.innerText = event.title;
           eventSecondModalInitialDate.innerText = `Start: ${event.initialDate}`;
           eventSecondModalTime.innerText = `at: ${event.time} h.`;
-          eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
-          eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
-          eventSecondModalDescription.innerText = `Description: ${event.description}`;
+          if (event.endDate) eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
+          if (event.endTime) eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+          if (event.reminder)eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
+          if (event.description) eventSecondModalDescription.innerText = `Description: ${event.description}`;
           eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
-          eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
 
           eventSecondModalCloseBtn.addEventListener("click", () => {
             hideEventModal();
@@ -96,6 +96,7 @@ function updateCalendarWithReminders(
           });
           eventDeleteButton.addEventListener("click", () => {
             reminderElement.remove();
+            hideEventModal();
           });
         });
       }
