@@ -7,7 +7,7 @@ export const domElements = {
     eventModalReminderCheck: document.getElementById("reminder"),
     eventModalReminderOptions: document.getElementById("reminder-options"),
     eventModalEndDateCheck: document.getElementById("end-date-checkbox"),
-    eventModalEndDate: document.getElementById("end-date-container"),
+    eventModalEndDate: document.getElementById("end-date-calendar"),
     eventModalEndDateTime: document.getElementById("end-date-calendar"),
     eventModalInitialDate: document.getElementById("initial-date"),
     eventNameElement: document.getElementById("event-name"),

@@ -14,7 +14,7 @@ export const domElements = {
     "end-date-checkbox"
   ) as HTMLInputElement,
   eventModalEndDate: document.getElementById(
-    "end-date-container"
+    "end-date-calendar"
   ) as HTMLDivElement,
   eventModalEndDateTime: document.getElementById(
     "end-date-calendar"
