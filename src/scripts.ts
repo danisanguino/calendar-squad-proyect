@@ -59,11 +59,14 @@ function updateCalendarWithReminders(
         const reminderText = `${event.title} - ${event.time.toString()}:00`;
         const reminderElement = document.createElement("div");
         reminderElement.classList.add("reminder");
-        // reminderElement.id =
         reminderElement.innerText = reminderText;
-
+        const reminderDescription = `<p class="event-description">${event.title}
+        Description: ${event.description}
+        Time: ${event.time.toString()}:00</p>`;
+        // console.log(reminderDescription);
         dayBox.appendChild(reminderElement);
-        console.log(dayBox);
+        reminderElement.innerHTML += reminderDescription;
+        // console.log(dayBox);
       }
     }
   });

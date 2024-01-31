@@ -110,12 +110,7 @@
       /><br />
 
       <label for="initial-date">Initial date</label><br />
-      <input
-        type="date"
-        name="start-event"
-        id="initial-date"
-        required
-      /><br />
+      <input type="date" name="start-event" id="initial-date" required /><br />
 
       <label for="start-time-input">Start Time</label><br />
       <input
@@ -155,7 +150,6 @@
         <input type="checkbox" name="reminder" id="reminder" />
         <label for="reminder"> Remind me</label><br />
       </div>
-    
       <div id="reminder-options" class="modal-form__reminder-options hide">
         <select name="reminder" id="reminder-checkbox">
           <option value="5">5 minutes before</option>
@@ -167,7 +161,9 @@
       </div>
 
       <div class="modal-form__textbox">
-        <textarea name="modal-form-textarea" rows="4" cols="30" maxlength="500" placeholder="Event description"></textarea>
+        <textarea name="modal-form-textarea" rows="8" cols="30" maxlength="500">
+Write something here</textarea
+        >
       </div>
 
       <div id="type-events-options" class="modal-form__reminder-options">
