@@ -72,7 +72,7 @@ function printCalendar(): void {
     // const previousEvents = localStorage.getItem("events");
     // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
-    // //iterar atravé de los eventos para encontrar eventos del dia actual
+    //iterar atravé de los eventos para encontrar eventos del dia actual
     // const eventsForDay = allEvents.filter(
     //   (evnt) => {
     //   evnt.initialDate.getDate() === i &&
@@ -80,7 +80,7 @@ function printCalendar(): void {
     //   evnt.initialDate.getFullYear() === currentYear
     //   });
 
-    // //Display event if day exists
+    //Display event if day exists
     // if (eventsForDay.length > 0) {
     //   const eventsContainer = document.createElement("div");
     //   eventsContainer.classList.add("events-container");
@@ -89,11 +89,8 @@ function printCalendar(): void {
     //     const eventElement = document.createElement("p");
     //     eventElement.textContent = evnt.title;
     //     eventsContainer.appendChild(eventElement);
-    //   });
 
-    //   dayBox.innerHTML = eventsContainer.outerHTML;
-
-    // }
+    // dayBox.innerHTML = eventsContainer.outerHTML;
 
     //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
     const addTaskButton = document.createElement("button");
@@ -123,7 +120,6 @@ function printCalendar(): void {
 
   currentDayElement.innerText = `${weekDay} ${dayNumber}`;
 }
-
 // Buttons functionality
 const prevMonthBtn = () => {
   if (currentMonth === 0) {
@@ -176,18 +172,6 @@ const rightAnimation = function () {
   });
 };
 
-prevBtn.addEventListener("click", () => {
-  prevMonthBtn();
-  printCalendar();
-  leftAnimation();
-});
-
-nextBtn.addEventListener("click", () => {
-  nextMonthBtn();
-  printCalendar();
-  rightAnimation();
-});
-
 const hideModal = () => {
   eventModalElement.classList.add("hide");
   modalOverlayElement.classList.add("hide");
@@ -232,16 +216,38 @@ eventBtnElement.addEventListener("click", () => {
   showModal();
 });
 
-export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.initialDate && evnt.time) {
-    const previousEvents = localStorage.getItem("events");
-    const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+////////  Tomi /////////
 
-    allEvents.push(evnt);
-    localStorage.setItem("events", JSON.stringify(allEvents));
-    printCalendar();
+// export const saveEvent = (evnt: Event) => {
+//   if (evnt.title && evnt.initialDate && evnt.time) {
+//     const previousEvents = localStorage.getItem("events");
+//     const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+//     console.log(allEvents);
+//     allEvents.push(evnt);
+//     localStorage.setItem("events", JSON.stringify(allEvents));
+//     printCalendar();
+//   }
+// };
+
+// saveEvent;
+
+////////  Tomi /////////
+
+////////  Eira /////////
+
+let allEvents: Event[] = [];
+
+function getEvents() {
+  const previousEvents = localStorage.getItem("events");
+  if (previousEvents) {
+    allEvents = JSON.parse(previousEvents);
+    console.log(allEvents);
   }
-};
+}
+
+getEvents();
+
+////////  Eira /////////
 
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -292,7 +298,7 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
     description,
   };
 
-  saveEvent(event);
+  // saveEvent(event);
   hideModal();
 });
 

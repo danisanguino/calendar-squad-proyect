@@ -86,16 +86,6 @@ const rightAnimation = function () {
         daysElement.classList.remove("animate__slideOutLeft");
     });
 };
-prevBtn.addEventListener("click", () => {
-    prevMonthBtn();
-    printCalendar();
-    leftAnimation();
-});
-nextBtn.addEventListener("click", () => {
-    nextMonthBtn();
-    printCalendar();
-    rightAnimation();
-});
 const hideModal = () => {
     eventModalElement.classList.add("hide");
     modalOverlayElement.classList.add("hide");
@@ -126,15 +116,15 @@ const showModalDayBox = (clickedDay) => {
 eventBtnElement.addEventListener("click", () => {
     showModal();
 });
-export const saveEvent = (evnt) => {
-    if (evnt.title && evnt.initialDate && evnt.time) {
-        const previousEvents = localStorage.getItem("events");
-        const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
-        allEvents.push(evnt);
-        localStorage.setItem("events", JSON.stringify(allEvents));
-        printCalendar();
+let allEvents = [];
+function getEvents() {
+    const previousEvents = localStorage.getItem("events");
+    if (previousEvents) {
+        allEvents = JSON.parse(previousEvents);
+        console.log(allEvents);
     }
-};
+}
+getEvents();
 (_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
     evt.preventDefault();
     const title = eventNameElement.value;
@@ -165,7 +155,6 @@ export const saveEvent = (evnt) => {
         reminder,
         description,
     };
-    saveEvent(event);
     hideModal();
 });
 printCalendar();
