@@ -44,13 +44,13 @@ function printCalendar(): void {
     0
   ).getDate();
 
-  // clean Calendar content
+  // Clean Calendar content
   daysElement.innerHTML = " ";
 
   // Add empty days element before first day
   for (let i = 0; i < firstDayOfTheMonth; i++) {
     const dayBox = document.createElement("div");
-    dayBox.classList.add("main__container-days--dynamic-day");
+    dayBox.classList.add("main__container-days--dynamic-day", "opacity");
     daysElement.appendChild(dayBox);
   }
   // Printing Days of actual month
@@ -59,20 +59,21 @@ function printCalendar(): void {
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
 
-    // Emphasing current day
-    if (
-      i === date.getDate() &&
-      currentMonth === date.getMonth() &&
-      currentYear === date.getFullYear()
-    ) {
-      dayBox.classList.add("active");
-    }
+    // Emphasing current day ******* ****** *******
+    // if (
+    //   i === date.getDate() &&
+    //   currentMonth === date.getMonth() &&
+    //   currentYear === date.getFullYear()
+    // ) {
+    //   dayBox.classList.add("active");
+    // }
+    // ******** ******** ******** ******** ********
 
     // //testing localStorage Fetch
     // const previousEvents = localStorage.getItem("events");
     // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
-    //iterar atravé de los eventos para encontrar eventos del dia actual
+    // //iterar atravé de los eventos para encontrar eventos del dia actual
     // const eventsForDay = allEvents.filter(
     //   (evnt) => {
     //   evnt.initialDate.getDate() === i &&
@@ -80,7 +81,7 @@ function printCalendar(): void {
     //   evnt.initialDate.getFullYear() === currentYear
     //   });
 
-    //Display event if day exists
+    // //Display event if day exists
     // if (eventsForDay.length > 0) {
     //   const eventsContainer = document.createElement("div");
     //   eventsContainer.classList.add("events-container");
@@ -89,10 +90,13 @@ function printCalendar(): void {
     //     const eventElement = document.createElement("p");
     //     eventElement.textContent = evnt.title;
     //     eventsContainer.appendChild(eventElement);
+    //   });
 
-    // dayBox.innerHTML = eventsContainer.outerHTML;
+    //   dayBox.innerHTML = eventsContainer.outerHTML;
 
-    //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
+    // }
+
+    // Create dynamic button
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
     addTaskButton.classList.add("add-btn", "hide");
@@ -120,6 +124,7 @@ function printCalendar(): void {
 
   currentDayElement.innerText = `${weekDay} ${dayNumber}`;
 }
+
 // Buttons functionality
 const prevMonthBtn = () => {
   if (currentMonth === 0) {
@@ -216,47 +221,41 @@ eventBtnElement.addEventListener("click", () => {
   showModal();
 });
 
-////////  Tomi /////////
+export const saveEvent = (evnt: Event) => {
+  if (evnt.title && evnt.initialDate && evnt.time) {
+    const previousEvents = localStorage.getItem("events");
+    const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
-// export const saveEvent = (evnt: Event) => {
-//   if (evnt.title && evnt.initialDate && evnt.time) {
-//     const previousEvents = localStorage.getItem("events");
-//     const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
-//     console.log(allEvents);
-//     allEvents.push(evnt);
-//     localStorage.setItem("events", JSON.stringify(allEvents));
-//     printCalendar();
-//   }
-// };
-
-// saveEvent;
-
-////////  Tomi /////////
-
-////////  Eira /////////
-
-let allEvents: Event[] = [];
-
-function getEvents() {
-  const previousEvents = localStorage.getItem("events");
-  if (previousEvents) {
-    allEvents = JSON.parse(previousEvents);
-    console.log(allEvents);
+    allEvents.push(evnt);
+    localStorage.setItem("events", JSON.stringify(allEvents));
+    printCalendar();
   }
-}
-
-getEvents();
-
-////////  Eira /////////
+};
 
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
+
+  //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+
+  // let allEvents: Event[] = [];
+
+  // function getEvents() {
+  //   const previousEvents = localStorage.getItem("events");
+  //   if (previousEvents) {
+  //     allEvents = JSON.parse(previousEvents);
+  //     console.log(allEvents);
+  //   }
+  // }
+
+  // getEvents();
+
+  //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
 
   // Gather form data
   const title = eventNameElement.value;
   const initialDate = new Date(eventModalInitialDate.value);
   const endDate = eventModalEndDateCheck.checked
-    ? new Date(eventModalEndDate.value)
+    ? new Date(eventModalEndDateTime.value)
     : null;
   const eventTypeString = (
     document.getElementById("type-events-options-values") as HTMLSelectElement
@@ -298,7 +297,7 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
     description,
   };
 
-  // saveEvent(event);
+  saveEvent(event);
   hideModal();
 });
 
@@ -344,8 +343,6 @@ function onImageClick(event: MouseEvent) {
 addEventBtnImg.addEventListener("click", onImageClick);
 
 // Show and hide modal's children
-
-// !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
 
 const showEndDateTime = () => {
   eventModalEndDate.classList.remove("hide");

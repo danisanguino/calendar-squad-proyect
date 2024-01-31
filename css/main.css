@@ -6,15 +6,13 @@
   color: var(--text-color);
 }
 
-/* this is a text that must be stay here later */
-
 /* ---HEADER--- */
 
 header {
   background-color: var(--second-background-color);
   padding: 0 1rem 1rem 1rem;
   height: 13rem;
-  border-bottom: solid 0.06rem var(--secondary-color);
+  /* border-bottom: solid 0.06rem var(--secondary-color); */
 }
 
 .header__date {
@@ -38,24 +36,11 @@ header {
 
 /* Dark Mode Button */
 
-/* .dark-mode-switcher {
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-} */
-
 .switch {
-  /* dark mode button */
-  /* margin: 0;
-  padding: 0; */
-  /* background: none; */
-  /* height: 2rem; */
   border: 0;
-  /* margin-right: 0.5rem; */
 }
 
 img {
-  /* switch image button */
   width: 3rem;
   cursor: pointer;
 }
@@ -130,6 +115,11 @@ main p {
   padding: 0.5rem;
 }
 
+input,
+select {
+  cursor: pointer;
+}
+
 /* Dynamic */
 
 .main__container-days {
@@ -152,6 +142,10 @@ main p {
   position: relative;
 }
 
+.opacity {
+  opacity: 0%;
+}
+
 .add-btn {
   cursor: pointer;
   color: white;
@@ -160,7 +154,6 @@ main p {
   font-size: 1.5rem;
   padding: 0 0.5rem 0 0.5rem;
   font-weight: 800;
-  /* padding-inline: 0.2rem; */
   margin-left: 0.2rem;
   border-radius: 5px;
   position: absolute;
@@ -171,7 +164,6 @@ main p {
 .main__container-days--dynamic-day:hover {
   transition: all 0.3s ease;
   background-color: var(--background-color);
-  /*color: white; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -179,7 +171,6 @@ main p {
   border: 0.06rem solid var(--primary-color);
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
   color: var(--primary-color);
-  /* background-color: #f5f3f4; */
   background-color: var(--active-color);
   font-weight: 600;
 }
@@ -195,20 +186,11 @@ main p {
 
 /* Dark Mode Button */
 
-/* .dark-mode-switcher {
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-} */
-
 .switch {
-  /* dark mode button */
   margin: 0;
   padding: 0;
   background: none;
-  /* height: 2rem; */
   border: 0;
-  /* margin-right: 0.5rem; */
 }
 
 .header__date--year-and-btn--btn {

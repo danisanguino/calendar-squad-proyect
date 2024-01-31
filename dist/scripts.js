@@ -12,18 +12,13 @@ function printCalendar() {
     daysElement.innerHTML = " ";
     for (let i = 0; i < firstDayOfTheMonth; i++) {
         const dayBox = document.createElement("div");
-        dayBox.classList.add("main__container-days--dynamic-day");
+        dayBox.classList.add("main__container-days--dynamic-day", "opacity");
         daysElement.appendChild(dayBox);
     }
     for (let i = 1; i <= totalDaysInMonth; i++) {
         const dayBox = document.createElement("div");
         dayBox.classList.add("main__container-days--dynamic-day");
         dayBox.innerText = i.toString();
-        if (i === date.getDate() &&
-            currentMonth === date.getMonth() &&
-            currentYear === date.getFullYear()) {
-            dayBox.classList.add("active");
-        }
         const addTaskButton = document.createElement("button");
         addTaskButton.innerHTML = "+";
         addTaskButton.classList.add("add-btn", "hide");
@@ -116,21 +111,21 @@ const showModalDayBox = (clickedDay) => {
 eventBtnElement.addEventListener("click", () => {
     showModal();
 });
-let allEvents = [];
-function getEvents() {
-    const previousEvents = localStorage.getItem("events");
-    if (previousEvents) {
-        allEvents = JSON.parse(previousEvents);
-        console.log(allEvents);
+export const saveEvent = (evnt) => {
+    if (evnt.title && evnt.initialDate && evnt.time) {
+        const previousEvents = localStorage.getItem("events");
+        const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+        allEvents.push(evnt);
+        localStorage.setItem("events", JSON.stringify(allEvents));
+        printCalendar();
     }
-}
-getEvents();
+};
 (_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
     evt.preventDefault();
     const title = eventNameElement.value;
     const initialDate = new Date(eventModalInitialDate.value);
     const endDate = eventModalEndDateCheck.checked
-        ? new Date(eventModalEndDate.value)
+        ? new Date(eventModalEndDateTime.value)
         : null;
     const eventTypeString = document.getElementById("type-events-options-values").value;
     const eventType = eventTypeString;
@@ -155,6 +150,7 @@ getEvents();
         reminder,
         description,
     };
+    saveEvent(event);
     hideModal();
 });
 printCalendar();
