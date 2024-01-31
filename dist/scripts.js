@@ -6,7 +6,7 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let currentDate = new Date();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
         if (event.initialDate instanceof Date ||
@@ -27,6 +27,23 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
         Time: ${event.time.toString()}:00</p>`;
                 dayBox.appendChild(reminderElement);
                 reminderElement.innerHTML += reminderDescription;
+                reminderElement.addEventListener("click", () => {
+                    modalDescriptionElement.classList.remove("hide");
+                    eventSecondModalTitle.innerText = event.title;
+                    eventSecondModalInitialDate.innerText = `${event.initialDate}`;
+                    eventSecondModalTime.innerText = `${event.time}`;
+                    eventSecondModalEndDate.innerText = `${event.endDate}`;
+                    eventSecondModalEndTime.innerText = `${event.endTime}`;
+                    eventSecondModalDescription.innerText = `${event.description}`;
+                    eventSecondModalEventType.innerText = `${event.eventType}`;
+                    eventSecondModalReminder.innerText = `${event.reminder}`;
+                    eventSecondModalCloseBtn.addEventListener("click", () => {
+                        hideEventModal();
+                    });
+                    eventDeleteButton.addEventListener("click", () => {
+                        reminderElement.remove();
+                    });
+                });
             }
         }
     });
@@ -63,7 +80,7 @@ function printCalendar() {
         });
         dayBox.appendChild(addTaskButton);
         daysElement.appendChild(dayBox);
-        dayBox.addEventListener("click", () => {
+        addTaskButton.addEventListener("click", () => {
             showModalDayBox(i);
         });
     }
@@ -116,6 +133,9 @@ const rightAnimation = function () {
 const hideModal = () => {
     eventModalElement.classList.add("hide");
     modalOverlayElement.classList.add("hide");
+};
+const hideEventModal = () => {
+    modalDescriptionElement.classList.add("hide");
 };
 document.addEventListener("keydown", (escKey) => {
     if (escKey.key === "Escape" &&

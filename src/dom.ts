@@ -14,7 +14,47 @@ export const domElements = {
   currentYearElement: document.getElementById("header-year") as HTMLHeadingElement,
   eventBtnElement: document.getElementById("event-btn") as HTMLButtonElement,
   eventModalElement: document.getElementById("event-form") as HTMLModElement,
-  modalOverlayElement: document.getElementById("modal-overlay") as HTMLDivElement,
-  modalCloseBtnElement: document.getElementById("close-btn") as HTMLButtonElement,
-  modalCurrentDayElement: document.getElementById("initial-date") as HTMLInputElement,
+  modalOverlayElement: document.getElementById(
+    "modal-overlay"
+  ) as HTMLDivElement,
+  modalCloseBtnElement: document.getElementById(
+    "close-btn"
+  ) as HTMLButtonElement,
+  modalCurrentDayElement: document.getElementById(
+    "initial-date"
+  ) as HTMLInputElement,
+  modalDescriptionElement: document.getElementById(
+    "modal-description"
+  ) as HTMLDivElement,
+
+  eventSecondModalTitle: document.getElementById(
+    "event-modal-title"
+  ) as HTMLHeadingElement,
+  eventSecondModalInitialDate: document.getElementById(
+    "event-modal-initialDate"
+  ) as HTMLParagraphElement,
+  eventSecondModalTime: document.getElementById(
+    "event-modal-time"
+  ) as HTMLParagraphElement,
+  eventSecondModalEndDate: document.getElementById(
+    "event-modal-endDate"
+  ) as HTMLParagraphElement,
+  eventSecondModalEndTime: document.getElementById(
+    "event-modal-endTime"
+  ) as HTMLParagraphElement,
+  eventSecondModalDescription: document.getElementById(
+    "event-modal-description"
+  ) as HTMLParagraphElement,
+  eventSecondModalEventType: document.getElementById(
+    "event-modal-eventType"
+  ) as HTMLParagraphElement,
+  eventSecondModalReminder: document.getElementById(
+    "event-modal-reminder"
+  ) as HTMLParagraphElement,
+  eventDeleteButton: document.getElementById(
+    "event-delete"
+  ) as HTMLParagraphElement,
+  eventSecondModalCloseBtn: document.getElementById(
+    "event-close-btn"
+  ) as HTMLButtonElement,
 };

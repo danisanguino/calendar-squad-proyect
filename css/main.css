@@ -131,7 +131,6 @@ input, select {
 }
 
 .main__container-days--dynamic-day {
-  cursor: pointer;
   border: 0.06rem solid var(--border-color);
   padding: 0.2rem;
   border-radius: 5px;
@@ -202,13 +201,22 @@ input, select {
 }
 
 .reminder {
-  background-color: var(--tertiary-color);
-  /* opacity: 0.5; */
+  background-color: var(--primary-color);
   text-align: left;
+  color: white;
+  border-radius: 3px;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  margin: 0.2rem 0 0.2rem 0;
 }
 
 .event-description {
   display: none;
+}
+
+.reminder:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
 }
 
 .reminder:hover .event-description {
