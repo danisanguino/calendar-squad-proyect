@@ -30,6 +30,17 @@ const {
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
+  modalDescriptionElement,
+  eventSecondModalTitle,
+  eventSecondModalInitialDate,
+  eventSecondModalTime,
+  eventSecondModalEndDate,
+  eventSecondModalEndTime,
+  eventSecondModalDescription,
+  eventSecondModalEventType,
+  eventSecondModalReminder,
+  eventDeleteButton,
+  eventSecondModalCloseBtn,
 } = domElements;
 
 function updateCalendarWithReminders(
@@ -66,7 +77,24 @@ function updateCalendarWithReminders(
         // console.log(reminderDescription);
         dayBox.appendChild(reminderElement);
         reminderElement.innerHTML += reminderDescription;
-        // console.log(dayBox);
+        reminderElement.addEventListener("click", () => {
+          modalDescriptionElement.classList.remove("hide");
+          eventSecondModalTitle.innerText = event.title;
+          eventSecondModalInitialDate.innerText = `${event.initialDate}`;
+          eventSecondModalTime.innerText = `${event.time}`;
+          eventSecondModalEndDate.innerText = `${event.endDate}`;
+          eventSecondModalEndTime.innerText = `${event.endTime}`;
+          eventSecondModalDescription.innerText = `${event.description}`;
+          eventSecondModalEventType.innerText = `${event.eventType}`;
+          eventSecondModalReminder.innerText = `${event.reminder}`;
+
+          eventSecondModalCloseBtn.addEventListener("click", () => {
+            hideEventModal();
+          });
+          eventDeleteButton.addEventListener("click", () => {
+            reminderElement.remove();
+          });
+        });
       }
     }
   });
@@ -133,7 +161,7 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    dayBox.addEventListener("click", () => {
+    addTaskButton.addEventListener("click", () => {
       showModalDayBox(i);
     });
   }
@@ -203,6 +231,11 @@ const rightAnimation = function () {
 const hideModal = () => {
   eventModalElement.classList.add("hide");
   modalOverlayElement.classList.add("hide");
+};
+
+const hideEventModal = () => {
+  modalDescriptionElement.classList.add("hide");
+  // modalOverlayElement.classList.add("hide");
 };
 // Escape button listener to close modal
 document.addEventListener("keydown", (escKey) => {

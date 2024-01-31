@@ -37,4 +37,38 @@ export const domElements = {
   modalCurrentDayElement: document.getElementById(
     "initial-date"
   ) as HTMLInputElement,
+  modalDescriptionElement: document.getElementById(
+    "modal-description"
+  ) as HTMLDivElement,
+
+  eventSecondModalTitle: document.getElementById(
+    "event-modal-title"
+  ) as HTMLHeadingElement,
+  eventSecondModalInitialDate: document.getElementById(
+    "event-modal-initialDate"
+  ) as HTMLParagraphElement,
+  eventSecondModalTime: document.getElementById(
+    "event-modal-time"
+  ) as HTMLParagraphElement,
+  eventSecondModalEndDate: document.getElementById(
+    "event-modal-endDate"
+  ) as HTMLParagraphElement,
+  eventSecondModalEndTime: document.getElementById(
+    "event-modal-endTime"
+  ) as HTMLParagraphElement,
+  eventSecondModalDescription: document.getElementById(
+    "event-modal-description"
+  ) as HTMLParagraphElement,
+  eventSecondModalEventType: document.getElementById(
+    "event-modal-eventType"
+  ) as HTMLParagraphElement,
+  eventSecondModalReminder: document.getElementById(
+    "event-modal-reminder"
+  ) as HTMLParagraphElement,
+  eventDeleteButton: document.getElementById(
+    "event-delete"
+  ) as HTMLParagraphElement,
+  eventSecondModalCloseBtn: document.getElementById(
+    "event-close-btn"
+  ) as HTMLButtonElement,
 };
