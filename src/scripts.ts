@@ -10,6 +10,9 @@ let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
 let currentDate: object = new Date();
+let currentHour: number = date.getHours();
+let currentMinutes: number = date.getMinutes();
+console.log(currentHour, currentMinutes);
 
 const {
   currentMonthElement,
@@ -294,6 +297,10 @@ eventBtnElement.addEventListener("click", () => {
   showModal();
 });
 
+///////////// Save events and Delete Events ////////////
+
+const allEvents: Event[] = [];
+
 export const saveEvent = (evnt: Event) => {
   if (evnt.title && evnt.time) {
     if (!evnt.initialDate || typeof evnt.initialDate === "string") {
@@ -315,21 +322,31 @@ export const saveEvent = (evnt: Event) => {
   }
 };
 
-//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+export const deleteEvent = (eventIndex: number) => {
+  const previousEvents = localStorage.getItem("events");
+  // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
-// let allEvents: Event[] = [];
+  // Eliminar el evento del arreglo de eventos
+  allEvents.splice(eventIndex, 1);
 
-// function getEvents() {
-//   const previousEvents = localStorage.getItem("events");
-//   if (previousEvents) {
-//     allEvents = JSON.parse(previousEvents);
-//     console.log(allEvents);
-//   }
-// }
+  // Guardar el nuevo arreglo en localStorage
+  localStorage.setItem("events", JSON.stringify(allEvents));
+  printCalendar();
+};
 
-// getEvents();
+eventDeleteButton.addEventListener("click", () => {
+  // Obtener el índice del evento que se eliminará
+  const eventIndex = allEvents.findIndex(
+    (event: Event) => event.title === eventSecondModalTitle.innerText
+  );
 
-//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+  if (eventIndex !== -1) {
+    deleteEvent(eventIndex);
+    hideEventModal();
+  } else {
+    console.error("Evento no encontrado para eliminar");
+  }
+});
 
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();

@@ -6,6 +6,9 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let currentDate = new Date();
+let currentHour = date.getHours();
+let currentMinutes = date.getMinutes();
+console.log(currentHour, currentMinutes);
 const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalPlaceholderElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
@@ -177,6 +180,7 @@ const showModalDayBox = (clickedDay) => {
 eventBtnElement.addEventListener("click", () => {
     showModal();
 });
+const allEvents = [];
 export const saveEvent = (evnt) => {
     if (evnt.title && evnt.time) {
         if (!evnt.initialDate || typeof evnt.initialDate === "string") {
@@ -192,6 +196,23 @@ export const saveEvent = (evnt) => {
         printCalendar();
     }
 };
+export const deleteEvent = (eventIndex) => {
+    const previousEvents = localStorage.getItem("events");
+    const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+    allEvents.splice(eventIndex, 1);
+    localStorage.setItem("events", JSON.stringify(allEvents));
+    printCalendar();
+};
+eventDeleteButton.addEventListener("click", () => {
+    const eventIndex = allEvents.findIndex((event) => event.title === eventSecondModalTitle.innerText);
+    if (eventIndex == -1) {
+        deleteEvent(eventIndex);
+        hideEventModal();
+    }
+    else {
+        console.error("Evento no encontrado para eliminar");
+    }
+});
 (_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
     evt.preventDefault();
     const title = eventNameElement.value;
