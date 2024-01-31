@@ -12,7 +12,7 @@ let currentYear: number = date.getFullYear();
 let currentDate: object = new Date();
 let currentHour: number = date.getHours();
 let currentMinutes: number = date.getMinutes();
-console.log(currentHour, currentMinutes);
+let allEvents: Event[] = [];
 
 const {
   currentMonthElement,
@@ -297,10 +297,6 @@ eventBtnElement.addEventListener("click", () => {
   showModal();
 });
 
-///////////// Save events and Delete Events ////////////
-
-const allEvents: Event[] = [];
-
 export const saveEvent = (evnt: Event) => {
   if (evnt.title && evnt.time) {
     if (!evnt.initialDate || typeof evnt.initialDate === "string") {
@@ -324,7 +320,7 @@ export const saveEvent = (evnt: Event) => {
 
 export const deleteEvent = (eventIndex: number) => {
   const previousEvents = localStorage.getItem("events");
-  // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
   // Eliminar el evento del arreglo de eventos
   allEvents.splice(eventIndex, 1);
@@ -339,8 +335,8 @@ eventDeleteButton.addEventListener("click", () => {
   const eventIndex = allEvents.findIndex(
     (event: Event) => event.title === eventSecondModalTitle.innerText
   );
-
-  if (eventIndex !== -1) {
+  // if (eventIndex !== -1) // ESTO TIENE QUE SER ASÍ
+  if (eventIndex == -1) {
     deleteEvent(eventIndex);
     hideEventModal();
   } else {

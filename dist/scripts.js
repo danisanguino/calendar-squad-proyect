@@ -8,7 +8,7 @@ let currentYear = date.getFullYear();
 let currentDate = new Date();
 let currentHour = date.getHours();
 let currentMinutes = date.getMinutes();
-console.log(currentHour, currentMinutes);
+let allEvents = [];
 const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalPlaceholderElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
@@ -180,7 +180,6 @@ const showModalDayBox = (clickedDay) => {
 eventBtnElement.addEventListener("click", () => {
     showModal();
 });
-const allEvents = [];
 export const saveEvent = (evnt) => {
     if (evnt.title && evnt.time) {
         if (!evnt.initialDate || typeof evnt.initialDate === "string") {
