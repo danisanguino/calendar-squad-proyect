@@ -6,7 +6,7 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let currentDate = new Date();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalPlaceholderElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
         if (event.initialDate instanceof Date ||
@@ -18,7 +18,7 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
             if (eventMonth === currentMonth &&
                 eventYear === currentYear &&
                 eventDay === i) {
-                const reminderText = `${event.title} - ${event.time.toString()}:00`;
+                const reminderText = `${event.time.toString()}:00 - ${event.title}`;
                 const reminderElement = document.createElement("div");
                 reminderElement.classList.add("reminder");
                 reminderElement.innerText = reminderText;
@@ -29,19 +29,25 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
                 reminderElement.innerHTML += reminderDescription;
                 reminderElement.addEventListener("click", () => {
                     modalDescriptionElement.classList.remove("hide");
+                    modalOverlayElement.classList.remove("hide");
                     eventSecondModalTitle.innerText = event.title;
-                    eventSecondModalInitialDate.innerText = `${event.initialDate}`;
-                    eventSecondModalTime.innerText = `${event.time}`;
-                    eventSecondModalEndDate.innerText = `${event.endDate}`;
-                    eventSecondModalEndTime.innerText = `${event.endTime}`;
-                    eventSecondModalDescription.innerText = `${event.description}`;
-                    eventSecondModalEventType.innerText = `${event.eventType}`;
-                    eventSecondModalReminder.innerText = `${event.reminder}`;
+                    eventSecondModalInitialDate.innerText = `Start: ${event.initialDate}`;
+                    eventSecondModalTime.innerText = `at: ${event.time} h.`;
+                    if (event.endDate)
+                        eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
+                    if (event.endTime)
+                        eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+                    if (event.reminder)
+                        eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
+                    if (event.description)
+                        eventSecondModalDescription.innerText = `Description: ${event.description}`;
+                    eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
                     eventSecondModalCloseBtn.addEventListener("click", () => {
                         hideEventModal();
                     });
                     eventDeleteButton.addEventListener("click", () => {
                         reminderElement.remove();
+                        hideEventModal();
                     });
                 });
             }
@@ -136,6 +142,7 @@ const hideModal = () => {
 };
 const hideEventModal = () => {
     modalDescriptionElement.classList.add("hide");
+    modalOverlayElement.classList.add("hide");
 };
 document.addEventListener("keydown", (escKey) => {
     if (escKey.key === "Escape" &&
@@ -143,8 +150,15 @@ document.addEventListener("keydown", (escKey) => {
         hideModal();
     }
 });
+document.addEventListener("keydown", (escKey) => {
+    if (escKey.key === "Escape" &&
+        !modalDescriptionElement.classList.contains("hide")) {
+        hideEventModal();
+    }
+});
 modalOverlayElement.addEventListener("click", () => {
     hideModal();
+    hideEventModal();
 });
 modalCloseBtnElement.addEventListener("click", () => {
     hideModal();

@@ -30,6 +30,7 @@ const {
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
+  modalPlaceholderElement,
   modalDescriptionElement,
   eventSecondModalTitle,
   eventSecondModalInitialDate,
@@ -67,7 +68,7 @@ function updateCalendarWithReminders(
         eventDay === i
       ) {
         // Display the title and time as a reminder in the day box
-        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderText = `${event.time.toString()}:00 - ${event.title}`;
         const reminderElement = document.createElement("div");
         reminderElement.classList.add("reminder");
         reminderElement.innerText = reminderText;
@@ -79,20 +80,26 @@ function updateCalendarWithReminders(
         reminderElement.innerHTML += reminderDescription;
         reminderElement.addEventListener("click", () => {
           modalDescriptionElement.classList.remove("hide");
+          modalOverlayElement.classList.remove("hide");
           eventSecondModalTitle.innerText = event.title;
-          eventSecondModalInitialDate.innerText = `${event.initialDate}`;
-          eventSecondModalTime.innerText = `${event.time}`;
-          eventSecondModalEndDate.innerText = `${event.endDate}`;
-          eventSecondModalEndTime.innerText = `${event.endTime}`;
-          eventSecondModalDescription.innerText = `${event.description}`;
-          eventSecondModalEventType.innerText = `${event.eventType}`;
-          eventSecondModalReminder.innerText = `${event.reminder}`;
+          eventSecondModalInitialDate.innerText = `Start: ${event.initialDate}`;
+          eventSecondModalTime.innerText = `at: ${event.time} h.`;
+          if (event.endDate)
+            eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
+          if (event.endTime)
+            eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+          if (event.reminder)
+            eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
+          if (event.description)
+            eventSecondModalDescription.innerText = `Description: ${event.description}`;
+          eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
 
           eventSecondModalCloseBtn.addEventListener("click", () => {
             hideEventModal();
           });
           eventDeleteButton.addEventListener("click", () => {
             reminderElement.remove();
+            hideEventModal();
           });
         });
       }
@@ -235,8 +242,9 @@ const hideModal = () => {
 
 const hideEventModal = () => {
   modalDescriptionElement.classList.add("hide");
-  // modalOverlayElement.classList.add("hide");
+  modalOverlayElement.classList.add("hide");
 };
+
 // Escape button listener to close modal
 document.addEventListener("keydown", (escKey) => {
   if (
@@ -247,9 +255,19 @@ document.addEventListener("keydown", (escKey) => {
   }
 });
 
+document.addEventListener("keydown", (escKey) => {
+  if (
+    escKey.key === "Escape" &&
+    !modalDescriptionElement.classList.contains("hide")
+  ) {
+    hideEventModal();
+  }
+});
+
 // Overlay click to close modal
 modalOverlayElement.addEventListener("click", () => {
   hideModal();
+  hideEventModal();
 });
 
 modalCloseBtnElement.addEventListener("click", () => {

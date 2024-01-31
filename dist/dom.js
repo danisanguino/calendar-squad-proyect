@@ -17,6 +17,7 @@ export const domElements = {
     modalOverlayElement: document.getElementById("modal-overlay"),
     modalCloseBtnElement: document.getElementById("close-btn"),
     modalCurrentDayElement: document.getElementById("initial-date"),
+    modalPlaceholderElement: document.getElementById("modal-form-description"),
     modalDescriptionElement: document.getElementById("modal-description"),
     eventSecondModalTitle: document.getElementById("event-modal-title"),
     eventSecondModalInitialDate: document.getElementById("event-modal-initialDate"),
