@@ -9,6 +9,7 @@ let date: Date = new Date();
 let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
+let currentDate: object = new Date();
 
 const {
   currentMonthElement,
@@ -31,8 +32,47 @@ const {
   modalCurrentDayElement,
 } = domElements;
 
+function updateCalendarWithReminders(
+  events: Event[],
+  currentMonth: number,
+  currentYear: number,
+  i: number,
+  dayBox: Element
+): void {
+  // Loop through each event and update the corresponding day box in the calendar
+  events.forEach((event: Event) => {
+    if (
+      event.initialDate instanceof Date ||
+      typeof event.initialDate === "string"
+    ) {
+      const eventDate = new Date(event.initialDate);
+      const eventDay = eventDate.getDate();
+      const eventMonth = eventDate.getMonth();
+      const eventYear = eventDate.getFullYear();
+
+      if (
+        eventMonth === currentMonth &&
+        eventYear === currentYear &&
+        eventDay === i
+      ) {
+        // Display the title and time as a reminder in the day box
+        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderElement = document.createElement("div");
+        reminderElement.classList.add("reminder");
+        // reminderElement.id =
+        reminderElement.innerText = reminderText;
+
+        dayBox.appendChild(reminderElement);
+        console.log(dayBox);
+      }
+    }
+  });
+}
+
 // Function to print the Calendar
 function printCalendar(): void {
+  const previousEvents = localStorage.getItem("events");
+  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
   const firstDayOfTheMonth: number = new Date(
     currentYear,
     currentMonth,
@@ -58,43 +98,23 @@ function printCalendar(): void {
     const dayBox = document.createElement("div");
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
+    updateCalendarWithReminders(
+      allEvents,
+      currentMonth,
+      currentYear,
+      i,
+      dayBox
+    );
 
     // Emphasing current day ******* ****** *******
-    // if (
-    //   i === date.getDate() &&
-    //   currentMonth === date.getMonth() &&
-    //   currentYear === date.getFullYear()
-    // ) {
-    //   dayBox.classList.add("active");
-    // }
-    // ******** ******** ******** ******** ******** 
-
-    // //testing localStorage Fetch
-    // const previousEvents = localStorage.getItem("events");
-    // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
-
-    // //iterar atravé de los eventos para encontrar eventos del dia actual
-    // const eventsForDay = allEvents.filter(
-    //   (evnt) => {
-    //   evnt.initialDate.getDate() === i &&
-    //   evnt.initialDate.getMonth() === currentMonth &&
-    //   evnt.initialDate.getFullYear() === currentYear
-    //   });
-
-    // //Display event if day exists
-    // if (eventsForDay.length > 0) {
-    //   const eventsContainer = document.createElement("div");
-    //   eventsContainer.classList.add("events-container");
-
-    //   eventsForDay.forEach((evnt) => {
-    //     const eventElement = document.createElement("p");
-    //     eventElement.textContent = evnt.title;
-    //     eventsContainer.appendChild(eventElement);
-    //   });
-
-    //   dayBox.innerHTML = eventsContainer.outerHTML;
-
-    // }
+    if (
+      i === date.getDate() &&
+      currentMonth === date.getMonth() &&
+      currentYear === date.getFullYear()
+    ) {
+      dayBox.classList.add("active");
+    }
+    // ******** ******** ******** ******** ********
 
     // Create dynamic button
     const addTaskButton = document.createElement("button");
@@ -114,6 +134,7 @@ function printCalendar(): void {
       showModalDayBox(i);
     });
   }
+
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
 
@@ -142,7 +163,6 @@ const nextMonthBtn = () => {
   } else {
     currentMonth += 1;
   }
-  console.log(currentMonth);
 };
 
 prevBtn.addEventListener("click", () => {
@@ -181,7 +201,6 @@ const hideModal = () => {
   eventModalElement.classList.add("hide");
   modalOverlayElement.classList.add("hide");
 };
-
 // Escape button listener to close modal
 document.addEventListener("keydown", (escKey) => {
   if (
@@ -222,7 +241,17 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.initialDate && evnt.time) {
+  if (evnt.title && evnt.time) {
+    if (!evnt.initialDate || typeof evnt.initialDate === "string") {
+      // If initialDate is missing or a string, set it to the current date
+      evnt.initialDate = new Date();
+    }
+
+    // If initialDate is a string, convert it to a Date object
+    if (typeof evnt.initialDate === "string") {
+      evnt.initialDate = new Date(evnt.initialDate);
+    }
+
     const previousEvents = localStorage.getItem("events");
     const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
@@ -231,6 +260,22 @@ export const saveEvent = (evnt: Event) => {
     printCalendar();
   }
 };
+
+//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+
+// let allEvents: Event[] = [];
+
+// function getEvents() {
+//   const previousEvents = localStorage.getItem("events");
+//   if (previousEvents) {
+//     allEvents = JSON.parse(previousEvents);
+//     console.log(allEvents);
+//   }
+// }
+
+// getEvents();
+
+//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
 
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -296,7 +341,6 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
     reminder,
     description,
   };
-
   saveEvent(event);
   hideModal();
 });

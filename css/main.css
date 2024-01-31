@@ -200,3 +200,19 @@ input, select {
   width: 2.5rem;
   cursor: pointer;
 }
+
+.reminder {
+  background-color: var(--tertiary-color);
+  /* opacity: 0.5; */
+  text-align: left;
+}
+
+/* .reminder:hover {
+
+}
+
+.past-reminder {
+  background-color: var(--tertiary-color);
+  /* opacity: 0.5; 
+  text-align: left;
+} */
