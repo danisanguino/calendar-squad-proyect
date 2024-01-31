@@ -310,7 +310,7 @@ export const saveEvent = (evnt: Event) => {
     }
 
     const previousEvents = localStorage.getItem("events");
-    const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+    allEvents = previousEvents ? JSON.parse(previousEvents) : [];
 
     allEvents.push(evnt);
     localStorage.setItem("events", JSON.stringify(allEvents));
@@ -320,7 +320,7 @@ export const saveEvent = (evnt: Event) => {
 
 export const deleteEvent = (eventIndex: number) => {
   const previousEvents = localStorage.getItem("events");
-  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+  allEvents = previousEvents ? JSON.parse(previousEvents) : [];
 
   // Eliminar el evento del arreglo de eventos
   allEvents.splice(eventIndex, 1);
@@ -336,7 +336,7 @@ eventDeleteButton.addEventListener("click", () => {
     (event: Event) => event.title === eventSecondModalTitle.innerText
   );
   // if (eventIndex !== -1) // ESTO TIENE QUE SER ASÍ
-  if (eventIndex == -1) {
+  if (eventIndex !== -1) {
     deleteEvent(eventIndex);
     hideEventModal();
   } else {

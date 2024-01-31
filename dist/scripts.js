@@ -189,7 +189,7 @@ export const saveEvent = (evnt) => {
             evnt.initialDate = new Date(evnt.initialDate);
         }
         const previousEvents = localStorage.getItem("events");
-        const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+        allEvents = previousEvents ? JSON.parse(previousEvents) : [];
         allEvents.push(evnt);
         localStorage.setItem("events", JSON.stringify(allEvents));
         printCalendar();
@@ -197,14 +197,14 @@ export const saveEvent = (evnt) => {
 };
 export const deleteEvent = (eventIndex) => {
     const previousEvents = localStorage.getItem("events");
-    const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+    allEvents = previousEvents ? JSON.parse(previousEvents) : [];
     allEvents.splice(eventIndex, 1);
     localStorage.setItem("events", JSON.stringify(allEvents));
     printCalendar();
 };
 eventDeleteButton.addEventListener("click", () => {
     const eventIndex = allEvents.findIndex((event) => event.title === eventSecondModalTitle.innerText);
-    if (eventIndex !== 1) {
+    if (eventIndex !== -1) {
         deleteEvent(eventIndex);
         hideEventModal();
     }
