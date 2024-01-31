@@ -208,11 +208,10 @@ select {
   text-align: left;
 }
 
-/* .reminder:hover {
-
+.reminder:hover {
 }
 
-.past-reminder {
+/*.past-reminder {
   background-color: var(--tertiary-color);
   /* opacity: 0.5; 
   text-align: left;
