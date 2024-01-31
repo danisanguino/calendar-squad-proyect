@@ -11,7 +11,7 @@
     border-bottom: solid 0.06rem var(--secondary-color);
   }
 
-  .headerdate--today-month {
+  .header__date--today-month {
     font-size: 5rem;
     color: var(--secondary-color);
     margin-top: 0;
@@ -24,15 +24,15 @@
     right: 0;
   }
 
-  .headerdate--year-and-btn {
+  .header__date--year-and-btn {
     display: none;
   }
 
-  .maincontainer-week {
+  .main__container-week {
     display: none;
   }
 
-  .headerdate--today-month {
+  .header__date--today-month {
     font-size: 4rem;
     color: var(--secondary-color);
   }
@@ -41,7 +41,7 @@
     padding: 1rem;
   }
 
-  .maincontainer-days {
+  .main__container-days {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
     grid-auto-rows: 1fr;
@@ -49,7 +49,7 @@
     justify-content: space-between;
   }
 
-  .maincontainer-days--dynamic-day {
+  .main__container-days--dynamic-day {
     cursor: pointer;
     border: 0.06rem solid var(--border-color);
     padding: 0.2rem;
