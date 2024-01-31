@@ -204,7 +204,7 @@ export const deleteEvent = (eventIndex) => {
 };
 eventDeleteButton.addEventListener("click", () => {
     const eventIndex = allEvents.findIndex((event) => event.title === eventSecondModalTitle.innerText);
-    if (eventIndex == -1) {
+    if (eventIndex !== 1) {
         deleteEvent(eventIndex);
         hideEventModal();
     }
