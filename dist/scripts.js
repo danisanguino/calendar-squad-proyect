@@ -22,8 +22,11 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
                 const reminderElement = document.createElement("div");
                 reminderElement.classList.add("reminder");
                 reminderElement.innerText = reminderText;
+                const reminderDescription = `<p class="event-description">${event.title}
+        Description: ${event.description}
+        Time: ${event.time.toString()}:00</p>`;
                 dayBox.appendChild(reminderElement);
-                console.log(dayBox);
+                reminderElement.innerHTML += reminderDescription;
             }
         }
     });
