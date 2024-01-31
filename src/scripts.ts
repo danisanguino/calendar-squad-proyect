@@ -9,6 +9,7 @@ let date: Date = new Date();
 let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
+let currentDate: object = new Date();
 
 const {
   currentMonthElement,
@@ -20,6 +21,7 @@ const {
   eventBtnElement,
   eventModalElement,
   eventModalEndDate,
+  eventModalEndDateTime,
   eventModalInitialDate,
   eventNameElement,
   eventModalEndDateCheck,
@@ -28,10 +30,80 @@ const {
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
+  modalDescriptionElement,
+  eventSecondModalTitle,
+  eventSecondModalInitialDate,
+  eventSecondModalTime,
+  eventSecondModalEndDate,
+  eventSecondModalEndTime,
+  eventSecondModalDescription,
+  eventSecondModalEventType,
+  eventSecondModalReminder,
+  eventDeleteButton,
+  eventSecondModalCloseBtn,
 } = domElements;
+
+function updateCalendarWithReminders(
+  events: Event[],
+  currentMonth: number,
+  currentYear: number,
+  i: number,
+  dayBox: Element
+): void {
+  // Loop through each event and update the corresponding day box in the calendar
+  events.forEach((event: Event) => {
+    if (
+      event.initialDate instanceof Date ||
+      typeof event.initialDate === "string"
+    ) {
+      const eventDate = new Date(event.initialDate);
+      const eventDay = eventDate.getDate();
+      const eventMonth = eventDate.getMonth();
+      const eventYear = eventDate.getFullYear();
+
+      if (
+        eventMonth === currentMonth &&
+        eventYear === currentYear &&
+        eventDay === i
+      ) {
+        // Display the title and time as a reminder in the day box
+        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderElement = document.createElement("div");
+        reminderElement.classList.add("reminder");
+        reminderElement.innerText = reminderText;
+        const reminderDescription = `<p class="event-description">${event.title}
+        Description: ${event.description}
+        Time: ${event.time.toString()}:00</p>`;
+        // console.log(reminderDescription);
+        dayBox.appendChild(reminderElement);
+        reminderElement.innerHTML += reminderDescription;
+        reminderElement.addEventListener("click", () => {
+          modalDescriptionElement.classList.remove("hide");
+          eventSecondModalTitle.innerText = event.title;
+          eventSecondModalInitialDate.innerText = `${event.initialDate}`;
+          eventSecondModalTime.innerText = `${event.time}`;
+          eventSecondModalEndDate.innerText = `${event.endDate}`;
+          eventSecondModalEndTime.innerText = `${event.endTime}`;
+          eventSecondModalDescription.innerText = `${event.description}`;
+          eventSecondModalEventType.innerText = `${event.eventType}`;
+          eventSecondModalReminder.innerText = `${event.reminder}`;
+
+          eventSecondModalCloseBtn.addEventListener("click", () => {
+            hideEventModal();
+          });
+          eventDeleteButton.addEventListener("click", () => {
+            reminderElement.remove();
+          });
+        });
+      }
+    }
+  });
+}
 
 // Function to print the Calendar
 function printCalendar(): void {
+  const previousEvents = localStorage.getItem("events");
+  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
   const firstDayOfTheMonth: number = new Date(
     currentYear,
     currentMonth,
@@ -43,13 +115,13 @@ function printCalendar(): void {
     0
   ).getDate();
 
-  // clean Calendar content
+  // Clean Calendar content
   daysElement.innerHTML = " ";
 
   // Add empty days element before first day
   for (let i = 0; i < firstDayOfTheMonth; i++) {
     const dayBox = document.createElement("div");
-    dayBox.classList.add("main__container-days--dynamic-day");
+    dayBox.classList.add("main__container-days--dynamic-day", "opacity");
     daysElement.appendChild(dayBox);
   }
   // Printing Days of actual month
@@ -57,8 +129,15 @@ function printCalendar(): void {
     const dayBox = document.createElement("div");
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
+    updateCalendarWithReminders(
+      allEvents,
+      currentMonth,
+      currentYear,
+      i,
+      dayBox
+    );
 
-    // Emphasing current day
+    // Emphasing current day ******* ****** *******
     if (
       i === date.getDate() &&
       currentMonth === date.getMonth() &&
@@ -66,35 +145,9 @@ function printCalendar(): void {
     ) {
       dayBox.classList.add("active");
     }
+    // ******** ******** ******** ******** ********
 
-    // //testing localStorage Fetch
-    // const previousEvents = localStorage.getItem("events");
-    // const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
-
-    // //iterar atravé de los eventos para encontrar eventos del dia actual
-    // const eventsForDay = allEvents.filter(
-    //   (evnt) => {
-    //   evnt.initialDate.getDate() === i &&
-    //   evnt.initialDate.getMonth() === currentMonth &&
-    //   evnt.initialDate.getFullYear() === currentYear
-    //   });
-
-    // //Display event if day exists
-    // if (eventsForDay.length > 0) {
-    //   const eventsContainer = document.createElement("div");
-    //   eventsContainer.classList.add("events-container");
-
-    //   eventsForDay.forEach((evnt) => {
-    //     const eventElement = document.createElement("p");
-    //     eventElement.textContent = evnt.title;
-    //     eventsContainer.appendChild(eventElement);
-    //   });
-
-    //   dayBox.innerHTML = eventsContainer.outerHTML;
-
-    // }
-
-    //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
+    // Create dynamic button
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
     addTaskButton.classList.add("add-btn", "hide");
@@ -108,10 +161,11 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    dayBox.addEventListener("click", () => {
+    addTaskButton.addEventListener("click", () => {
       showModalDayBox(i);
     });
   }
+
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
 
@@ -140,7 +194,6 @@ const nextMonthBtn = () => {
   } else {
     currentMonth += 1;
   }
-  console.log(currentMonth);
 };
 
 prevBtn.addEventListener("click", () => {
@@ -180,6 +233,10 @@ const hideModal = () => {
   modalOverlayElement.classList.add("hide");
 };
 
+const hideEventModal = () => {
+  modalDescriptionElement.classList.add("hide");
+  // modalOverlayElement.classList.add("hide");
+};
 // Escape button listener to close modal
 document.addEventListener("keydown", (escKey) => {
   if (
@@ -220,7 +277,17 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.initialDate && evnt.time) {
+  if (evnt.title && evnt.time) {
+    if (!evnt.initialDate || typeof evnt.initialDate === "string") {
+      // If initialDate is missing or a string, set it to the current date
+      evnt.initialDate = new Date();
+    }
+
+    // If initialDate is a string, convert it to a Date object
+    if (typeof evnt.initialDate === "string") {
+      evnt.initialDate = new Date(evnt.initialDate);
+    }
+
     const previousEvents = localStorage.getItem("events");
     const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
 
@@ -230,6 +297,22 @@ export const saveEvent = (evnt: Event) => {
   }
 };
 
+//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+
+// let allEvents: Event[] = [];
+
+// function getEvents() {
+//   const previousEvents = localStorage.getItem("events");
+//   if (previousEvents) {
+//     allEvents = JSON.parse(previousEvents);
+//     console.log(allEvents);
+//   }
+// }
+
+// getEvents();
+
+//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
@@ -237,7 +320,7 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   const title = eventNameElement.value;
   const initialDate = new Date(eventModalInitialDate.value);
   const endDate = eventModalEndDateCheck.checked
-    ? new Date(eventModalEndDate.value)
+    ? new Date(eventModalEndDateTime.value)
     : null;
   const eventTypeString = (
     document.getElementById("type-events-options-values") as HTMLSelectElement
@@ -278,7 +361,6 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
     reminder,
     description,
   };
-
   saveEvent(event);
   hideModal();
 });
@@ -326,20 +408,36 @@ addEventBtnImg.addEventListener("click", onImageClick);
 
 // Show and hide modal's children
 
-// !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
-
-const ShowEndDate = () => {
+const showEndDateTime = () => {
   eventModalEndDate.classList.remove("hide");
 };
+
+const hideEndDateTime = () => {
+  eventModalEndDate.classList.add("hide");
+};
+
 const showReminder = () => {
   eventModalReminderOptions.classList.remove("hide");
+};
+
+const hideReminder = () => {
+  eventModalReminderOptions.classList.add("hide");
 };
 
 // Listener to show modal
 
 eventModalEndDateCheck.addEventListener("click", () => {
-  ShowEndDate();
+  if (eventModalEndDateCheck.checked) {
+    showEndDateTime();
+  } else {
+    hideEndDateTime();
+  }
 });
+
 eventModalReminderCheck.addEventListener("click", () => {
-  showReminder();
+  if (eventModalReminderCheck.checked) {
+    showReminder();
+  } else {
+    hideReminder();
+  }
 });

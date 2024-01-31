@@ -5,20 +5,65 @@ let date = new Date();
 let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
-const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
+let currentDate = new Date();
+const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
+function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
+    events.forEach((event) => {
+        if (event.initialDate instanceof Date ||
+            typeof event.initialDate === "string") {
+            const eventDate = new Date(event.initialDate);
+            const eventDay = eventDate.getDate();
+            const eventMonth = eventDate.getMonth();
+            const eventYear = eventDate.getFullYear();
+            if (eventMonth === currentMonth &&
+                eventYear === currentYear &&
+                eventDay === i) {
+                const reminderText = `${event.title} - ${event.time.toString()}:00`;
+                const reminderElement = document.createElement("div");
+                reminderElement.classList.add("reminder");
+                reminderElement.innerText = reminderText;
+                const reminderDescription = `<p class="event-description">${event.title}
+        Description: ${event.description}
+        Time: ${event.time.toString()}:00</p>`;
+                dayBox.appendChild(reminderElement);
+                reminderElement.innerHTML += reminderDescription;
+                reminderElement.addEventListener("click", () => {
+                    modalDescriptionElement.classList.remove("hide");
+                    eventSecondModalTitle.innerText = event.title;
+                    eventSecondModalInitialDate.innerText = `${event.initialDate}`;
+                    eventSecondModalTime.innerText = `${event.time}`;
+                    eventSecondModalEndDate.innerText = `${event.endDate}`;
+                    eventSecondModalEndTime.innerText = `${event.endTime}`;
+                    eventSecondModalDescription.innerText = `${event.description}`;
+                    eventSecondModalEventType.innerText = `${event.eventType}`;
+                    eventSecondModalReminder.innerText = `${event.reminder}`;
+                    eventSecondModalCloseBtn.addEventListener("click", () => {
+                        hideEventModal();
+                    });
+                    eventDeleteButton.addEventListener("click", () => {
+                        reminderElement.remove();
+                    });
+                });
+            }
+        }
+    });
+}
 function printCalendar() {
+    const previousEvents = localStorage.getItem("events");
+    const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
     const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     daysElement.innerHTML = " ";
     for (let i = 0; i < firstDayOfTheMonth; i++) {
         const dayBox = document.createElement("div");
-        dayBox.classList.add("main__container-days--dynamic-day");
+        dayBox.classList.add("main__container-days--dynamic-day", "opacity");
         daysElement.appendChild(dayBox);
     }
     for (let i = 1; i <= totalDaysInMonth; i++) {
         const dayBox = document.createElement("div");
         dayBox.classList.add("main__container-days--dynamic-day");
         dayBox.innerText = i.toString();
+        updateCalendarWithReminders(allEvents, currentMonth, currentYear, i, dayBox);
         if (i === date.getDate() &&
             currentMonth === date.getMonth() &&
             currentYear === date.getFullYear()) {
@@ -35,7 +80,7 @@ function printCalendar() {
         });
         dayBox.appendChild(addTaskButton);
         daysElement.appendChild(dayBox);
-        dayBox.addEventListener("click", () => {
+        addTaskButton.addEventListener("click", () => {
             showModalDayBox(i);
         });
     }
@@ -62,7 +107,6 @@ const nextMonthBtn = () => {
     else {
         currentMonth += 1;
     }
-    console.log(currentMonth);
 };
 prevBtn.addEventListener("click", () => {
     prevMonthBtn();
@@ -89,6 +133,9 @@ const rightAnimation = function () {
 const hideModal = () => {
     eventModalElement.classList.add("hide");
     modalOverlayElement.classList.add("hide");
+};
+const hideEventModal = () => {
+    modalDescriptionElement.classList.add("hide");
 };
 document.addEventListener("keydown", (escKey) => {
     if (escKey.key === "Escape" &&
@@ -117,7 +164,13 @@ eventBtnElement.addEventListener("click", () => {
     showModal();
 });
 export const saveEvent = (evnt) => {
-    if (evnt.title && evnt.initialDate && evnt.time) {
+    if (evnt.title && evnt.time) {
+        if (!evnt.initialDate || typeof evnt.initialDate === "string") {
+            evnt.initialDate = new Date();
+        }
+        if (typeof evnt.initialDate === "string") {
+            evnt.initialDate = new Date(evnt.initialDate);
+        }
         const previousEvents = localStorage.getItem("events");
         const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
         allEvents.push(evnt);
@@ -130,7 +183,7 @@ export const saveEvent = (evnt) => {
     const title = eventNameElement.value;
     const initialDate = new Date(eventModalInitialDate.value);
     const endDate = eventModalEndDateCheck.checked
-        ? new Date(eventModalEndDate.value)
+        ? new Date(eventModalEndDateTime.value)
         : null;
     const eventTypeString = document.getElementById("type-events-options-values").value;
     const eventType = eventTypeString;
@@ -187,15 +240,31 @@ function onImageClick(event) {
     }
 }
 addEventBtnImg.addEventListener("click", onImageClick);
-const ShowEndDate = () => {
+const showEndDateTime = () => {
     eventModalEndDate.classList.remove("hide");
+};
+const hideEndDateTime = () => {
+    eventModalEndDate.classList.add("hide");
 };
 const showReminder = () => {
     eventModalReminderOptions.classList.remove("hide");
 };
+const hideReminder = () => {
+    eventModalReminderOptions.classList.add("hide");
+};
 eventModalEndDateCheck.addEventListener("click", () => {
-    ShowEndDate();
+    if (eventModalEndDateCheck.checked) {
+        showEndDateTime();
+    }
+    else {
+        hideEndDateTime();
+    }
 });
 eventModalReminderCheck.addEventListener("click", () => {
-    showReminder();
+    if (eventModalReminderCheck.checked) {
+        showReminder();
+    }
+    else {
+        hideReminder();
+    }
 });
