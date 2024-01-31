@@ -86,16 +86,6 @@ const rightAnimation = function () {
         daysElement.classList.remove("animate__slideOutLeft");
     });
 };
-prevBtn.addEventListener("click", () => {
-    prevMonthBtn();
-    printCalendar();
-    leftAnimation();
-});
-nextBtn.addEventListener("click", () => {
-    nextMonthBtn();
-    printCalendar();
-    rightAnimation();
-});
 const hideModal = () => {
     eventModalElement.classList.add("hide");
     modalOverlayElement.classList.add("hide");
