@@ -10,6 +10,14 @@ let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
 let currentDate: object = new Date();
+const startTimeInput = (document.getElementById("start-time-input") as HTMLInputElement).value;
+const timeString: string[] = startTimeInput.split(":");
+const hours: number = parseInt(timeString[0],10)
+const minutes: number = parseInt(timeString[1],10)
+const reminderElement = document.createElement("div");
+reminderElement.classList.add("reminder");
+
+
 
 const {
   currentMonthElement,
@@ -56,9 +64,18 @@ function updateCalendarWithReminders(
         eventDay === i
       ) {
         // Display the title and time as a reminder in the day box
-        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderText = `${event.title} - ${timeString[0]}:${timeString[1]}`;
         const reminderElement = document.createElement("div");
-        reminderElement.classList.add("reminder");
+        reminderElement.classList.add("reminder"); 
+        const checkPastEvents = (evt: Event) => {
+        const eventStartTime = new Date(evt.initialDate).getTime(); 
+        const currentTime = new Date().getTime()
+        if (eventStartTime<currentTime) {
+        reminderElement.classList.add("reminder-past");
+        }
+        }
+        checkPastEvents;
+
         reminderElement.innerText = reminderText;
         const reminderDescription = `<p class="event-description">${event.title}
         Description: ${event.description}
@@ -325,9 +342,15 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   const startTimeInput = (
     document.getElementById("start-time-input") as HTMLInputElement
   ).value;
+  console.log(startTimeInput)
   const endTimeInputValue = (
     document.getElementById("end-time-input") as HTMLInputElement
   ).value;
+
+  const timeString: string[] = startTimeInput.split(":");
+  const hours: number = parseInt(timeString[0])
+  const minutes: number = parseInt(timeString[1])
+  
 
   const time: number = parseInt(startTimeInput, 10);
   const endTime: number | null = endTimeInputValue
@@ -426,20 +449,23 @@ eventModalReminderCheck.addEventListener("click", () => {
   }
 });
 
-function scheduleNotification(evt: Event) {
+function scheduleNotification(evt: Event) {    //coge el evento 
   
-  if (evt.reminder && !isNaN(Number(evt.reminder))) {
-    const reminderTimeInMinutes = Number(evt.reminder);
-    const eventStartTime = new Date(evt.initialDate).getTime();
-    const currentTime = new Date().getTime();
-    const reminderTime = eventStartTime - reminderTimeInMinutes * 60000; // Convert minutes to ms
+  if (evt.reminder && !isNaN(Number(evt.reminder))) { //comprueba que el evento tenga reminder y que el rem tenga un numero, si lo tiene
+    const reminderTimeInMinutes = Number(evt.reminder); //convierte el numero de minutos de string a numero
+    const eventStartTime = new Date(evt.initialDate).getTime(); //genera un objeto date y te devuelve su timestamp (from 1/01/1970)
+    const currentTime = new Date().getTime();//devuelve el timestamp del momento actual (ahora)
+    const reminderTime = eventStartTime - reminderTimeInMinutes * 60000; // prioridad multiplicacion, luego la resta. Convert minutes to millisegundos (1 minuto)
+    //remindertime= time stamp del momento en el cual se tiene que activar el recordatorio
 
-    if (reminderTime > currentTime) {
-      const timeoutDuration = reminderTime - currentTime;
-      setTimeout(() => {
-        alert(`Reminder: ${evt.title} starts in ${reminderTimeInMinutes} minutes.`);
-      }, timeoutDuration);
+    if (reminderTime > currentTime) { //si el time stamp es mayor del current time
+      const timeoutDuration = reminderTime - currentTime; //va a calculare lo que tiene que durar el contador 
+      setTimeout(() => { 
+        alert(`Reminder: ${evt.title} starts in ${reminderTimeInMinutes} minutes.`); 
+      }, timeoutDuration); //se activa un alert en el navegador y el segundo parametro es el tiempo que dura
     }
   }
 }
+
+
 

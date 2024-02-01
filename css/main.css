@@ -207,6 +207,10 @@ input, select {
   text-align: left;
 }
 
+.reminder-past {
+   opacity: 0.5; 
+}
+
 .event-description {
   display: none;
 }

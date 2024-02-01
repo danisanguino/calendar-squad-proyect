@@ -6,6 +6,12 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let currentDate = new Date();
+const startTimeInput = document.getElementById("start-time-input").value;
+const timeString = startTimeInput.split(":");
+const hours = parseInt(timeString[0], 10);
+const minutes = parseInt(timeString[1], 10);
+const reminderElement = document.createElement("div");
+reminderElement.classList.add("reminder");
 const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
@@ -18,9 +24,17 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
             if (eventMonth === currentMonth &&
                 eventYear === currentYear &&
                 eventDay === i) {
-                const reminderText = `${event.title} - ${event.time.toString()}:00`;
+                const reminderText = `${event.title} - ${timeString[0]}:${timeString[1]}`;
                 const reminderElement = document.createElement("div");
                 reminderElement.classList.add("reminder");
+                const checkPastEvents = (evt) => {
+                    const eventStartTime = new Date(evt.initialDate).getTime();
+                    const currentTime = new Date().getTime();
+                    if (eventStartTime < currentTime) {
+                        reminderElement.classList.add("reminder-past");
+                    }
+                };
+                checkPastEvents;
                 reminderElement.innerText = reminderText;
                 const reminderDescription = `<p class="event-description">${event.title}
         Description: ${event.description}
@@ -174,7 +188,11 @@ export const saveEvent = (evnt) => {
         : null;
     const description = document.querySelector('textarea[name="modal-form-textarea"]').value;
     const startTimeInput = document.getElementById("start-time-input").value;
+    console.log(startTimeInput);
     const endTimeInputValue = document.getElementById("end-time-input").value;
+    const timeString = startTimeInput.split(":");
+    const hours = parseInt(timeString[0]);
+    const minutes = parseInt(timeString[1]);
     const time = parseInt(startTimeInput, 10);
     const endTime = endTimeInputValue
         ? parseInt(endTimeInputValue, 10)
