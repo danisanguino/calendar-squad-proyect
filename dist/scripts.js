@@ -302,18 +302,3 @@ eventModalReminderCheck.addEventListener("click", () => {
         hideReminder();
     }
 });
-function checkReminders() {
-    setInterval(() => {
-        const previousEvents = localStorage.getItem("events");
-        const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
-        const currentDate = new Date();
-        allEvents.forEach((event) => {
-            if (event.reminder &&
-                event.initialDate &&
-                new Date(event.initialDate) <= currentDate) {
-                console.log(`Recordatorio para el evento "${event.title}"`);
-            }
-        });
-    }, 5000);
-}
-checkReminders();
