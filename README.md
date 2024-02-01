@@ -50,3 +50,5 @@ Squad project Berners Lee / January 2024
     · Styling responsive.
     · Saving events into their own day and month.
     · Implementing hover description.
+    · Implementing modal full description.
+    · Implementing optional features.
