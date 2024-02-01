@@ -68,7 +68,7 @@ function updateCalendarWithReminders(
         eventDay === i
       ) {
         // Display the title and time as a reminder in the day box
-        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderText = `${event.time}:15 - ${event.title}`;
         const reminderElement = document.createElement("div");
         reminderElement.classList.add("reminder");
         reminderElement.innerText = reminderText;

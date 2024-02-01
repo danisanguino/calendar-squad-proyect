@@ -18,7 +18,7 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
             if (eventMonth === currentMonth &&
                 eventYear === currentYear &&
                 eventDay === i) {
-                const reminderText = `${event.title} - ${event.time.toString()}:00`;
+                const reminderText = `${event.time}:15 - ${event.title}`;
                 const reminderElement = document.createElement("div");
                 reminderElement.classList.add("reminder");
                 reminderElement.innerText = reminderText;
@@ -37,11 +37,11 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
                         eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
                     if (event.endTime)
                         eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+                    if (event.reminder)
+                        eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
                     if (event.description)
                         eventSecondModalDescription.innerText = `Description: ${event.description}`;
                     eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
-                    if (event.reminder)
-                        eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
                     eventSecondModalCloseBtn.addEventListener("click", () => {
                         hideEventModal();
                     });
