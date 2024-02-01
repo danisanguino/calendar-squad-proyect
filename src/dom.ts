@@ -11,9 +11,12 @@ export const domElements = {
     "reminder-options"
   ) as HTMLDivElement,
   eventModalEndDateCheck: document.getElementById(
-    "end-date"
+    "end-date-checkbox"
   ) as HTMLInputElement,
   eventModalEndDate: document.getElementById(
+    "end-date-container"
+  ) as HTMLDivElement,
+  eventModalEndDateTime: document.getElementById(
     "end-date-calendar"
   ) as HTMLInputElement,
   eventModalInitialDate: document.getElementById(
@@ -34,4 +37,41 @@ export const domElements = {
   modalCurrentDayElement: document.getElementById(
     "initial-date"
   ) as HTMLInputElement,
+  modalPlaceholderElement: document.getElementById(
+    "modal-form-description"
+  ) as HTMLTextAreaElement,
+  modalDescriptionElement: document.getElementById(
+    "modal-description"
+  ) as HTMLDivElement,
+
+  eventSecondModalTitle: document.getElementById(
+    "event-modal-title"
+  ) as HTMLHeadingElement,
+  eventSecondModalInitialDate: document.getElementById(
+    "event-modal-initialDate"
+  ) as HTMLParagraphElement,
+  eventSecondModalTime: document.getElementById(
+    "event-modal-time"
+  ) as HTMLParagraphElement,
+  eventSecondModalEndDate: document.getElementById(
+    "event-modal-endDate"
+  ) as HTMLParagraphElement,
+  eventSecondModalEndTime: document.getElementById(
+    "event-modal-endTime"
+  ) as HTMLParagraphElement,
+  eventSecondModalDescription: document.getElementById(
+    "event-modal-description"
+  ) as HTMLParagraphElement,
+  eventSecondModalEventType: document.getElementById(
+    "event-modal-eventType"
+  ) as HTMLParagraphElement,
+  eventSecondModalReminder: document.getElementById(
+    "event-modal-reminder"
+  ) as HTMLParagraphElement,
+  eventDeleteButton: document.getElementById(
+    "event-delete"
+  ) as HTMLParagraphElement,
+  eventSecondModalCloseBtn: document.getElementById(
+    "event-close-btn"
+  ) as HTMLButtonElement,
 };

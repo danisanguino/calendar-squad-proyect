@@ -9,6 +9,10 @@ let date: Date = new Date();
 let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
+let currentDate: object = new Date();
+let currentHour: number = date.getHours();
+let currentMinutes: number = date.getMinutes();
+let allEvents: Event[] = [];
 
 const {
   currentMonthElement,
@@ -20,6 +24,7 @@ const {
   eventBtnElement,
   eventModalElement,
   eventModalEndDate,
+  eventModalEndDateTime,
   eventModalInitialDate,
   eventNameElement,
   eventModalEndDateCheck,
@@ -28,9 +33,27 @@ const {
   modalOverlayElement,
   modalCloseBtnElement,
   modalCurrentDayElement,
+  modalPlaceholderElement,
+  modalDescriptionElement,
+  eventSecondModalTitle,
+  eventSecondModalInitialDate,
+  eventSecondModalTime,
+  eventSecondModalEndDate,
+  eventSecondModalEndTime,
+  eventSecondModalDescription,
+  eventSecondModalEventType,
+  eventSecondModalReminder,
+  eventDeleteButton,
+  eventSecondModalCloseBtn,
 } = domElements;
 
-function updateCalendarWithReminders(events: Event[]): void {
+function updateCalendarWithReminders(
+  events: Event[],
+  currentMonth: number,
+  currentYear: number,
+  i: number,
+  dayBox: Element
+): void {
   // Loop through each event and update the corresponding day box in the calendar
   events.forEach((event: Event) => {
     if (
@@ -39,24 +62,58 @@ function updateCalendarWithReminders(events: Event[]): void {
     ) {
       const eventDate = new Date(event.initialDate);
       const eventDay = eventDate.getDate();
-      const dayBox = daysElement.children[eventDay - 1];
+      const eventMonth = eventDate.getMonth();
+      const eventYear = eventDate.getFullYear();
 
-      if (dayBox) {
+      if (
+        eventMonth === currentMonth &&
+        eventYear === currentYear &&
+        eventDay === i
+      ) {
         // Display the title and time as a reminder in the day box
-        const reminderText = `${event.title} - ${event.time.toString()}:00`;
+        const reminderText = `${event.time.toString()}:00 - ${event.title}`;
         const reminderElement = document.createElement("div");
         reminderElement.classList.add("reminder");
         reminderElement.innerText = reminderText;
-
+        const reminderDescription = `<p class="event-description">${event.title}
+        Description: ${event.description}
+        Time: ${event.time.toString()}:00</p>`;
+        // console.log(reminderDescription);
         dayBox.appendChild(reminderElement);
+        reminderElement.innerHTML += reminderDescription;
+        reminderElement.addEventListener("click", () => {
+          modalDescriptionElement.classList.remove("hide");
+          modalOverlayElement.classList.remove("hide");
+          eventSecondModalTitle.innerText = event.title;
+          eventSecondModalInitialDate.innerText = `Start: ${event.initialDate}`;
+          eventSecondModalTime.innerText = `at: ${event.time} h.`;
+          if (event.endDate)
+            eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
+          if (event.endTime)
+            eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+          if (event.reminder)
+            eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
+          if (event.description)
+            eventSecondModalDescription.innerText = `Description: ${event.description}`;
+          eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
+
+          eventSecondModalCloseBtn.addEventListener("click", () => {
+            hideEventModal();
+          });
+          eventDeleteButton.addEventListener("click", () => {
+            reminderElement.remove();
+            hideEventModal();
+          });
+        });
       }
-    } else {
-      console.error(`Invalid initialDate for event: ${event.title}`);
     }
   });
 }
+
 // Function to print the Calendar
 function printCalendar(): void {
+  const previousEvents = localStorage.getItem("events");
+  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
   const firstDayOfTheMonth: number = new Date(
     currentYear,
     currentMonth,
@@ -68,13 +125,13 @@ function printCalendar(): void {
     0
   ).getDate();
 
-  // clean Calendar content
+  // Clean Calendar content
   daysElement.innerHTML = " ";
 
   // Add empty days element before first day
   for (let i = 0; i < firstDayOfTheMonth; i++) {
     const dayBox = document.createElement("div");
-    dayBox.classList.add("main__container-days--dynamic-day");
+    dayBox.classList.add("main__container-days--dynamic-day", "opacity");
     daysElement.appendChild(dayBox);
   }
   // Printing Days of actual month
@@ -82,8 +139,15 @@ function printCalendar(): void {
     const dayBox = document.createElement("div");
     dayBox.classList.add("main__container-days--dynamic-day");
     dayBox.innerText = i.toString();
+    updateCalendarWithReminders(
+      allEvents,
+      currentMonth,
+      currentYear,
+      i,
+      dayBox
+    );
 
-    // Emphasing current day
+    // Emphasing current day ******* ****** *******
     if (
       i === date.getDate() &&
       currentMonth === date.getMonth() &&
@@ -91,8 +155,9 @@ function printCalendar(): void {
     ) {
       dayBox.classList.add("active");
     }
+    // ******** ******** ******** ******** ********
 
-    //PRUEBA DE CREAR EL BUTTON DINAMICAMENTE
+    // Create dynamic button
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "+";
     addTaskButton.classList.add("add-btn", "hide");
@@ -106,14 +171,10 @@ function printCalendar(): void {
     dayBox.appendChild(addTaskButton);
     daysElement.appendChild(dayBox);
 
-    dayBox.addEventListener("click", () => {
+    addTaskButton.addEventListener("click", () => {
       showModalDayBox(i);
     });
   }
-
-  const previousEvents = localStorage.getItem("events");
-  const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
-  updateCalendarWithReminders(allEvents);
 
   currentMonthElement.innerText = `${Months[currentMonth]}`;
   currentYearElement.innerHTML = `${currentYear}`;
@@ -143,7 +204,6 @@ const nextMonthBtn = () => {
   } else {
     currentMonth += 1;
   }
-  console.log(currentMonth);
 };
 
 prevBtn.addEventListener("click", () => {
@@ -178,20 +238,13 @@ const rightAnimation = function () {
   });
 };
 
-prevBtn.addEventListener("click", () => {
-  prevMonthBtn();
-  printCalendar();
-  leftAnimation();
-});
-
-nextBtn.addEventListener("click", () => {
-  nextMonthBtn();
-  printCalendar();
-  rightAnimation();
-});
-
 const hideModal = () => {
   eventModalElement.classList.add("hide");
+  modalOverlayElement.classList.add("hide");
+};
+
+const hideEventModal = () => {
+  modalDescriptionElement.classList.add("hide");
   modalOverlayElement.classList.add("hide");
 };
 
@@ -205,9 +258,19 @@ document.addEventListener("keydown", (escKey) => {
   }
 });
 
+document.addEventListener("keydown", (escKey) => {
+  if (
+    escKey.key === "Escape" &&
+    !modalDescriptionElement.classList.contains("hide")
+  ) {
+    hideEventModal();
+  }
+});
+
 // Overlay click to close modal
 modalOverlayElement.addEventListener("click", () => {
   hideModal();
+  hideEventModal();
 });
 
 modalCloseBtnElement.addEventListener("click", () => {
@@ -235,7 +298,7 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.time) {
+  if (evnt.title && evnt.time !== undefined) {
     if (!evnt.initialDate || typeof evnt.initialDate === "string") {
       // If initialDate is missing or a string, set it to the current date
       evnt.initialDate = new Date();
@@ -247,13 +310,39 @@ export const saveEvent = (evnt: Event) => {
     }
 
     const previousEvents = localStorage.getItem("events");
-    const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+    allEvents = previousEvents ? JSON.parse(previousEvents) : [];
 
     allEvents.push(evnt);
     localStorage.setItem("events", JSON.stringify(allEvents));
     printCalendar();
   }
 };
+
+export const deleteEvent = (eventIndex: number) => {
+  const previousEvents = localStorage.getItem("events");
+  allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+
+  // Eliminar el evento del arreglo de eventos
+  allEvents.splice(eventIndex, 1);
+
+  // Guardar el nuevo arreglo en localStorage
+  localStorage.setItem("events", JSON.stringify(allEvents));
+  printCalendar();
+};
+
+eventDeleteButton.addEventListener("click", () => {
+  // Obtener el índice del evento que se eliminará
+  const eventIndex = allEvents.findIndex(
+    (event: Event) => event.title === eventSecondModalTitle.innerText
+  );
+  // if (eventIndex !== -1) // ESTO TIENE QUE SER ASÍ
+  if (eventIndex !== -1) {
+    deleteEvent(eventIndex);
+    hideEventModal();
+  } else {
+    console.error("Evento no encontrado para eliminar");
+  }
+});
 
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -262,7 +351,7 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   const title = eventNameElement.value;
   const initialDate = new Date(eventModalInitialDate.value);
   const endDate = eventModalEndDateCheck.checked
-    ? new Date(eventModalEndDate.value)
+    ? new Date(eventModalEndDateTime.value)
     : null;
   const eventTypeString = (
     document.getElementById("type-events-options-values") as HTMLSelectElement
@@ -303,7 +392,6 @@ document.getElementById("event-form")?.addEventListener("submit", (evt) => {
     reminder,
     description,
   };
-
   saveEvent(event);
   hideModal();
 });
@@ -326,77 +414,61 @@ window.addEventListener("load", () => {
 function darkModeSwitcher() {
   const body = document.body;
   body.classList.toggle("dark-mode");
-
-  const headers = document.getElementsByClassName("header");
-  for (let i = 0; i < headers.length; i++) {
-    headers[i].classList.toggle("dark-mode");
-  }
-
-  const h1Elements = document.querySelectorAll(".header__date--today-month");
-  h1Elements.forEach((element) => {
-    element.classList.toggle("h1-dark-mode");
-  });
-
-  const h2Elements = document.querySelectorAll(".header__date--today-day");
-  h2Elements.forEach((element) => {
-    element.classList.toggle("h2-dark-mode");
-  });
-
-  const h3Elements = document.querySelectorAll(
-    ".header__date--year-and-btn--year"
-  );
-  h3Elements.forEach((h3) => {
-    h3.classList.toggle("h3-dark-mode");
-
-    const calendarBtn = document.querySelectorAll(
-      ".header__date--year-and-btn--btn"
-    );
-    calendarBtn.forEach((element) => {
-      element.classList.toggle("calendar-btn-dark-mode");
-    });
-
-    const monthBtn = document.querySelectorAll(".month-btn");
-    monthBtn.forEach((element) => {
-      element.classList.toggle("month-btn-dark-mode");
-    });
-  });
 }
 
 // Dark Mode Button
 
-const img = document.querySelector("#icon") as HTMLImageElement;
+const addEventBtnImg = document.getElementById(
+  "button-off"
+) as HTMLImageElement;
 let newSrc = "assets/button-on.png";
 
 function onImageClick(event: MouseEvent) {
   const target = event.target as HTMLImageElement;
-  target.src = newSrc;
-  if (newSrc == "assets/button-on.png") {
-    newSrc = "assets/button-off.png";
-  } else {
-    newSrc = "assets/button-on.png";
+  if (target) {
+    target.src = newSrc;
+    if (newSrc == "assets/button-on.png") {
+      newSrc = "assets/button-off.png";
+    } else {
+      newSrc = "assets/button-on.png";
+    }
   }
 }
 
-if (img) {
-  img.addEventListener("click", onImageClick);
-}
+addEventBtnImg.addEventListener("click", onImageClick);
 
 // Show and hide modal's children
 
-// !!! HAY QUE CAMBIARLO PARA QUE SE MUESTRE U OCULTE EN FUNCIÓN DE SI ESTÁ EL CHECK ACTIVO O NO. AHORA SOLO SE MUESTRA AL HACER EL PRIMER CLICK !!!
-
-const ShowEndDate = () => {
+const showEndDateTime = () => {
   eventModalEndDate.classList.remove("hide");
 };
+
+const hideEndDateTime = () => {
+  eventModalEndDate.classList.add("hide");
+};
+
 const showReminder = () => {
   eventModalReminderOptions.classList.remove("hide");
+};
+
+const hideReminder = () => {
+  eventModalReminderOptions.classList.add("hide");
 };
 
 // Listener to show modal
 
 eventModalEndDateCheck.addEventListener("click", () => {
-  ShowEndDate();
+  if (eventModalEndDateCheck.checked) {
+    showEndDateTime();
+  } else {
+    hideEndDateTime();
+  }
 });
+
 eventModalReminderCheck.addEventListener("click", () => {
-  showReminder();
+  if (eventModalReminderCheck.checked) {
+    showReminder();
+  } else {
+    hideReminder();
+  }
 });

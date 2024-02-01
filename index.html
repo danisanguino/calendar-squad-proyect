@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon-calendar.png" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
+
   <body>
     <header class="header">
       <section class="header__date">
@@ -20,17 +21,22 @@
           <h1 id="header-month" class="header__date--today-month"></h1>
           <h2 id="header-day" class="header__date--today-day"></h2>
         </div>
+
         <div class="header__date--year-and-btn">
+          <h3 id="header-year" class="header__date--year-and-btn--year"></h3>
           <button id="switch" class="switch">
             <img id="button-off" src="assets/button-off.png" />
           </button>
           <!-- <button class="dark-mode-switcher" id="dark-mode">DM</button> -->
-          <h3 id="header-year" class="header__date--year-and-btn--year"></h3>
           <button class="header__date--year-and-btn--btn" id="event-btn">
-            <img src="assets/add-event.svg" height="40rem" />
+            <img
+              src="assets/addevent.png"
+              class="header__date--year-and-btn--btn--img"
+            />
           </button>
         </div>
       </section>
+
       <section class="header__more-months">
         <button
           id="prev-btn"
@@ -38,12 +44,15 @@
         >
           &lt
         </button>
+
         <p class="header__more-months">TypeScript Calendar</p>
+
         <button id="next-btn" class="header__more-months--next-btn month-btn">
           >
         </button>
       </section>
     </header>
+
     <main class="main">
       <!-- No dinamyc day name -->
       <div class="main__container-week">
@@ -86,7 +95,8 @@
     <form class="modal-form hide" id="event-form">
       <button id="close-btn" class="section__btn-close">X</button>
       <h4>ADD EVENT</h4>
-      <label for="title-date">Title</label><br />
+
+      <label for="event-name">Title</label><br />
       <input
         type="text"
         placeholder="Add a title"
@@ -97,47 +107,47 @@
       /><br />
 
       <label for="initial-date">Initial date</label><br />
-      <input
-        type="date"
-        name="start-event"
-        id="initial-date"
-        required
-      /><br /><br />
+      <input type="date" name="start-event" id="initial-date" required /><br />
 
-      <label for="time-input">Start Time</label><br />
+      <label for="start-time-input">Start Time</label><br />
       <input
         type="time"
         name="start-time-input"
         id="start-time-input"
         required
-      /><br /><br />
+      /><br />
 
       <div class="modal-form__end-date">
         <input
           type="checkbox"
           name="end-event-box"
-          id="end-date"
+          id="end-date-checkbox"
           class="modal-form__end-date"
-        /><label for="end-date"> End date</label><br />
-      </div>
-      <input
-        type="date"
-        name="end-event"
-        id="end-date-calendar"
-        class="modal-form__end-date hide"
-      /><br /><br />
+        /><label for="end-date-calendar"> End date</label><br />
 
-      <label for="end-time-input">End Time</label><br />
-      <input
-        type="time"
-        name="end-time-input"
-        id="end-time-input"
-      /><br /><br />
+        <div id="end-date-container" class="modal-form__end-date-time hide">
+          <input
+            type="date"
+            name="end-event"
+            id="end-date-calendar"
+            class="modal-form__end-date"
+          /><br />
+
+          <label for="end-time-input">End Time</label><br />
+          <input
+            type="time"
+            name="end-time-input"
+            id="end-time-input"
+            class="modal-form__end-date"
+          /><br />
+        </div>
+      </div>
 
       <div class="modal-form__reminder-set">
         <input type="checkbox" name="reminder" id="reminder" />
-        <label for="reminder"> Remember me</label><br />
+        <label for="reminder"> Remind me</label><br />
       </div>
+
       <div id="reminder-options" class="modal-form__reminder-options hide">
         <select name="reminder" id="reminder-checkbox">
           <option value="5">5 minutes before</option>
@@ -149,9 +159,14 @@
       </div>
 
       <div class="modal-form__textbox">
-        <textarea name="modal-form-textarea" rows="8" cols="30" maxlength="500">
-Write something here</textarea
-        >
+        <textarea
+          name="modal-form-textarea"
+          rows="4"
+          cols="30"
+          maxlength="500"
+          placeholder="Event description"
+          id="modal-form-description"
+        ></textarea>
       </div>
 
       <div id="type-events-options" class="modal-form__reminder-options">
@@ -168,6 +183,20 @@ Write something here</textarea
       <button type="reset">Cancel</button>
     </form>
     <!-- </section> -->
+
+    <div id="modal-description" class="modal-form hide">
+      <button id="event-close-btn" class="section__btn-close">X</button>
+      <h4 id="event-modal-title"></h4>
+      <p id="event-modal-initialDate"></p>
+      <p id="event-modal-time"></p>
+      <p id="event-modal-endDate"></p>
+      <p id="event-modal-endTime"></p>
+      <p id="event-modal-description"></p>
+      <p id="event-modal-eventType"></p>
+      <p id="event-modal-reminder"></p>
+      <button id="event-delete">Delete</button>
+    </div>
+
     <div id="modal-overlay" class="overlay hide"></div>
 
     <script type="module" src="dist/scripts.js"></script>

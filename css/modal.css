@@ -3,9 +3,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 16rem;
-  background-color: white;
-  padding: 6rem;
+  width: 18rem;
+  background-color: var(--second-background-color);
+  padding: 2rem 4rem 2rem 4rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
@@ -33,7 +33,13 @@
   padding: 0.5rem;
 }
 
-.modal-form select, textarea {
+.modal-form p {
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.modal-form select,
+textarea {
   background-color: var(--background-color);
   font-weight: 400;
   border-radius: 5px;
@@ -59,7 +65,7 @@
   transition: all 0.3s ease;
 }
 
-#close-btn {
+/* #close-btn {
   position: absolute;
   padding-inline: 0.45rem;
   padding-block: 0.2rem;
@@ -70,14 +76,25 @@
   border-radius: 5px;
   color: white;
   border: 0;
+} */
+
+.section__btn-close {
+  position: absolute;
+  padding-inline: 0.45rem;
+  padding-block: 0.2rem;
+  font-weight: 800;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  color: white;
 }
 
-#close-btn:hover {
+.section__btn-close:hover {
   cursor: pointer;
   background-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
-  
 }
 
 .hide {
