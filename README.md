@@ -27,26 +27,5 @@ Squad project Berners Lee / January 2024
     · Modal CSS styling.
 
 28th January 2024:
-
-    · Dark Mode feature added.
-    · Dark Mode styling.
-    . Adding month animations.
-
-29th January 2024:
-
-    · Implementing modal form.
-    · Styling model form.
-    · Starting localStorage.
-
-30th January 2024:
-
-    · Implementing localStorage.
-    · Styling Add Event inside DayBox.
-    · Implementing Modal Checkboxes.
-
-31st January 2024:
-
-    · Repairing month passing.
-    · Styling responsive.
-    · Saving events into their own day and month.
-    · Implementing hover description.
+    · Dark Mode feature added
+    · Dark Mode styling

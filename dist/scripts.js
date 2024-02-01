@@ -6,6 +6,9 @@ let currentDay = date.getDate();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let currentDate = new Date();
+let currentHour = date.getHours();
+let currentMinutes = date.getMinutes();
+let allEvents = [];
 const { currentMonthElement, currentDayElement, daysElement, prevBtn, nextBtn, currentYearElement, eventBtnElement, eventModalElement, eventModalEndDate, eventModalEndDateTime, eventModalInitialDate, eventNameElement, eventModalEndDateCheck, eventModalReminderCheck, eventModalReminderOptions, modalOverlayElement, modalCloseBtnElement, modalCurrentDayElement, modalPlaceholderElement, modalDescriptionElement, eventSecondModalTitle, eventSecondModalInitialDate, eventSecondModalTime, eventSecondModalEndDate, eventSecondModalEndTime, eventSecondModalDescription, eventSecondModalEventType, eventSecondModalReminder, eventDeleteButton, eventSecondModalCloseBtn, } = domElements;
 function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBox) {
     events.forEach((event) => {
@@ -18,7 +21,7 @@ function updateCalendarWithReminders(events, currentMonth, currentYear, i, dayBo
             if (eventMonth === currentMonth &&
                 eventYear === currentYear &&
                 eventDay === i) {
-                const reminderText = `${event.time}:15 - ${event.title}`;
+                const reminderText = `${event.time.toString()}:00 - ${event.title}`;
                 const reminderElement = document.createElement("div");
                 reminderElement.classList.add("reminder");
                 reminderElement.innerText = reminderText;
@@ -158,6 +161,12 @@ document.addEventListener("keydown", (escKey) => {
     }
     ;
 });
+document.addEventListener("keydown", (escKey) => {
+    if (escKey.key === "Escape" &&
+        !modalDescriptionElement.classList.contains("hide")) {
+        hideEventModal();
+    }
+});
 modalOverlayElement.addEventListener("click", () => {
     hideModal();
     hideEventModal();
@@ -188,12 +197,29 @@ export const saveEvent = (evnt) => {
             evnt.initialDate = new Date(evnt.initialDate);
         }
         const previousEvents = localStorage.getItem("events");
-        const allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+        allEvents = previousEvents ? JSON.parse(previousEvents) : [];
         allEvents.push(evnt);
         localStorage.setItem("events", JSON.stringify(allEvents));
         printCalendar();
     }
 };
+export const deleteEvent = (eventIndex) => {
+    const previousEvents = localStorage.getItem("events");
+    allEvents = previousEvents ? JSON.parse(previousEvents) : [];
+    allEvents.splice(eventIndex, 1);
+    localStorage.setItem("events", JSON.stringify(allEvents));
+    printCalendar();
+};
+eventDeleteButton.addEventListener("click", () => {
+    const eventIndex = allEvents.findIndex((event) => event.title === eventSecondModalTitle.innerText);
+    if (eventIndex !== -1) {
+        deleteEvent(eventIndex);
+        hideEventModal();
+    }
+    else {
+        console.error("Evento no encontrado para eliminar");
+    }
+});
 (_a = document.getElementById("event-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", (evt) => {
     evt.preventDefault();
     const title = eventNameElement.value;

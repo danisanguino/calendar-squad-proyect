@@ -33,14 +33,7 @@
   padding: 0.5rem;
 }
 
-.modal-form p {
-  font-weight: 400;
-  margin-bottom: 1rem;
-
-}
-
-.modal-form select,
-textarea {
+.modal-form select, textarea {
   background-color: var(--background-color);
   font-weight: 400;
   border-radius: 5px;

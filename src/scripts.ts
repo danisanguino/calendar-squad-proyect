@@ -10,6 +10,9 @@ let currentDay: number = date.getDate();
 let currentMonth: Months = date.getMonth() as Months;
 let currentYear: number = date.getFullYear();
 let currentDate: object = new Date();
+let currentHour: number = date.getHours();
+let currentMinutes: number = date.getMinutes();
+let allEvents: Event[] = [];
 
 const {
   currentMonthElement,
@@ -68,7 +71,7 @@ function updateCalendarWithReminders(
         eventDay === i
       ) {
         // Display the title and time as a reminder in the day box
-        const reminderText = `${event.time}:15 - ${event.title}`;
+        const reminderText = `${event.time.toString()}:00 - ${event.title}`;
         const reminderElement = document.createElement("div");
         reminderElement.classList.add("reminder");
         reminderElement.innerText = reminderText;
@@ -80,19 +83,22 @@ function updateCalendarWithReminders(
         reminderElement.innerHTML += reminderDescription;
         reminderElement.addEventListener("click", () => {
           modalDescriptionElement.classList.remove("hide");
-          modalOverlayElement.classList.remove("hide")
+          modalOverlayElement.classList.remove("hide");
           eventSecondModalTitle.innerText = event.title;
           eventSecondModalInitialDate.innerText = `Start: ${event.initialDate}`;
           eventSecondModalTime.innerText = `at: ${event.time} h.`;
-          if (event.endDate) eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
-          if (event.endTime) eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
-          if (event.reminder)eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
-          if (event.description) eventSecondModalDescription.innerText = `Description: ${event.description}`;
+          if (event.endDate)
+            eventSecondModalEndDate.innerText = `Finish: ${event.endDate}`;
+          if (event.endTime)
+            eventSecondModalEndTime.innerText = `at: ${event.endTime} h.`;
+          if (event.reminder)
+            eventSecondModalReminder.innerText = `Remind me: ${event.reminder}`;
+          if (event.description)
+            eventSecondModalDescription.innerText = `Description: ${event.description}`;
           eventSecondModalEventType.innerText = `Type: ${event.eventType}`;
 
           eventSecondModalCloseBtn.addEventListener("click", () => {
             hideEventModal();
-            
           });
           eventDeleteButton.addEventListener("click", () => {
             reminderElement.remove();
@@ -261,6 +267,15 @@ document.addEventListener("keydown", (escKey) => {
   };
 });
 
+document.addEventListener("keydown", (escKey) => {
+  if (
+    escKey.key === "Escape" &&
+    !modalDescriptionElement.classList.contains("hide")
+  ) {
+    hideEventModal();
+  }
+});
+
 // Overlay click to close modal
 modalOverlayElement.addEventListener("click", () => {
   hideModal();
@@ -293,19 +308,9 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.time) {
-    if (!evnt.initialDate || typeof evnt.initialDate === "string") {
-      // If initialDate is missing or a string, set it to the current date
-      evnt.initialDate = new Date();
-    }
-
-    // If initialDate is a string, convert it to a Date object
-    if (typeof evnt.initialDate === "string") {
-      evnt.initialDate = new Date(evnt.initialDate);
-    }
-
+  if (evnt.title && evnt.initialDate && evnt.time) {
     const previousEvents = localStorage.getItem("events");
-    const allEvents: Event[] = previousEvents ? JSON.parse(previousEvents) : [];
+    allEvents = previousEvents ? JSON.parse(previousEvents) : [];
 
     allEvents.push(evnt);
     localStorage.setItem("events", JSON.stringify(allEvents));
@@ -313,21 +318,31 @@ export const saveEvent = (evnt: Event) => {
   }
 };
 
-//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+export const deleteEvent = (eventIndex: number) => {
+  const previousEvents = localStorage.getItem("events");
+  allEvents = previousEvents ? JSON.parse(previousEvents) : [];
 
-// let allEvents: Event[] = [];
+  // Eliminar el evento del arreglo de eventos
+  allEvents.splice(eventIndex, 1);
 
-// function getEvents() {
-//   const previousEvents = localStorage.getItem("events");
-//   if (previousEvents) {
-//     allEvents = JSON.parse(previousEvents);
-//     console.log(allEvents);
-//   }
-// }
+  // Guardar el nuevo arreglo en localStorage
+  localStorage.setItem("events", JSON.stringify(allEvents));
+  printCalendar();
+};
 
-// getEvents();
-
-//////// EIRA'S CACHO ///////// //////// EIRA'S CACHO ///////// //////// EIRA'S CACHO /////////
+eventDeleteButton.addEventListener("click", () => {
+  // Obtener el índice del evento que se eliminará
+  const eventIndex = allEvents.findIndex(
+    (event: Event) => event.title === eventSecondModalTitle.innerText
+  );
+  // if (eventIndex !== -1) // ESTO TIENE QUE SER ASÍ
+  if (eventIndex !== -1) {
+    deleteEvent(eventIndex);
+    hideEventModal();
+  } else {
+    console.error("Evento no encontrado para eliminar");
+  }
+});
 
 document.getElementById("event-form")?.addEventListener("submit", (evt) => {
   evt.preventDefault();
