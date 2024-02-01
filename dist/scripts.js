@@ -181,7 +181,7 @@ eventBtnElement.addEventListener("click", () => {
     showModal();
 });
 export const saveEvent = (evnt) => {
-    if (evnt.title && evnt.time) {
+    if (evnt.title && evnt.time !== undefined) {
         if (!evnt.initialDate || typeof evnt.initialDate === "string") {
             evnt.initialDate = new Date();
         }

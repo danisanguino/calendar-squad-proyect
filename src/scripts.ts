@@ -78,7 +78,6 @@ function updateCalendarWithReminders(
         const reminderDescription = `<p class="event-description">${event.title}
         Description: ${event.description}
         Time: ${event.time.toString()}:00</p>`;
-        // console.log(reminderDescription);
         dayBox.appendChild(reminderElement);
         reminderElement.innerHTML += reminderDescription;
         reminderElement.addEventListener("click", () => {
@@ -147,7 +146,8 @@ function printCalendar(): void {
       dayBox
     );
 
-    // Emphasing current day ******* ****** *******
+    // Emphasing current day
+
     if (
       i === date.getDate() &&
       currentMonth === date.getMonth() &&
@@ -155,7 +155,6 @@ function printCalendar(): void {
     ) {
       dayBox.classList.add("active");
     }
-    // ******** ******** ******** ******** ********
 
     // Create dynamic button
     const addTaskButton = document.createElement("button");
@@ -298,7 +297,7 @@ eventBtnElement.addEventListener("click", () => {
 });
 
 export const saveEvent = (evnt: Event) => {
-  if (evnt.title && evnt.time) {
+  if (evnt.title && evnt.time !== undefined) {
     if (!evnt.initialDate || typeof evnt.initialDate === "string") {
       // If initialDate is missing or a string, set it to the current date
       evnt.initialDate = new Date();
@@ -322,10 +321,8 @@ export const deleteEvent = (eventIndex: number) => {
   const previousEvents = localStorage.getItem("events");
   allEvents = previousEvents ? JSON.parse(previousEvents) : [];
 
-  // Eliminar el evento del arreglo de eventos
   allEvents.splice(eventIndex, 1);
 
-  // Guardar el nuevo arreglo en localStorage
   localStorage.setItem("events", JSON.stringify(allEvents));
   printCalendar();
 };
@@ -335,7 +332,7 @@ eventDeleteButton.addEventListener("click", () => {
   const eventIndex = allEvents.findIndex(
     (event: Event) => event.title === eventSecondModalTitle.innerText
   );
-  // if (eventIndex !== -1) // ESTO TIENE QUE SER ASÍ
+
   if (eventIndex !== -1) {
     deleteEvent(eventIndex);
     hideEventModal();
