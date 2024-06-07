@@ -1,4 +1,15 @@
-# calendar-squad-proyect
+<h1>📅 Calendar</h1>
+
+<img src="https://res.cloudinary.com/drp3zy62g/image/upload/v1717753502/Proyecto_nuevo_3_ansebt.jpg"/>
+
+This project is a dynamic Calendar application where users can schedule and manage events. Users have the ability to add, edit, and delete events as needed. The application stores all event data locally using the browser's localStorage, ensuring that user data persists across sessions.
+
+<h2>Features</h2>
+Event Scheduling: Add new events with ease.
+Event Editing: Modify existing events to keep your schedule up-to-date.
+Local Storage: Events are saved in localStorage, so they remain available even after refreshing the page or closing the browser.
+Responsive Design: The layout is designed to be responsive, providing an optimal viewing experience on a variety of devices, from desktops to mobile phones.
+User-friendly Interface: Designed with CSS to provide a clean and intuitive user experience.
 
 Squad project Berners Lee / January 2024
 
