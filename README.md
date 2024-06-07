@@ -1,4 +1,4 @@
-`#typescript``#css``#localstorage``#responsive`
+`#typescript` `#css` `#localstorage` `#responsive`
 
 <h1>📅 Calendar</h1>
 
