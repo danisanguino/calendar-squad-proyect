@@ -1,3 +1,5 @@
+`#typescript``#css``#localstorage``#responsive`
+
 <h1>📅 Calendar</h1>
 
 <img src="https://res.cloudinary.com/drp3zy62g/image/upload/v1717753502/Proyecto_nuevo_3_ansebt.jpg"/>
